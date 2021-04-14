@@ -22,8 +22,8 @@ import FolderOpenIcon from '../../icons/FolderOpen';
 import ShareIcon from '../../icons/Share';
 import ShoppingBagIcon from '../../icons/ShoppingBag';
 import ShoppingCartIcon from '../../icons/ShoppingCart';
-import UserIcon from '../../icons/User';
-// import UsersIcon from '../../icons/Users';
+// import UserIcon from '../../icons/User';
+import CashIcon from '../../icons/Cash';
 import Logo from '../Logo';
 import NavSection from '../NavSection';
 import Scrollbar from '../Scrollbar';
@@ -96,7 +96,7 @@ const sections = [
       {
         title: 'Account Overview',
         path: '/account',
-        icon: <UserIcon fontSize="small" />
+        icon: <CashIcon fontSize="small" />
       },
       {
         title: 'Tokens',
@@ -191,7 +191,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
               p: 2
             }}
           >
-            <RouterLink to="/account">
+            <RouterLink to="/">
               <Avatar
                 src={user.avatar}
                 sx={{
@@ -206,7 +206,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                 color="textPrimary"
                 variant="subtitle2"
               >
-                {user.name}
+                Solana Dash
               </Typography>
               <Typography
                 color="textSecondary"
@@ -252,17 +252,17 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
             color="textSecondary"
             variant="body2"
           >
-            Check our docs
+            Contact Us
           </Typography>
           <Button
             color="primary"
             component={RouterLink}
             fullWidth
             sx={{ mt: 2 }}
-            to="/docs"
+            to="/contact"
             variant="contained"
           >
-            Documentation
+            Contact Us
           </Button>
         </Box>
       </Scrollbar>
