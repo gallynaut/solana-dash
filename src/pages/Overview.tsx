@@ -19,16 +19,16 @@ import {
   OverviewTotalBalance,
   OverviewTotalTransactions,
   OverviewWeeklyEarnings
-} from '../../components/dashboard/overview';
-import useSettings from '../../hooks/useSettings';
-import ArrowRightIcon from '../../icons/ArrowRight';
-import BriefcaseIcon from '../../icons/Briefcase';
-import DownloadIcon from '../../icons/Download';
-import ExternalLinkIcon from '../../icons/ExternalLink';
-import InformationCircleIcon from '../../icons/InformationCircle';
-import PlusIcon from '../../icons/Plus';
-import UsersIcon from '../../icons/Users';
-import gtm from '../../lib/gtm';
+} from '../components/dashboard/overview';
+import useSettings from '../hooks/useSettings';
+import ArrowRightIcon from '../icons/ArrowRight';
+import BriefcaseIcon from '../icons/Briefcase';
+import DownloadIcon from '../icons/Download';
+import ExternalLinkIcon from '../icons/ExternalLink';
+import InformationCircleIcon from '../icons/InformationCircle';
+import PlusIcon from '../icons/Plus';
+import UsersIcon from '../icons/Users';
+import gtm from '../lib/gtm';
 
 const Overview: FC = () => {
   const { settings } = useSettings();

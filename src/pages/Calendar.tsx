@@ -22,10 +22,10 @@ import {
 import type { Theme } from '@material-ui/core';
 import { alpha, experimentalStyled } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { CalendarEventForm, CalendarToolbar } from '../../components/dashboard/calendar';
-import ChevronRightIcon from '../../icons/ChevronRight';
-import PlusIcon from '../../icons/Plus';
-import gtm from '../../lib/gtm';
+import { CalendarEventForm, CalendarToolbar } from '../components/dashboard/calendar';
+import ChevronRightIcon from '../icons/ChevronRight';
+import PlusIcon from '../icons/Plus';
+import gtm from '../lib/gtm';
 import {
   closeModal,
   getEvents,
@@ -33,10 +33,10 @@ import {
   selectEvent,
   selectRange,
   updateEvent
-} from '../../slices/calendar';
-import { useDispatch, useSelector } from '../../store';
-import type { RootState } from '../../store';
-import type { CalendarEvent, CalendarView } from '../../types/calendar';
+} from '../slices/calendar';
+import { useDispatch, useSelector } from '../store';
+import type { RootState } from '../store';
+import type { CalendarEvent, CalendarView } from '../types/calendar';
 
 const selectedEventSelector = (state: RootState): CalendarEvent | null => {
   const { events, selectedEventId } = state.calendar;

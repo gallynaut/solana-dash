@@ -12,10 +12,10 @@ const Loadable = (Component) => (props) => (
 
 // Dashboard pages
 
-const Calendar = Loadable(lazy(() => import('./pages/dashboard/Calendar')));
-const Network = Loadable(lazy(() => import('./pages/dashboard/Network')));
-const Overview = Loadable(lazy(() => import('./pages/dashboard/Overview')));
-const News = Loadable(lazy(() => import('./pages/dashboard/News')));
+const Calendar = Loadable(lazy(() => import('./pages/Calendar')));
+const Network = Loadable(lazy(() => import('./pages/Network')));
+const Overview = Loadable(lazy(() => import('./pages/Overview')));
+const News = Loadable(lazy(() => import('./pages/News')));
 
 // Error pages
 
