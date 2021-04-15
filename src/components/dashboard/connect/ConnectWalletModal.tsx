@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import {
   formatDistanceToNowStrict,
+  subDays,
   subHours,
   subMinutes
 } from 'date-fns';
@@ -15,25 +16,26 @@ import {
   Paper,
   Typography
 } from '@material-ui/core';
-import { truncate } from 'lodash';
 import StatusIndicator from '../../StatusIndicator';
 
 const now = new Date();
 
 const contacts = [
   {
-    id: 'phantom',
+    id: '5e8891ab188cd2855e6029b7',
     avatar: '/static/mock-images/avatars/avatar-alcides_antonio.png',
     isActive: true,
     lastActivity: now.getTime(),
-    name: 'Phantom',
+    name: 'Alcides Antonio',
+    username: 'alcides.antonio'
   },
   {
-    id: 'sollet',
+    id: '5e887a62195cc5aef7e8ca5d',
     avatar: '/static/mock-images/avatars/avatar-marcus_finn.png',
-    isActive: truncate,
+    isActive: false,
     lastActivity: subHours(now, 2).getTime(),
-    name: 'Sollet',
+    name: 'Marcus Finn',
+    username: 'marcus.finn'
   },
   {
     id: '5e887ac47eed253091be10cb',
@@ -43,6 +45,22 @@ const contacts = [
     name: 'Carson Darrin',
     username: 'carson.darrin'
   },
+  {
+    id: '5e887b209c28ac3dd97f6db5',
+    avatar: '/static/mock-images/avatars/avatar-fran_perez.png',
+    isActive: true,
+    lastActivity: now.getTime(),
+    name: 'Fran Perez',
+    username: 'fran.perez'
+  },
+  {
+    id: '5e887b7602bdbc4dbb234b27',
+    avatar: '/static/mock-images/avatars/avatar-jie_yan_song.png',
+    isActive: true,
+    lastActivity: now.getTime(),
+    name: 'Jie Yan Song',
+    username: 'jie.yan.song'
+  }
 ];
 
 const ConnectWalletModal: FC = () => (
@@ -65,54 +83,13 @@ const ConnectWalletModal: FC = () => (
         color="textPrimary"
         variant="h6"
       >
-        Contacts
+        Connect to Your Solana Wallet
       </Typography>
       <Box sx={{ mt: 2 }}>
         <List disablePadding>
-          {contacts.map((contact) => (
-            <ListItem
-              disableGutters
-              key={contact.id}
-            >
-              <ListItemAvatar>
-                <Avatar src={contact.avatar} />
-              </ListItemAvatar>
-              <ListItemText
-                disableTypography
-                primary={(
-                  <Link
-                    color="textPrimary"
-                    display="block"
-                    noWrap
-                    underline="none"
-                    variant="subtitle2"
-                  >
-                    {contact.name}
-                  </Link>
-                )}
-              />
-              {
-                contact.isActive
-                  ? (
-                    <StatusIndicator
-                      size="small"
-                      status="online"
-                    />
-                  )
-                  : (
-                    <Typography
-                      color="textSecondary"
-                      noWrap
-                      variant="caption"
-                    >
-                      {formatDistanceToNowStrict(contact.lastActivity)}
-                      {' '}
-                      ago
-                    </Typography>
-                  )
-              }
-            </ListItem>
-          ))}
+          <ListItem>#1</ListItem>
+          <ListItem>#2</ListItem>
+          <ListItem>#3</ListItem>
         </List>
       </Box>
     </Paper>

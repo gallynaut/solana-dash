@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { FC, KeyboardEvent } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -77,7 +77,7 @@ const ContentSearch: FC = () => {
     <>
       <Tooltip title="Search">
         <IconButton
-          color="inherit"
+          color="primary"
           onClick={handleOpen}
         >
           <SearchIcon fontSize="small" />

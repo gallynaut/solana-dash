@@ -45,8 +45,10 @@
     "@material-ui/icons": "^5.0.0-alpha.27",
     "@material-ui/lab": "^5.0.0-alpha.27",
     "@material-ui/system": "^5.0.0-alpha.27",
+    "@project-serum/sol-wallet-adapter": "^0.1.8",
     "@react-pdf/renderer": "^1.6.13",
     "@reduxjs/toolkit": "^1.5.0",
+    "@solana/web3.js": "^1.2.7",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/user-event": "^13.0.1",
     "@types/jest": "^26.0.20",
@@ -102,6 +104,10 @@
     "yup": "^0.32.8"
   },
   "devDependencies": {
-    "eslint-config-airbnb-typescript": "^12.3.1"
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-react": "^7.23.2"
   }
 }

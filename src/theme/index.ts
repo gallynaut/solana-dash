@@ -117,7 +117,7 @@ const themesOptions: Record<string, ThemeOptions> = {
       mode: 'light',
       primary: {
         contrastText: '#ffffff',
-        main: '#5664d2'
+        main: '#193650'
       },
       success: {
         contrastText: '#ffffff',
@@ -174,7 +174,7 @@ const themesOptions: Record<string, ThemeOptions> = {
     },
     shadows: darkShadows
   },
-  [THEMES.NATURE]: {
+  [THEMES.SOLANA]: {
     components: {
       MuiTableCell: {
         styleOverrides: {
@@ -187,7 +187,7 @@ const themesOptions: Record<string, ThemeOptions> = {
     palette: {
       background: {
         default: '#1c2531',
-        paper: '#293142'
+        paper: '#193650'
       },
       divider: 'rgba(145, 158, 171, 0.24)',
       error: {
@@ -196,8 +196,8 @@ const themesOptions: Record<string, ThemeOptions> = {
       },
       mode: 'dark',
       primary: {
-        contrastText: '#ffffff',
-        main: '#01ab56'
+        contrastText: '#193650',
+        main: '#00ffa3'
       },
       success: {
         contrastText: '#ffffff',

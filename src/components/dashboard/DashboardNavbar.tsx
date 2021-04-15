@@ -1,16 +1,16 @@
 import type { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AppBar, Box, Hidden, IconButton, Toolbar } from '@material-ui/core';
+import { AppBar, Box, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core';
 import { experimentalStyled } from '@material-ui/core/styles';
 import type { AppBarProps } from '@material-ui/core';
 import MenuIcon from '../../icons/Menu';
+import SolanaIcon from '../../icons/Solana';
 import AccountPopover from './AccountPopover';
 import ContentSearch from './ContentSearch';
-import LanguagePopover from './LanguagePopover';
-import Logo from '../Logo';
+import NetworkPopover from './connect/NetworkPopover';
 import NotificationsPopover from './NotificationsPopover';
-import ConnectWalletButton from './connect/ConnectWalletButton';
+import ConnectWallet from './connect/ConnectWallet';
 
 interface DashboardNavbarProps extends AppBarProps {
   onSidebarMobileOpen?: () => void;
@@ -21,7 +21,8 @@ const DashboardNavbarRoot = experimentalStyled(AppBar)(
     {
       ...(
         theme.palette.mode === 'light' && {
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.background.paper,
+          borderBottom: `1px solid ${theme.palette.divider}`,
           boxShadow: 'none',
           color: theme.palette.primary.contrastText
         }
@@ -43,24 +44,41 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
 
   return (
     <DashboardNavbarRoot {...other}>
-      <Toolbar sx={{ minHeight: 64 }}>
+      <Toolbar sx={{ 
+        // minHeight: 64,
+        maxHeight: 64
+      }}
+      >
         <Hidden lgUp>
           <IconButton
             color="inherit"
             onClick={onSidebarMobileOpen}
           >
-            <MenuIcon fontSize="small" />
+            <SolanaIcon
+              color="primary"
+              fontSize="small"
+            />
           </IconButton>
         </Hidden>
         <Hidden lgDown>
           <RouterLink to="/">
-            <Logo
+            <SolanaIcon
+              color="primary"
               sx={{
                 height: 40,
                 width: 40
               }}
             />
           </RouterLink>
+          <Typography 
+            variant="h3"
+            color="secondary"
+            sx={{
+              height: 40,
+            }}
+          >
+            DASH
+          </Typography>
         </Hidden>
         <Box
           sx={{
@@ -68,8 +86,9 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
             ml: 2
           }}
         />
-        <ConnectWalletButton />
-        <LanguagePopover />
+        <NetworkPopover />
+        <ConnectWallet />
+        
         <Box sx={{ ml: 1 }}>
           <ContentSearch />
         </Box>

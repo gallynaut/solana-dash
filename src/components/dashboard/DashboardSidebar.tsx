@@ -22,11 +22,20 @@ import FolderOpenIcon from '../../icons/FolderOpen';
 import ShareIcon from '../../icons/Share';
 import ShoppingBagIcon from '../../icons/ShoppingBag';
 import ShoppingCartIcon from '../../icons/ShoppingCart';
-// import UserIcon from '../../icons/User';
+import SolanaIcon from '../../icons/Solana';
 import CashIcon from '../../icons/Cash';
 import Logo from '../Logo';
 import NavSection from '../NavSection';
 import Scrollbar from '../Scrollbar';
+import {
+  setNetwork,
+  setAccount,
+  setConnectedStatus,
+  openModal,
+  closeModal,
+} from '../../slices/solana';
+import { useDispatch, useSelector } from '../../store';
+import shortenPublicKey from '../../utils/shortenPublicKey'
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;
@@ -145,7 +154,18 @@ const sections = [
 const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
-  const { user } = useAuth();
+  const dispatch = useDispatch();
+  const {
+    network,
+    connectedStatus,
+    account,
+    isModalOpen
+  } = useSelector((state) => state.solana);
+
+
+  const openConnectWalletModal = () => {
+    dispatch(openModal())
+  }
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -171,7 +191,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
             }}
           >
             <RouterLink to="/">
-              <Logo
+              <SolanaIcon
+                color="primary"
                 sx={{
                   height: 40,
                   width: 40
@@ -181,6 +202,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
           </Box>
         </Hidden>
         <Box sx={{ p: 2 }}>
+          {/* START OF ACCOUNT INFO */}
           <Box
             sx={{
               alignItems: 'center',
@@ -191,7 +213,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
               p: 2
             }}
           >
-            <RouterLink to="/">
+            {/* <RouterLink to="/">
               <Avatar
                 src={user.avatar}
                 sx={{
@@ -200,7 +222,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                   width: 48
                 }}
               />
-            </RouterLink>
+            </RouterLink> */}
             <Box sx={{ ml: 2 }}>
               <Typography
                 color="textPrimary"
@@ -216,14 +238,14 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                 {' '}
                 <Link
                   color="primary"
-                  component={RouterLink}
-                  to="/pricing"
+                  onClick={openConnectWalletModal}
                 >
-                  {user.plan}
+                  {!connectedStatus ? "Connect to Wallet" : shortenPublicKey(account.publicKey)}
                 </Link>
               </Typography>
             </Box>
           </Box>
+          {/* END OF ACCOUNT BOX */}
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>

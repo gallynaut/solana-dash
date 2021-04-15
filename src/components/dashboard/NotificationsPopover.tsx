@@ -84,7 +84,7 @@ const NotificationsPopover: FC = () => {
     <>
       <Tooltip title="Notifications">
         <IconButton
-          color="inherit"
+          color="primary"
           ref={anchorRef}
           onClick={handleOpen}
         >

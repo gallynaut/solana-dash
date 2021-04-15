@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { Suspense, lazy } from 'react';
 import type { PartialRouteObject } from 'react-router';
 // import AuthGuard from './components/AuthGuard';
@@ -17,6 +18,10 @@ const Contact = Loadable(lazy(() => import('./pages/Contact')));
 const Network = Loadable(lazy(() => import('./pages/Network')));
 const Overview = Loadable(lazy(() => import('./pages/Overview')));
 const News = Loadable(lazy(() => import('./pages/News')));
+
+// Beginner pages
+
+const BeginnerWhat = Loadable(lazy(() => import('./pages/beginners/BeginnerWhat')));
 
 // Error pages
 
@@ -39,7 +44,7 @@ const routes: PartialRouteObject[] = [
         children: [
           {
             path: 'what',
-            element: <Overview />,
+            element: <BeginnerWhat />,
           },
           {
             path: 'how',
