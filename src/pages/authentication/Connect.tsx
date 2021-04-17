@@ -12,12 +12,7 @@ import {
   Typography
 } from '@material-ui/core';
 import AuthBanner from '../../components/authentication/AuthBanner';
-import {
-  LoginAmplify,
-  LoginAuth0,
-  LoginFirebase,
-  LoginJWT
-} from '../../components/authentication/login';
+import { LoginSolana, } from '../../components/authentication/login';
 import Logo from '../../components/Logo';
 import useAuth from '../../hooks/useAuth';
 import gtm from '../../lib/gtm';
@@ -29,17 +24,14 @@ const platformIcons = {
   JWT: '/static/icons/jwt.svg'
 };
 
-const Login: FC = () => {
+const Connect: FC = () => {
   const { platform } = useAuth() as any;
 
-  useEffect(() => {
-    gtm.push({ event: 'page_view' });
-  }, []);
 
   return (
     <>
       <Helmet>
-        <title>Login | Material Kit Pro</title>
+        <title>Connect | SolanaDash</title>
       </Helmet>
       <Box
         sx={{
@@ -49,27 +41,10 @@ const Login: FC = () => {
           minHeight: '100vh'
         }}
       >
-        <AuthBanner />
         <Container
           maxWidth="sm"
           sx={{ py: '80px' }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              mb: 8
-            }}
-          >
-            <RouterLink to="/">
-              <Logo
-                sx={{
-                  height: 40,
-                  width: 40
-                }}
-              />
-            </RouterLink>
-          </Box>
           <Card>
             <CardContent
               sx={{
@@ -101,7 +76,7 @@ const Login: FC = () => {
                     Log in on the internal platform
                   </Typography>
                 </div>
-                <Box
+                {/* <Box
                   sx={{
                     height: 32,
                     '& > img': {
@@ -114,7 +89,7 @@ const Login: FC = () => {
                     alt="Auth platform"
                     src={platformIcons[platform]}
                   />
-                </Box>
+                </Box> */}
               </Box>
               <Box
                 sx={{
@@ -122,10 +97,7 @@ const Login: FC = () => {
                   mt: 3
                 }}
               >
-                {platform === 'Amplify' && <LoginAmplify />}
-                {platform === 'Auth0' && <LoginAuth0 />}
-                {platform === 'Firebase' && <LoginFirebase />}
-                {platform === 'JWT' && <LoginJWT />}
+                <LoginSolana />
               </Box>
               <Divider sx={{ my: 3 }} />
               <Link
@@ -134,19 +106,8 @@ const Login: FC = () => {
                 to="/authentication/register"
                 variant="body2"
               >
-                Create new account
+                Create new wallet (Link to page)
               </Link>
-              {platform === 'Amplify' && (
-                <Link
-                  color="textSecondary"
-                  component={RouterLink}
-                  sx={{ mt: 1 }}
-                  to="/authentication/password-recovery"
-                  variant="body2"
-                >
-                  Forgot password
-                </Link>
-              )}
             </CardContent>
           </Card>
         </Container>
@@ -155,4 +116,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default Connect;

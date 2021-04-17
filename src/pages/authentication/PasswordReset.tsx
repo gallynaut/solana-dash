@@ -34,7 +34,7 @@ const PasswordReset: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Password Reset | Material Kit Pro</title>
+        <title>Password Reset | Solana Dash</title>
       </Helmet>
       <Box
         sx={{

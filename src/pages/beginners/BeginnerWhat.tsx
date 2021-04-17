@@ -23,7 +23,7 @@ const BeginnerWhat: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Overview | Material Kit Pro</title>
+        <title>Dashboard: Overview | Solana Dash</title>
       </Helmet>
       <Box
         sx={{
@@ -66,7 +66,7 @@ const BeginnerWhat: FC = () => {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid 
+            <Grid
               item
               xs={5}
             >
@@ -75,7 +75,7 @@ const BeginnerWhat: FC = () => {
                 color="primary"
                 size="large"
                 startIcon={<ArrowLeftIcon />}
-                sx={{ 
+                sx={{
                   m: 3,
                   pl: 8,
                   pr: 8,
@@ -86,7 +86,7 @@ const BeginnerWhat: FC = () => {
                 Prev
               </Button>
             </Grid>
-            <Grid 
+            <Grid
               item
               xs={5}
             >
@@ -94,13 +94,13 @@ const BeginnerWhat: FC = () => {
                 color="primary"
                 size="large"
                 endIcon={<ArrowRightIcon />}
-                sx={{ 
+                sx={{
                   m: 3,
                   pl: 8,
                   pr: 8,
-                //   '&:hover': {
-                //     backgroundColor: 'success.main'
-                //   }
+                  //   '&:hover': {
+                  //     backgroundColor: 'success.main'
+                  //   }
                 }}
                 variant="contained"
               >

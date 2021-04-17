@@ -1,37 +1,23 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import type { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
-  Box,
   Button,
-  IconButton,
   ListItemIcon,
   ListItemText,
   MenuItem,
   Popover,
   Typography
 } from '@material-ui/core';
-import {
-  setNetwork,
-  setAccount,
-  setConnectedStatus,
-  openModal,
-  closeModal,
-} from '../../../slices/solana';
-import { useDispatch, useSelector } from '../../../store';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import type { Cluster } from '@solana/web3.js';
 import { NETWORKS } from '../../../constants';
-
+import AuthContext from '../../../contexts/SolanaContext'
 
 const NetworkPopover: FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
-  const dispatch = useDispatch();
   const [open, setOpen] = useState<boolean>(false);
-  const {
-    network
-  } = useSelector((state) => state.solana);
+  const { cluster, setCluster } = useContext(AuthContext);
+
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -41,9 +27,10 @@ const NetworkPopover: FC = () => {
     setOpen(false);
   };
 
-  const handleChangeLanguage = (network: string): void => {
-    console.log(NETWORKS[network])
-    dispatch(setNetwork(NETWORKS[network]))
+  const handleChangeNetwork = (selectedCluster: string): void => {
+    if (cluster != selectedCluster) {
+      setCluster(selectedCluster)
+    }
     setOpen(false)
   };
 
@@ -56,13 +43,14 @@ const NetworkPopover: FC = () => {
         color="secondary"
         size="large"
         sx={{
-          m: 3,
+          m: 1,
           pl: 3,
           pr: 3,
+          minWidth: '175px'
         }}
         variant="contained"
       >
-        {network.label}
+        {NETWORKS[cluster].label}
         <ArrowDropDownIcon />
       </Button>
       <Popover
@@ -79,9 +67,9 @@ const NetworkPopover: FC = () => {
           sx: { width: 240 }
         }}
       >
-        {Object.keys(NETWORKS).map((key) => (
+        {Object.keys(NETWORKS).map((key, value) => (
           <MenuItem
-            onClick={() => handleChangeLanguage(key)}
+            onClick={() => handleChangeNetwork(key)}
             key={key}
           >
             <ListItemIcon>

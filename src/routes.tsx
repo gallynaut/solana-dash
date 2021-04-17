@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import { Suspense, lazy } from 'react';
 import type { PartialRouteObject } from 'react-router';
-// import AuthGuard from './components/AuthGuard';
+import AuthGuard from './components/AuthGuard';
 import DashboardLayout from './components/dashboard/DashboardLayout';
 import LoadingScreen from './components/LoadingScreen';
+import Connect from './pages/authentication/Connect';
 
 const Loadable = (Component) => (props) => (
   <Suspense fallback={<LoadingScreen />}>
@@ -38,6 +39,10 @@ const routes: PartialRouteObject[] = [
       {
         path: '/',
         element: <Overview />
+      },
+      {
+        path: 'connect',
+        element: <Connect />
       },
       {
         path: 'beginners',
@@ -83,7 +88,11 @@ const routes: PartialRouteObject[] = [
       },
       {
         path: 'account',
-        element: <Overview />
+        element: (
+          <AuthGuard>
+            <Overview />
+          </AuthGuard>
+        ),
       },
       {
         path: 'network',
@@ -103,7 +112,7 @@ const routes: PartialRouteObject[] = [
       },
       {
         path: '/calendar',
-        element: <Calendar />
+        element: (<AuthGuard><Calendar /></AuthGuard>),
       },
       {
         path: '/projects',

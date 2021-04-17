@@ -234,14 +234,28 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                 color="textSecondary"
                 variant="body2"
               >
-                Your plan:
+                Account:
                 {' '}
                 <Link
                   color="primary"
                   onClick={openConnectWalletModal}
                 >
-                  {!connectedStatus ? "Connect to Wallet" : shortenPublicKey(account.publicKey)}
+                  {!connectedStatus ? "Connect to Wallet" : shortenPublicKey(account.publicKey, 4, 8)}
                 </Link>
+              </Typography>
+              <Typography
+                color="textSecondary"
+                variant="body2"
+              >
+                Balance:
+                {' '}
+                <Typography
+                  color="primary"
+                  variant="body2"
+                  display="inline"
+                >
+                  {!connectedStatus ? "Connect to Wallet" : 0.00000000}
+                </Typography>
               </Typography>
             </Box>
           </Box>

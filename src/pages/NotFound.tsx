@@ -18,7 +18,7 @@ const NotFound: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Error: Not Found | Material Kit Pro</title>
+        <title>Error: Not Found | Solana Dash</title>
       </Helmet>
       <Box
         sx={{

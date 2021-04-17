@@ -34,7 +34,7 @@ const VerifyCode: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Verify Code | Material Kit Pro</title>
+        <title>Verify Code | Solana Dash</title>
       </Helmet>
       <Box
         sx={{

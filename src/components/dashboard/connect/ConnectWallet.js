@@ -76,25 +76,23 @@ function ConnectWallet() {
   }, [network.url]);
   const [selectedWallet, setSelectedWallet] = useState(undefined);
 
-  useEffect(() => {
-    if (selectedWallet) {
-      selectedWallet.on('connect', () => {
-        const pk = selectedWallet.publicKey.toBase58()
-        console.log(pk)
-        dispatch(setAccount(pk))
-        addLog(`Connected to wallet ${pk}`);
-      });
-      selectedWallet.on('disconnect', () => {
-        dispatch(setAccount(""))
-        dispatch(setConnectedStatus(false))
-        addLog('Disconnected from wallet');
-      });
-      selectedWallet.connect();
-      return () => {
-        selectedWallet.disconnect();
-      };
-    }
-  }, [selectedWallet]);
+  // useEffect(() => {
+  //   if (selectedWallet) {
+  //     selectedWallet.on('connect', () => {
+  //       const pk = selectedWallet.publicKey.toBase58()
+  //       console.log(pk)
+  //       addLog(`Connected to wallet ${pk}`);
+  //     });
+  //     selectedWallet.on('disconnect', () => {
+  //       dispatch(setConnectedStatus(false))
+  //       addLog('Disconnected from wallet');
+  //     });
+  //     selectedWallet.connect();
+  //     return () => {
+  //       selectedWallet.disconnect();
+  //     };
+  //   }
+  // }, [selectedWallet]);
 
   async function sendTransaction() {
     try {
@@ -146,7 +144,7 @@ function ConnectWallet() {
         }}
         variant="contained"
       >
-        {!connectedStatus ? "Connect to Wallet" : shortenPublicKey(account.publicKey)}
+        {!connectedStatus ? "Connect to Wallet" : "Connected"}
       </Button>
 
       <Modal
@@ -230,26 +228,3 @@ function ConnectWallet() {
 
 export default ConnectWallet;
 
-// const ConnectWalletButton: FC = () => (
-//   <Box
-//     sx={{
-//       p: 3
-//     }}
-//   >
-//     <div>
-//       <Hidden lgDown>
-//         <Button
-//           color="primary" // should be different for light theme
-//           size="large"
-//           sx={{ mr: 3 }}
-//           variant="contained"
-//         >
-//           Connect Wallet
-//         </Button>
-//       </Hidden>
-
-//     </div>
-//   </Box>
-// );
-
-// export default ConnectWalletButton;

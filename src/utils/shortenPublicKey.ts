@@ -1,7 +1,6 @@
 
-const shortenPublicKey = (pk: string): string => {
-    return pk.substring(0,3)+ '...' + pk.substring(pk.length-5)
-  };
+const shortenPublicKey = (pk: string, firstN: number, lastN: number): string => {
+  return pk.substring(0, firstN) + '...' + pk.substring(pk.length - lastN)
+};
 
 export default shortenPublicKey;
-  

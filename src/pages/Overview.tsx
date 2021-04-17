@@ -40,7 +40,7 @@ const Overview: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard: Overview | Material Kit Pro</title>
+        <title>Dashboard: Overview | Solana Dash</title>
       </Helmet>
       <Box
         sx={{

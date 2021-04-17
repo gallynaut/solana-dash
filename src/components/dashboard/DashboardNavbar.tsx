@@ -11,6 +11,7 @@ import ContentSearch from './ContentSearch';
 import NetworkPopover from './connect/NetworkPopover';
 import NotificationsPopover from './NotificationsPopover';
 import ConnectWallet from './connect/ConnectWallet';
+import ConnectIndicator from './connect/ConnectIndicator';
 
 interface DashboardNavbarProps extends AppBarProps {
   onSidebarMobileOpen?: () => void;
@@ -44,7 +45,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
 
   return (
     <DashboardNavbarRoot {...other}>
-      <Toolbar sx={{ 
+      <Toolbar sx={{
         // minHeight: 64,
         maxHeight: 64
       }}
@@ -70,7 +71,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
               }}
             />
           </RouterLink>
-          <Typography 
+          <Typography
             variant="h3"
             color="secondary"
             sx={{
@@ -86,17 +87,14 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
             ml: 2
           }}
         />
-        <NetworkPopover />
-        <ConnectWallet />
-        
-        <Box sx={{ ml: 1 }}>
+        <Box sx={{ ml: 1, }}>
           <ContentSearch />
         </Box>
         <Box sx={{ ml: 1 }}>
-          <NotificationsPopover />
+          <ConnectIndicator />
         </Box>
-        <Box sx={{ ml: 2 }}>
-          <AccountPopover />
+        <Box sx={{ ml: 1 }}>
+          <NotificationsPopover />
         </Box>
       </Toolbar>
     </DashboardNavbarRoot>

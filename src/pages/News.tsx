@@ -8,7 +8,7 @@ import {
 const News: FC = () => (
   <>
     <Helmet>
-      <title>Dashboard: Account | Material Kit Pro</title>
+      <title>Dashboard: Account | Solana Dash</title>
     </Helmet>
     <Box
       sx={{

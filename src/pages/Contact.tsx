@@ -16,7 +16,7 @@ const Contact: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Contact | Material Kit Pro</title>
+        <title>Contact | Solana Dash</title>
       </Helmet>
       <Box
         sx={{

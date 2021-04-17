@@ -1,31 +1,22 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 import type { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import Amplify, { Auth } from 'aws-amplify';
-import { amplifyConfig } from '../config';
-import type { User } from '../types/user';
-
-Amplify.configure(amplifyConfig);
+import { NETWORKS, WALLETS } from '../constants'
+import { Connection, Cluster, clusterApiUrl } from '@solana/web3.js';
 
 interface State {
   isInitialized: boolean;
   isAuthenticated: boolean;
-  user: User | null;
+  cluster: string;
+  connection: Connection | null;
 }
 
 interface AuthContextValue extends State {
   platform: 'Solana';
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
-  verifyCode: (username: string, code: string) => Promise<void>;
-  resendCode: (username: string) => Promise<void>;
-  passwordRecovery: (username: string) => Promise<void>;
-  passwordReset: (
-    username: string,
-    code: string,
-    newPassword: string
-  ) => Promise<void>;
+  connectAccount: () => Promise<void>;
+  disconnectAccount: () => Promise<void>;
+  setCluster: (cluster: string) => Promise<void>;
+  setConnection: (cluster: string) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -34,89 +25,72 @@ interface AuthProviderProps {
 
 type InitializeAction = {
   type: 'INITIALIZE';
-  payload: {
-    isAuthenticated: boolean;
-    user: User | null;
-  };
 };
-
-type LoginAction = {
-  type: 'LOGIN';
-  payload: {
-    user: User;
-  };
-};
-
-type LogoutAction = {
-  type: 'LOGOUT';
-};
-
-type RegisterAction = {
-  type: 'REGISTER';
-};
-
-type VerifyCodeAction = {
-  type: 'VERIFY_CODE';
-};
-
-type ResendCodeAction = {
-  type: 'RESEND_CODE';
+type ConnectAccountAction = {
+  type: 'CONNECT_ACCOUNT';
 }
-  ;
-type PasswordRecoveryAction = {
-  type: 'PASSWORD_RECOVERY';
-};
+type DisconnectAccountAction = {
+  type: 'DISCONNECT_ACCOUNT';
+}
+type SetClusterAction = {
+  type: 'SET_CLUSTER';
+  payload: {
+    cluster: string;
+  };
+}
+type SetConnectionAction = {
+  type: 'SET_CONNECTION';
+  payload: {
+    connection: Connection | null;
+  };
+}
 
-type PasswordResetAction = {
-  type: 'PASSWORD_RESET';
-};
-
-type Action =
-  | InitializeAction
-  | LoginAction
-  | LogoutAction
-  | RegisterAction
-  | VerifyCodeAction
-  | ResendCodeAction
-  | PasswordRecoveryAction
-  | PasswordResetAction;
+type Action = InitializeAction
+  | ConnectAccountAction
+  | DisconnectAccountAction
+  | SetClusterAction
+  | SetConnectionAction;
 
 const initialState: State = {
   isAuthenticated: false,
   isInitialized: false,
-  user: null
-};
+  cluster: 'devnet',
+  connection: new Connection('devnet')
+}
 
 const handlers: Record<string, (state: State, action: Action) => State> = {
   INITIALIZE: (state: State, action: InitializeAction): State => {
-    const { isAuthenticated, user } = action.payload;
-
     return {
       ...state,
-      isAuthenticated,
       isInitialized: true,
-      user
     };
   },
-  LOGIN: (state: State, action: LoginAction): State => {
-    const { user } = action.payload;
-
+  CONNECT_ACCOUNT: (state: State, action: ConnectAccountAction): State => {
     return {
       ...state,
-      isAuthenticated: true,
-      user
+      isAuthenticated: true
     };
   },
-  LOGOUT: (state: State): State => ({
-    ...state,
-    isAuthenticated: false,
-    user: null
-  }),
-  REGISTER: (state: State): State => ({ ...state }),
-  VERIFY_CODE: (state: State): State => ({ ...state }),
-  RESEND_CODE: (state: State): State => ({ ...state }),
-  PASSWORD_RECOVERY: (state: State): State => ({ ...state }),
-  PASSWORD_RESET: (state: State): State => ({ ...state })
+  DISCONNECT_ACCOUNT: (state: State, action: DisconnectAccountAction): State => {
+    return {
+      ...state,
+      isAuthenticated: false
+    };
+  },
+  SET_CLUSTER: (state: State, action: SetClusterAction): State => {
+    const { cluster } = action.payload
+    return {
+      ...state,
+      cluster: cluster,
+    };
+  },
+  SET_CONNECTION: (state: State, action: SetConnectionAction): State => {
+    const { connection } = action.payload
+    return {
+      ...state,
+      connection: connection,
+    };
+  },
 };
 
 const reducer = (state: State, action: Action): State => (
@@ -126,145 +100,112 @@ const reducer = (state: State, action: Action): State => (
 const AuthContext = createContext<AuthContextValue>({
   ...initialState,
   platform: 'Solana',
-  login: () => Promise.resolve(),
-  logout: () => Promise.resolve(),
-  register: () => Promise.resolve(),
-  verifyCode: () => Promise.resolve(),
-  resendCode: () => Promise.resolve(),
-  passwordRecovery: () => Promise.resolve(),
-  passwordReset: () => Promise.resolve()
-});
+  connectAccount: () => Promise.resolve(),
+  disconnectAccount: () => Promise.resolve(),
+  setCluster: (cluster: string) => Promise.resolve(),
+  setConnection: (cluster: string) => Promise.resolve(),
+})
 
 export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    // effect
+    // return () => {
+    //     cleanup
+    // }
     const initialize = async (): Promise<void> => {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-
-        // Here you should extract the complete user profile to make it
-        // available in your entire app.
-        // The auth state only provides basic information.
-
-        dispatch({
-          type: 'INITIALIZE',
-          payload: {
-            isAuthenticated: true,
-            user: {
-              id: user.sub,
-              avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-              email: user.attributes.email,
-              name: 'Jane Rotanson',
-              plan: 'Premium'
-            }
-          }
-        });
-      } catch (error) {
-        dispatch({
-          type: 'INITIALIZE',
-          payload: {
-            isAuthenticated: false,
-            user: null
-          }
-        });
-      }
+      dispatch({ type: 'INITIALIZE', })
     };
 
+
     initialize();
-  }, []);
+  }, [])
 
-  const login = async (email: string, password: string): Promise<void> => {
-    const user = await Auth.signIn(email, password);
+  const connectAccount = async (): Promise<void> => {
+    console.log("connecting to account")
+    dispatch({ type: 'CONNECT_ACCOUNT' })
+  }
 
-    if (user.challengeName) {
-      console.error(`Unable to login, because challenge "${user.challengeName}" is mandated and we did not handle this case.`);
-      return;
+  const disconnectAccount = async (): Promise<void> => {
+    console.log("disconnecting to account")
+    dispatch({ type: 'DISCONNECT_ACCOUNT' })
+  }
+
+  const setCluster = async (cluster: string): Promise<void> => {
+    if (!(cluster in NETWORKS)) {
+      console.log("no network exist for ", cluster)
+      return
     }
 
+    console.log("setting network ", cluster)
     dispatch({
-      type: 'LOGIN',
+      type: 'SET_CLUSTER',
       payload: {
-        user: {
-          id: user.attributes.sub,
-          avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-          email: user.attributes.email,
-          name: 'Jane Rotanson',
-          plan: 'Premium'
-        }
+        cluster: cluster,
       }
-    });
-  };
-
-  const logout = async (): Promise<void> => {
-    await Auth.signOut();
-    dispatch({
-      type: 'LOGOUT'
-    });
-  };
-
-  const register = async (email: string, password: string): Promise<void> => {
-    await Auth.signUp({
-      username: email,
-      password,
-      attributes: { email }
-    });
-    dispatch({
-      type: 'REGISTER'
-    });
-  };
-
-  const verifyCode = async (username: string, code: string): Promise<void> => {
-    await Auth.confirmSignUp(username, code);
-    dispatch({
-      type: 'VERIFY_CODE'
-    });
-  };
-
-  const resendCode = async (username: string): Promise<void> => {
-    await Auth.resendSignUp(username);
-    dispatch({
-      type: 'RESEND_CODE'
-    });
-  };
-
-  const passwordRecovery = async (username: string): Promise<void> => {
-    await Auth.forgotPassword(username);
-    dispatch({
-      type: 'PASSWORD_RECOVERY'
-    });
-  };
-
-  const passwordReset = async (
-    username: string,
-    code: string,
-    newPassword: string
-  ): Promise<void> => {
-    await Auth.forgotPasswordSubmit(username, code, newPassword);
-    dispatch({
-      type: 'PASSWORD_RESET'
-    });
-  };
+    })
+    // need to also set connection everytime
+    try {
+      const c: Cluster = NETWORKS[cluster].cluster
+      const newConn: Connection = new Connection(clusterApiUrl(c))
+      dispatch({
+        type: 'SET_CONNECTION',
+        payload: {
+          connection: newConn,
+        }
+      })
+    } catch (err) {
+      console.log("error setting connection: ", err)
+      dispatch({
+        type: 'SET_CONNECTION',
+        payload: {
+          connection: null,
+        }
+      })
+    }
+  }
+  const setConnection = async (cluster: string): Promise<void> => {
+    if (!(cluster in NETWORKS)) {
+      console.log("no network exist for ", cluster)
+      return
+    }
+    try {
+      const c: Cluster = NETWORKS[cluster].cluster
+      const newConn: Connection = new Connection(clusterApiUrl(c))
+      dispatch({
+        type: 'SET_CONNECTION',
+        payload: {
+          connection: newConn,
+        }
+      })
+    } catch (err) {
+      console.log("error setting connection: ", err)
+      dispatch({
+        type: 'SET_CONNECTION',
+        payload: {
+          connection: null,
+        }
+      })
+    }
+  }
 
   return (
     <AuthContext.Provider
       value={{
         ...state,
         platform: 'Solana',
-        login,
-        logout,
-        register,
-        verifyCode,
-        resendCode,
-        passwordRecovery,
-        passwordReset
+        connectAccount,
+        disconnectAccount,
+        setCluster,
+        setConnection,
       }}
     >
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired
