@@ -12,6 +12,7 @@ interface State {
   cluster: string;
   connection: Connection | null;
   account: PublicKey | null;
+  publicKey: string;
   wallet: any;
   walletProvider: string;
 }
@@ -36,6 +37,7 @@ type ConnectAccountAction = {
   type: 'CONNECT_ACCOUNT';
   payload: {
     account: PublicKey | null;
+    publicKey: string;
   };
 }
 type DisconnectAccountAction = {
@@ -80,6 +82,7 @@ const initialState: State = {
   cluster: 'devnet',
   connection: new Connection('devnet'),
   account: null, // we could pull from local storage during initialize
+  publicKey: '',
   wallet: null,
   walletProvider: '',
 }
@@ -92,11 +95,12 @@ const handlers: Record<string, (state: State, action: Action) => State> = {
     };
   },
   CONNECT_ACCOUNT: (state: State, action: ConnectAccountAction): State => {
-    const { account } = action.payload
+    const { account, publicKey } = action.payload
     return {
       ...state,
       isAuthenticated: true,
-      account: account
+      account: account,
+      publicKey: publicKey,
     };
   },
   DISCONNECT_ACCOUNT: (state: State, action: DisconnectAccountAction): State => {
@@ -104,6 +108,8 @@ const handlers: Record<string, (state: State, action: Action) => State> = {
       ...state,
       isAuthenticated: false,
       account: null,
+      publicKey: '',
+      walletProvider: '',
     };
   },
   SET_CLUSTER: (state: State, action: SetClusterAction): State => {
@@ -183,7 +189,11 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
       console.log('Connected to wallet ' + wallet.publicKey.toBase58());
       dispatch({
         type: 'CONNECT_ACCOUNT',
-        payload: pk,
+        payload: {
+          account: pk,
+          publicKey: wallet.publicKey.toBase58(),
+        }
+
       })
     });
     wallet.connect();

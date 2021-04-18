@@ -18,6 +18,7 @@ interface DashboardNavbarProps extends AppBarProps {
   onSidebarMobileOpen?: () => void;
 }
 
+
 const DashboardNavbarRoot = experimentalStyled(AppBar)(
   ({ theme }) => (
     {
@@ -68,19 +69,23 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
               color="primary"
               sx={{
                 height: 40,
-                width: 40
+                width: 40,
+                display: 'inline'
               }}
             />
+            <Typography
+              variant="h3"
+              color="secondary"
+              sx={{
+                height: 40,
+                display: 'inline'
+              }}
+            >
+              DASH
+              </Typography>
           </RouterLink>
-          <Typography
-            variant="h3"
-            color="secondary"
-            sx={{
-              height: 40,
-            }}
-          >
-            DASH
-          </Typography>
+
+
         </Hidden>
         <Box
           sx={{
@@ -95,10 +100,9 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         <Box sx={{ ml: 1 }}>
           <NetworkPopover />
         </Box>
-        <Divider orientation="vertical" flexItem variant="middle" light />
+        <Divider orientation="vertical" flexItem variant="middle" />
         <Box sx={{ ml: 1 }}>
           <ConnectAccountButton />
-
         </Box>
       </Toolbar>
     </DashboardNavbarRoot>
