@@ -36,6 +36,7 @@ import {
 } from '../../slices/solana';
 import { useDispatch, useSelector } from '../../store';
 import shortenPublicKey from '../../utils/shortenPublicKey'
+import AccountSummaryCard from '../../components/solana/AccountSummaryCard';
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;
@@ -202,63 +203,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
           </Box>
         </Hidden>
         <Box sx={{ p: 2 }}>
-          {/* START OF ACCOUNT INFO */}
-          <Box
-            sx={{
-              alignItems: 'center',
-              backgroundColor: 'background.default',
-              borderRadius: 1,
-              display: 'flex',
-              overflow: 'hidden',
-              p: 2
-            }}
-          >
-            {/* <RouterLink to="/">
-              <Avatar
-                src={user.avatar}
-                sx={{
-                  cursor: 'pointer',
-                  height: 48,
-                  width: 48
-                }}
-              />
-            </RouterLink> */}
-            <Box sx={{ ml: 2 }}>
-              <Typography
-                color="textPrimary"
-                variant="subtitle2"
-              >
-                Solana Dash
-              </Typography>
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Account:
-                {' '}
-                <Link
-                  color="primary"
-                  onClick={openConnectWalletModal}
-                >
-                  {!connectedStatus ? "Connect to Wallet" : shortenPublicKey(account.publicKey, 4, 8)}
-                </Link>
-              </Typography>
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Balance:
-                {' '}
-                <Typography
-                  color="primary"
-                  variant="body2"
-                  display="inline"
-                >
-                  {!connectedStatus ? "Connect to Wallet" : 0.00000000}
-                </Typography>
-              </Typography>
-            </Box>
-          </Box>
+          <AccountSummaryCard />
           {/* END OF ACCOUNT BOX */}
         </Box>
         <Divider />

@@ -6,15 +6,20 @@ import {
   ListItemText,
   MenuItem,
   Popover,
-  Typography
+  Typography,
 } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import { NETWORKS } from '../../../constants';
-import AuthContext from '../../../contexts/SolanaContext'
+import { NETWORKS } from '../../constants';
+import AuthContext from '../../contexts/SolanaContext'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+
 
 const NetworkPopover: FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
   const { cluster, setCluster } = useContext(AuthContext);
 
@@ -67,17 +72,19 @@ const NetworkPopover: FC = () => {
           sx: { width: 240 }
         }}
       >
-        {Object.keys(NETWORKS).map((key, value) => (
+        {Object.keys(NETWORKS).map((key, index) => (
           <MenuItem
             onClick={() => handleChangeNetwork(key)}
             key={key}
+            selected={key === cluster}
+            sx={{
+              '& .Mui-selected': {
+                bgcolor: 'blue',
+              },
+            }}
           >
             <ListItemIcon>
-              <BrightnessHighIcon
-                sx={{
-                  color: NETWORKS[key].icon
-                }}
-              />
+              <ChevronRightIcon />
             </ListItemIcon>
             <ListItemText
               primary={(

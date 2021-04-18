@@ -6,21 +6,20 @@ import {
   Grid,
   Typography
 } from '@material-ui/core';
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
-import { NETWORKS, WALLETS } from '../../../constants';
-import { Wallet } from '../../../types/wallet'
-import AuthContext from '../../../contexts/SolanaContext'
+import useIsMountedRef from '../../hooks/useIsMountedRef';
+import { NETWORKS, WALLETS } from '../../constants';
+import { Wallet } from '../../types/wallet'
+import AuthContext from '../../contexts/SolanaContext'
 
 const LoginSolana: FC = (props) => {
   const isMountedRef = useIsMountedRef();
-  const { cluster } = useContext(AuthContext)
-
-
+  const { cluster, connectAccount, setWalletProvider } = useContext(AuthContext)
 
   const handleClick = (wallet: Wallet) => {
-    console.log(wallet.url)
-    const networkURL: string = NETWORKS[cluster].url
-    // connect(networkURL, wallet.url)
+    // console.log(wallet.url)
+    // const networkURL: string = NETWORKS[cluster].url
+    // connectAccount(networkURL, wallet.url)
+    setWalletProvider(wallet.url)
   };
 
   return (
@@ -34,7 +33,7 @@ const LoginSolana: FC = (props) => {
         <Grid item>
           <Typography variant="h2" noWrap>Choose a Wallet</Typography>
         </Grid>
-        <Divider sx={{ m: 3 }} light />
+        <Divider sx={{ my: 3 }} />
         {WALLETS.map((w: Wallet) => (
           <Grid item key={w.label}>
             <Button
@@ -45,6 +44,7 @@ const LoginSolana: FC = (props) => {
                 m: 3,
                 pl: 3,
                 pr: 3,
+                minWidth: '200px'
               }}
               variant="contained"
             >

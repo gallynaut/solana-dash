@@ -2,20 +2,20 @@ import { useRef, useContext } from 'react';
 import type { FC } from 'react';
 import { IconButton } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import AuthContext from '../../../contexts/SolanaContext';
+import AuthContext from '../../contexts/SolanaContext';
 import WifiIcon from '@material-ui/icons/Wifi';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 import NetworkPopover from './NetworkPopover';
 import ReplayIcon from '@material-ui/icons/Replay';
 
-const ConnectIndicator: FC = () => {
+const NetworkNavbar: FC = () => {
   const theme = useTheme();
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const { cluster, connection, setConnection } = useContext(AuthContext);
 
   const handleNetworkRefresh = (): void => {
     if (connection == null) {
-      setConnection(cluster)
+      setConnection()
     } else {
       console.log("connection already established")
     }
@@ -57,4 +57,4 @@ const ConnectIndicator: FC = () => {
   );
 };
 
-export default ConnectIndicator;
+export default NetworkNavbar;

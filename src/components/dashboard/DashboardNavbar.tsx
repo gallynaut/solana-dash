@@ -1,17 +1,18 @@
 import type { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AppBar, Box, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Hidden, IconButton, Toolbar, Typography, Divider } from '@material-ui/core';
 import { experimentalStyled } from '@material-ui/core/styles';
 import type { AppBarProps } from '@material-ui/core';
 import MenuIcon from '../../icons/Menu';
 import SolanaIcon from '../../icons/Solana';
 import AccountPopover from './AccountPopover';
 import ContentSearch from './ContentSearch';
-import NetworkPopover from './connect/NetworkPopover';
+import NetworkPopover from '../solana/NetworkPopover';
 import NotificationsPopover from './NotificationsPopover';
-import ConnectWallet from './connect/ConnectWallet';
-import ConnectIndicator from './connect/ConnectIndicator';
+// import ConnectWallet from '../connect/ConnectWallet.js.old';
+import NetworkNavbar from '../solana/NetworkNavbar';
+import ConnectAccountButton from '../solana/ConnectAccountButton';
 
 interface DashboardNavbarProps extends AppBarProps {
   onSidebarMobileOpen?: () => void;
@@ -90,11 +91,14 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         <Box sx={{ ml: 1, }}>
           <ContentSearch />
         </Box>
+        <Divider orientation="vertical" flexItem variant="middle" />
         <Box sx={{ ml: 1 }}>
-          <ConnectIndicator />
+          <NetworkPopover />
         </Box>
+        <Divider orientation="vertical" flexItem variant="middle" light />
         <Box sx={{ ml: 1 }}>
-          <NotificationsPopover />
+          <ConnectAccountButton />
+
         </Box>
       </Toolbar>
     </DashboardNavbarRoot>

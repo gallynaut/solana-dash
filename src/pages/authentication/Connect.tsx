@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import type { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -11,22 +11,11 @@ import {
   Link,
   Typography
 } from '@material-ui/core';
-import AuthBanner from '../../components/authentication/AuthBanner';
-import { LoginSolana, } from '../../components/authentication/login';
-import Logo from '../../components/Logo';
-import useAuth from '../../hooks/useAuth';
-import gtm from '../../lib/gtm';
-
-const platformIcons = {
-  Amplify: '/static/icons/amplify.svg',
-  Auth0: '/static/icons/auth0.svg',
-  Firebase: '/static/icons/firebase.svg',
-  JWT: '/static/icons/jwt.svg'
-};
+import LoginSolana from '../../components/solana/LoginSolana';
+import AuthContext from '../../contexts/SolanaContext'
 
 const Connect: FC = () => {
-  const { platform } = useAuth() as any;
-
+  const { platform } = useContext(AuthContext);
 
   return (
     <>
@@ -76,20 +65,6 @@ const Connect: FC = () => {
                     Log in on the internal platform
                   </Typography>
                 </div>
-                {/* <Box
-                  sx={{
-                    height: 32,
-                    '& > img': {
-                      maxHeight: '100%',
-                      width: 'auto'
-                    }
-                  }}
-                >
-                  <img
-                    alt="Auth platform"
-                    src={platformIcons[platform]}
-                  />
-                </Box> */}
               </Box>
               <Box
                 sx={{
