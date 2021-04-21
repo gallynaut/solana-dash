@@ -1,10 +1,14 @@
 import { createContext, useReducer, useEffect } from 'react';
 import type { FC, ReactNode } from 'react';
+import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
 import { NETWORKS, WALLETS } from '../constants'
 import { Connection, Cluster, clusterApiUrl } from '@solana/web3.js';
+import type { RpcResponseAndContext } from '@solana/web3.js'
 import SolanaWallet, { PublicKey } from '@project-serum/sol-wallet-adapter';
 // import SolanaWallet from '@project-serum/sol-wallet-adapter'
+import useInterval from '../hooks/useInterval';
+import { notify } from '../utils/notifications'
 
 interface State {
   isInitialized: boolean;
@@ -15,7 +19,13 @@ interface State {
   publicKey: string;
   wallet: any;
   walletProvider: string;
+  balance: RpcResponseAndContext<number>;
 }
+// interface Balances {
+//   devnet: RpcResponseAndContext<number> | null;
+//   testnet: RpcResponseAndContext<number> | null;
+//   mainnetBeta: RpcResponseAndContext<number> | null;
+// }
 
 interface AuthContextValue extends State {
   platform: 'Solana';
@@ -24,6 +34,7 @@ interface AuthContextValue extends State {
   setCluster: (cluster: string) => Promise<void>;
   setConnection: () => Promise<void>;
   setWalletProvider: (providerURL: string) => Promise<void>;
+  getBalance: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -67,6 +78,12 @@ type SetWalletProviderAction = {
     walletProvider: string;
   };
 }
+type SetBalanceAction = {
+  type: 'SET_BALANCE';
+  payload: {
+    balance: RpcResponseAndContext<number> | null;
+  };
+}
 
 type Action = InitializeAction
   | ConnectAccountAction
@@ -74,17 +91,19 @@ type Action = InitializeAction
   | SetClusterAction
   | SetConnectionAction
   | SetWalletAction
-  | SetWalletProviderAction;
+  | SetWalletProviderAction
+  | SetBalanceAction;
 
 const initialState: State = {
   isAuthenticated: false,
   isInitialized: false,
-  cluster: 'devnet',
-  connection: new Connection('devnet'),
+  cluster: 'mainnetBeta',
+  connection: new Connection('mainnetBeta'),
   account: null, // we could pull from local storage during initialize
   publicKey: '',
   wallet: null,
   walletProvider: '',
+  balance: null,
 }
 
 const handlers: Record<string, (state: State, action: Action) => State> = {
@@ -140,6 +159,14 @@ const handlers: Record<string, (state: State, action: Action) => State> = {
       walletProvider: walletProvider,
     };
   },
+  SET_BALANCE: (state: State, action: SetBalanceAction): State => {
+    const { balance } = action.payload
+    console.log("setting balance ", balance)
+    return {
+      ...state,
+      balance: balance,
+    };
+  },
 };
 
 const reducer = (state: State, action: Action): State => (
@@ -154,11 +181,13 @@ const AuthContext = createContext<AuthContextValue>({
   setCluster: (cluster: string) => Promise.resolve(),
   setConnection: () => Promise.resolve(),
   setWalletProvider: (providerURL: string) => Promise.resolve(),
+  getBalance: () => Promise.resolve(),
 })
 
 export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const initialize = async (): Promise<void> => {
@@ -170,16 +199,49 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   // when network changes, update connection
   useEffect(() => {
     setConnection()
+    if (state.isInitialized) {
+      enqueueSnackbar('Solana cluster updated', {
+        anchorOrigin: {
+          horizontal: 'right',
+          vertical: 'top'
+        },
+        variant: 'success'
+      });
+    }
+
   }, [state.cluster])
 
+  // update wallet when provider changes/disconnects
   useEffect(() => {
     if (state.walletProvider != '') {
       console.log("changing wallet")
       connectAccount(NETWORKS[state.cluster].url, state.walletProvider)
     }
-
   }, [state.walletProvider])
 
+  useEffect(() => {
+    if (state.account != null) {
+      getBalance()
+    }
+  }, [state.account])
+
+  useInterval(() => {
+    getBalance()
+  }, 60000);
+
+  const getBalance = async (): Promise<void> => {
+    if (state.connection != null && state.publicKey != '') {
+      const conn: Connection = state.connection
+      conn.getBalanceAndContext(state.account).then((resp) =>
+        dispatch({
+          type: 'SET_BALANCE',
+          payload: {
+            balance: resp,
+          }
+        })
+      )
+    }
+  }
 
 
   const connectAccount = async (networkURL: string, providerURL: string): Promise<void> => {
@@ -231,6 +293,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
           connection: newConn,
         }
       })
+
     } catch (err) {
       console.log("error setting connection: ", err)
       dispatch({
@@ -262,6 +325,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         setCluster,
         setConnection,
         setWalletProvider,
+        getBalance
       }}
     >
       {children}

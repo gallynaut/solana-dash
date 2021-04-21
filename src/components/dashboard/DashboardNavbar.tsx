@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AppBar, Box, Hidden, IconButton, Toolbar, Typography, Divider } from '@material-ui/core';
+import { AppBar, Box, Hidden, IconButton, Toolbar, Typography, Divider, Grid } from '@material-ui/core';
 import { experimentalStyled } from '@material-ui/core/styles';
 import type { AppBarProps } from '@material-ui/core';
 import MenuIcon from '../../icons/Menu';
@@ -13,7 +13,7 @@ import NotificationsPopover from './NotificationsPopover';
 // import ConnectWallet from '../connect/ConnectWallet.js.old';
 import NetworkNavbar from '../solana/NetworkNavbar';
 import ConnectAccountButton from '../solana/ConnectAccountButton';
-
+import LightNetworkSelect from '../solana/LightNetworkSelect';
 interface DashboardNavbarProps extends AppBarProps {
   onSidebarMobileOpen?: () => void;
 }
@@ -48,8 +48,8 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
   return (
     <DashboardNavbarRoot {...other}>
       <Toolbar sx={{
-        // minHeight: 64,
-        maxHeight: 64
+        minHeight: 72,
+        maxHeight: 72
       }}
       >
         <Hidden lgUp>
@@ -65,24 +65,29 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         </Hidden>
         <Hidden lgDown>
           <RouterLink to="/">
-            <SolanaIcon
-              color="primary"
-              sx={{
-                height: 40,
-                width: 40,
-                display: 'inline'
-              }}
-            />
-            <Typography
-              variant="h3"
-              color="secondary"
-              sx={{
-                height: 40,
-                display: 'inline'
-              }}
-            >
-              DASH
+            <Grid container>
+              <Grid item>
+                <SolanaIcon
+                  color="primary"
+                  sx={{
+                    height: 40,
+                    width: 40,
+                    display: 'inline'
+                  }}
+                /></Grid>
+              <Grid item>
+                <Typography
+                  variant="h3"
+                  color="secondary"
+                  sx={{
+                    height: 40,
+                    display: 'inline'
+                  }}
+                >
+                  DASH
               </Typography>
+              </Grid>
+            </Grid>
           </RouterLink>
 
 
@@ -98,7 +103,7 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         </Box>
         <Divider orientation="vertical" flexItem variant="middle" />
         <Box sx={{ ml: 1 }}>
-          <NetworkPopover />
+          <LightNetworkSelect />
         </Box>
         <Divider orientation="vertical" flexItem variant="middle" />
         <Box sx={{ ml: 1 }}>

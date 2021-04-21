@@ -2,8 +2,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-quill/dist/quill.snow.css';
 import 'nprogress/nprogress.css';
-import './__mocks__';
-import { StrictMode } from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,12 +11,22 @@ import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import StyledEngineProvider from '@material-ui/core/StyledEngineProvider';
 import App from './App';
+import { SnackbarProvider } from 'notistack';
 // import { AuthProvider } from './contexts/JWTContext';
 import { AuthProvider } from './contexts/SolanaContext';
 import { SettingsProvider } from './contexts/SettingsContext';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
+import { Button, IconButton } from '@material-ui/core';
+import CancelIcon from '@material-ui/icons/Cancel';
+
+// add action to all snackbars
+const notistackRef: React.Ref<SnackbarProvider> = React.createRef();
+const onClickDismiss = key => () => {
+  notistackRef.current.closeSnackbar(key);
+}
+
 
 ReactDOM.render(
   <StrictMode>
@@ -25,13 +34,25 @@ ReactDOM.render(
       <ReduxProvider store={store}>
         <StyledEngineProvider injectFirst>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <SettingsProvider>
-              <BrowserRouter>
-                <AuthProvider>
-                  <App />
-                </AuthProvider>
-              </BrowserRouter>
-            </SettingsProvider>
+            <SnackbarProvider
+              dense
+              preventDuplicate
+              maxSnack={3}
+              ref={notistackRef}
+              action={(key) => (
+                <IconButton onClick={onClickDismiss(key)}>
+                  <CancelIcon />
+                </IconButton>
+              )}
+            >
+              <SettingsProvider>
+                <BrowserRouter>
+                  <AuthProvider>
+                    <App />
+                  </AuthProvider>
+                </BrowserRouter>
+              </SettingsProvider>
+            </SnackbarProvider>
           </LocalizationProvider>
         </StyledEngineProvider>
       </ReduxProvider>

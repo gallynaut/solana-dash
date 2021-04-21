@@ -12,7 +12,8 @@ import {
   Typography
 } from '@material-ui/core';
 import LoginSolana from '../../components/solana/LoginSolana';
-import AuthContext from '../../contexts/SolanaContext'
+import AuthContext from '../../contexts/SolanaContext';
+import LightNetworkSelect from '../../components/solana/LightNetworkSelect';
 
 const Connect: FC = () => {
   const { platform } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const Connect: FC = () => {
         sx={{
           backgroundColor: 'background.default',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           minHeight: '100vh'
         }}
       >
@@ -34,7 +35,7 @@ const Connect: FC = () => {
           maxWidth="sm"
           sx={{ py: '80px' }}
         >
-          <Card>
+          <Card >
             <CardContent
               sx={{
                 display: 'flex',
@@ -47,7 +48,8 @@ const Connect: FC = () => {
                   alignItems: 'center',
                   display: 'flex',
                   justifyContent: 'space-between',
-                  mb: 3
+                  mb: 3,
+                  maxWidth: '50%'
                 }}
               >
                 <div>
@@ -56,15 +58,22 @@ const Connect: FC = () => {
                     gutterBottom
                     variant="h4"
                   >
-                    Log in
+                    Connect
                   </Typography>
                   <Typography
                     color="textSecondary"
                     variant="body2"
                   >
-                    Log in on the internal platform
+                    Connect your wallet to the Solana network
                   </Typography>
                 </div>
+              </Box>
+              <Box
+                sx={{
+                  maxWidth: '50%'
+                }}
+              >
+                <LightNetworkSelect />
               </Box>
               <Box
                 sx={{

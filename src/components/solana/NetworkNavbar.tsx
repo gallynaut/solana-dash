@@ -7,6 +7,7 @@ import WifiIcon from '@material-ui/icons/Wifi';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 import NetworkPopover from './NetworkPopover';
 import ReplayIcon from '@material-ui/icons/Replay';
+import LightNetworkSelect from './LightNetworkSelect';
 
 const NetworkNavbar: FC = () => {
   const theme = useTheme();
@@ -24,7 +25,7 @@ const NetworkNavbar: FC = () => {
 
   return (
     <>
-      <NetworkPopover />
+      <LightNetworkSelect />
       {connection != null ? (
         <IconButton
           aria-label="connect solana network"

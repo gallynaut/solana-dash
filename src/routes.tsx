@@ -14,6 +14,7 @@ const Loadable = (Component) => (props) => (
 
 // Dashboard pages
 
+const Home = Loadable(lazy(() => import('./pages/Home')));
 const Calendar = Loadable(lazy(() => import('./pages/Calendar')));
 const Contact = Loadable(lazy(() => import('./pages/Contact')));
 const Network = Loadable(lazy(() => import('./pages/Network')));
@@ -38,7 +39,7 @@ const routes: PartialRouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Overview />
+        element: <Home />
       },
       {
         path: 'connect',

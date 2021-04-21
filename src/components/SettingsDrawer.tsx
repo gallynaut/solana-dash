@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Drawer,
+  Divider,
   Fab,
   FormControlLabel,
   Switch,
@@ -11,9 +12,11 @@ import {
   Tooltip,
   Typography
 } from '@material-ui/core';
-import { THEMES } from '../constants';
+import { THEMES, NETWORKS } from '../constants';
 import useSettings from '../hooks/useSettings';
 import AdjustmentsIcon from '../icons/Adjustments';
+import NetworkPopover from './solana/NetworkPopover';
+import LightNetworkSelect from './solana/LightNetworkSelect';
 
 const getValues = (settings) => (
   {
@@ -82,6 +85,14 @@ const SettingsDrawer: FC = () => {
           }
         }}
       >
+        <Typography
+          color="textPrimary"
+          variant="h6"
+        >
+          Network Options
+        </Typography>
+        <LightNetworkSelect />
+        <Divider />
         <Typography
           color="textPrimary"
           variant="h6"

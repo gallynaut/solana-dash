@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import type { FC } from 'react';
 import {
   Button,
@@ -7,6 +7,7 @@ import {
   Typography
 } from '@material-ui/core';
 import useIsMountedRef from '../../hooks/useIsMountedRef';
+
 import { NETWORKS, WALLETS } from '../../constants';
 import { Wallet } from '../../types/wallet'
 import AuthContext from '../../contexts/SolanaContext'
@@ -14,6 +15,7 @@ import AuthContext from '../../contexts/SolanaContext'
 const LoginSolana: FC = (props) => {
   const isMountedRef = useIsMountedRef();
   const { cluster, connectAccount, setWalletProvider } = useContext(AuthContext)
+
 
   const handleClick = (wallet: Wallet) => {
     // console.log(wallet.url)
@@ -33,6 +35,7 @@ const LoginSolana: FC = (props) => {
         <Grid item>
           <Typography variant="h2" noWrap>Choose a Wallet</Typography>
         </Grid>
+
         <Divider sx={{ my: 3 }} />
         {WALLETS.map((w: Wallet) => (
           <Grid item key={w.label}>

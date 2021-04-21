@@ -97,8 +97,9 @@ const themesOptions: Record<string, ThemeOptions> = {
             '&::placeholder': {
               opacity: 0.86,
               color: '#42526e'
-            }
-          }
+            },
+          },
+
         }
       }
     },

@@ -11,6 +11,7 @@ import { gtmConfig } from './config';
 import useAuth from './hooks/useAuth';
 import useScrollReset from './hooks/useScrollReset';
 import useSettings from './hooks/useSettings';
+import useNotifications from './hooks/useNotifications';
 import gtm from './lib/gtm';
 import routes from './routes';
 import { createTheme } from './theme';
@@ -34,14 +35,9 @@ const App: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider
-        dense
-        maxSnack={3}
-      >
-        <GlobalStyles />
-        <SettingsDrawer />
-        {auth.isInitialized ? content : <SplashScreen />}
-      </SnackbarProvider>
+      <GlobalStyles />
+      <SettingsDrawer />
+      {auth.isInitialized ? content : <SplashScreen />}
     </ThemeProvider>
   );
 };

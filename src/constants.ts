@@ -45,7 +45,8 @@ const mainnetBeta: Network = {
 }
 
 export const NETWORKS = {
+  mainnetBeta: mainnetBeta,
   devnet: devnet,
   testnet: testnet,
-  mainnetBeta: mainnetBeta,
 };
+
