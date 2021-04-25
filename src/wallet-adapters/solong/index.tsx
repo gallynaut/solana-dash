@@ -5,8 +5,11 @@ import { DEFAULT_PUBLIC_KEY, WalletAdapter } from "../types";
 
 export class SolongWalletAdapter implements WalletAdapter {
   _publicKey?: PublicKey;
+
   _onProcess: boolean;
+
   _connected: boolean;
+
   constructor() {
     // super();
     this._onProcess = false;
@@ -25,19 +28,18 @@ export class SolongWalletAdapter implements WalletAdapter {
   public async signAllTransactions(
     transactions: Transaction[]
   ): Promise<Transaction[]> {
-    const solong = (window as any).solong;
+    const { solong } = window as any;
     if (solong.signAllTransactions) {
       return solong.signAllTransactions(transactions);
-    } else {
-      const result: Transaction[] = [];
-      for (let i = 0; i < transactions.length; i++) {
-        const transaction = transactions[i];
-        const signed = await solong.signTransaction(transaction);
-        result.push(signed);
-      }
-
-      return result;
     }
+    const result: Transaction[] = [];
+    for (let i = 0; i < transactions.length; i++) {
+      const transaction = transactions[i];
+      const signed = await solong.signTransaction(transaction);
+      result.push(signed);
+    }
+
+    return result;
   }
 
   get publicKey() {

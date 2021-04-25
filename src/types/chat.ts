@@ -32,6 +32,6 @@ export interface Thread {
   id?: string;
   messages: Message[];
   participants: Participant[];
-  type: 'ONE_TO_ONE' | 'GROUP';
+  type: "ONE_TO_ONE" | "GROUP";
   unreadCount: number;
 }

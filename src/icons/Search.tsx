@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Search = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Search = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Search'
+  "Search"
 );
 
 export default Search;

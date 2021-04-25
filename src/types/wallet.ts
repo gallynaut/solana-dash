@@ -1,4 +1,4 @@
 export interface Wallet {
-    url: string;
-    label: string;
+  url: string;
+  label: string;
 }

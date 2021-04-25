@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const FingerPrint = createSvgIcon(
   <svg
@@ -22,7 +22,7 @@ const FingerPrint = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'FingerPrint'
+  "FingerPrint"
 );
 
 export default FingerPrint;

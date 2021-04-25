@@ -71,6 +71,6 @@ export interface Project {
   tags?: string[];
   technology?: string;
   title: string;
-  type: 'Full-Time' | 'Part-Time';
+  type: "Full-Time" | "Part-Time";
   updatedAt: number;
 }

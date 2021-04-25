@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Lock = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Lock = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Lock'
+  "Lock"
 );
 
 export default Lock;

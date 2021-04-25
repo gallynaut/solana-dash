@@ -1,18 +1,18 @@
-import { useRef, useState, memo } from 'react';
-import type { FC } from 'react';
+import { useRef, useState, memo } from "react";
+import type { FC } from "react";
 import {
   ListItemIcon,
   ListItemText,
   Tooltip,
   IconButton,
   Menu,
-  MenuItem
-} from '@material-ui/core';
-import ArchiveIcon from '../icons/Archive';
-import DocumentTextIcon from '../icons/DocumentText';
-import DotsHorizontalIcon from '../icons/DotsHorizontal';
-import DownloadIcon from '../icons/Download';
-import DuplicateIcon from '../icons/Duplicate';
+  MenuItem,
+} from "@material-ui/core";
+import ArchiveIcon from "../icons/Archive";
+import DocumentTextIcon from "../icons/DocumentText";
+import DotsHorizontalIcon from "../icons/DotsHorizontal";
+import DownloadIcon from "../icons/Download";
+import DuplicateIcon from "../icons/Duplicate";
 
 const MoreMenu: FC = (props) => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -29,31 +29,27 @@ const MoreMenu: FC = (props) => {
   return (
     <>
       <Tooltip title="More options">
-        <IconButton
-          onClick={handleMenuOpen}
-          ref={anchorRef}
-          {...props}
-        >
+        <IconButton onClick={handleMenuOpen} ref={anchorRef} {...props}>
           <DotsHorizontalIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       <Menu
         anchorEl={anchorRef.current}
         anchorOrigin={{
-          horizontal: 'left',
-          vertical: 'top'
+          horizontal: "left",
+          vertical: "top",
         }}
         onClose={handleMenuClose}
         open={openMenu}
         PaperProps={{
           sx: {
-            maxWidth: '100%',
-            width: 256
-          }
+            maxWidth: "100%",
+            width: 256,
+          },
         }}
         transformOrigin={{
-          horizontal: 'left',
-          vertical: 'top'
+          horizontal: "left",
+          vertical: "top",
         }}
       >
         <MenuItem>

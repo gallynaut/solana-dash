@@ -2,8 +2,6 @@ import React from "react";
 import { notification } from "antd";
 // import Link from '../components/Link';
 
-
-
 export function notify({
   message = "",
   description = undefined as any,

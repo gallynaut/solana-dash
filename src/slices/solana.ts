@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import type { AppThunk } from '../store';
-import type { Account } from '@solana/web3.js';
-import type { Network } from '../types/network';
-import { Cluster, clusterApiUrl } from '@solana/web3.js';
-import { NETWORKS } from '../constants'
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { Account } from "@solana/web3.js";
+import { Cluster, clusterApiUrl } from "@solana/web3.js";
+import type { AppThunk } from "../store";
+import type { Network } from "../types/network";
+import { NETWORKS } from "../constants";
 
 interface SolanaAccount {
   publicKey: string;
@@ -22,17 +22,16 @@ interface SolanaState {
 // }
 
 const initialState: SolanaState = {
-  network: NETWORKS['devnet'],
+  network: NETWORKS.devnet,
   connectedStatus: false,
   account: {
     publicKey: "",
   },
   isModalOpen: false,
-
 };
 //  reducer is used to update the state
 const slice = createSlice({
-  name: 'solana',
+  name: "solana",
   initialState,
   reducers: {
     setNetwork(
@@ -51,7 +50,7 @@ const slice = createSlice({
 
       state.account.publicKey = publicKey;
       state.isModalOpen = false;
-      state.connectedStatus = publicKey != "" ? true : false;
+      state.connectedStatus = publicKey! !== "";
     },
     setConnectedStatus(
       state: SolanaState,
@@ -66,24 +65,30 @@ const slice = createSlice({
     },
     closeModal(state: SolanaState): void {
       state.isModalOpen = false;
-    }
-  }
+    },
+  },
 });
 
 export const { reducer } = slice;
 
 // actions are called by components and then sent to reducers
 
-export const setNetwork = (network: Network): AppThunk => async (dispatch): Promise<void> => {
-  console.log("dispatching...", network)
+export const setNetwork = (network: Network): AppThunk => async (
+  dispatch
+): Promise<void> => {
+  console.log("dispatching...", network);
   dispatch(slice.actions.setNetwork({ network }));
 };
 
-export const setAccount = (publicKey: string): AppThunk => async (dispatch): Promise<void> => {
-  dispatch(slice.actions.setAccount({ publicKey }))
+export const setAccount = (publicKey: string): AppThunk => async (
+  dispatch
+): Promise<void> => {
+  dispatch(slice.actions.setAccount({ publicKey }));
 };
 
-export const setConnectedStatus = (connectedStatus: boolean): AppThunk => (dispatch): void => {
+export const setConnectedStatus = (connectedStatus: boolean): AppThunk => (
+  dispatch
+): void => {
   dispatch(slice.actions.setConnectedStatus({ connectedStatus }));
 };
 

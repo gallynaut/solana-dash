@@ -10,7 +10,9 @@ import { DEFAULT_PUBLIC_KEY, WalletAdapter } from "../types";
 
 export class LedgerWalletAdapter implements WalletAdapter {
   _connecting: boolean;
+
   _publicKey: PublicKey | null;
+
   _transport: Transport | null;
 
   constructor() {
@@ -83,17 +85,14 @@ export class LedgerWalletAdapter implements WalletAdapter {
   }
 
   async disconnect() {
-    return
     // let emit = false;
     // if (this._transport) {
     //   await this._transport.close();
     //   this._transport = null;
     //   emit = true;
     // }
-
     // this._connecting = false;
     // this._publicKey = null;
-
     // if (emit) {
     //   this.emit("disconnect");
     // }

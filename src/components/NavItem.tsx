@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import type { FC, ReactNode } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Box, Button, Collapse, ListItem } from '@material-ui/core';
-import type { ListItemProps } from '@material-ui/core';
-import ChevronDownIcon from '../icons/ChevronDown';
-import ChevronRightIcon from '../icons/ChevronRight';
+import { useState } from "react";
+import type { FC, ReactNode } from "react";
+import { NavLink as RouterLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Box, Button, Collapse, ListItem } from "@material-ui/core";
+import type { ListItemProps } from "@material-ui/core";
+import ChevronDownIcon from "../icons/ChevronDown";
+import ChevronRightIcon from "../icons/ChevronRight";
 
 interface NavItemProps extends ListItemProps {
   active?: boolean;
@@ -48,37 +48,38 @@ const NavItem: FC<NavItemProps> = (props) => {
       <ListItem
         disableGutters
         sx={{
-          display: 'block',
-          py: 0
+          display: "block",
+          py: 0,
         }}
         {...other}
       >
         <Button
-          endIcon={!open ? <ChevronRightIcon fontSize="small" />
-            : <ChevronDownIcon fontSize="small" />}
+          endIcon={
+            !open ? (
+              <ChevronRightIcon fontSize="small" />
+            ) : (
+              <ChevronDownIcon fontSize="small" />
+            )
+          }
           onClick={handleToggle}
           startIcon={icon}
           sx={{
-            color: 'text.secondary',
-            fontWeight: 'fontWeightMedium',
-            justifyContent: 'flex-start',
+            color: "text.secondary",
+            fontWeight: "fontWeightMedium",
+            justifyContent: "flex-start",
             pl: `${paddingLeft}px`,
-            pr: '8px',
-            py: '12px',
-            textAlign: 'left',
-            textTransform: 'none',
-            width: '100%'
+            pr: "8px",
+            py: "12px",
+            textAlign: "left",
+            textTransform: "none",
+            width: "100%",
           }}
           variant="text"
         >
-          <Box sx={{ flexGrow: 1 }}>
-            {title}
-          </Box>
+          <Box sx={{ flexGrow: 1 }}>{title}</Box>
           {info}
         </Button>
-        <Collapse in={open}>
-          {children}
-        </Collapse>
+        <Collapse in={open}>{children}</Collapse>
       </ListItem>
     );
   }
@@ -88,39 +89,35 @@ const NavItem: FC<NavItemProps> = (props) => {
     <ListItem
       disableGutters
       sx={{
-        display: 'flex',
-        py: 0
+        display: "flex",
+        py: 0,
       }}
     >
       <Button
         component={path && RouterLink}
         startIcon={icon}
         sx={{
-          color: 'text.secondary',
-          fontWeight: 'fontWeightMedium',
-          justifyContent: 'flex-start',
-          textAlign: 'left',
+          color: "text.secondary",
+          fontWeight: "fontWeightMedium",
+          justifyContent: "flex-start",
+          textAlign: "left",
           pl: `${paddingLeft}px`,
-          pr: '8px',
-          py: '12px',
-          textTransform: 'none',
-          width: '100%',
-          ...(
-            active && {
-              color: 'primary.main',
-              fontWeight: 'fontWeightBold',
-              '& svg': {
-                color: 'primary.main'
-              }
-            }
-          )
+          pr: "8px",
+          py: "12px",
+          textTransform: "none",
+          width: "100%",
+          ...(active && {
+            color: "primary.main",
+            fontWeight: "fontWeightBold",
+            "& svg": {
+              color: "primary.main",
+            },
+          }),
         }}
         variant="text"
         to={path}
       >
-        <Box sx={{ flexGrow: 1 }}>
-          {title}
-        </Box>
+        <Box sx={{ flexGrow: 1 }}>{title}</Box>
         {info}
       </Button>
     </ListItem>
@@ -135,12 +132,12 @@ NavItem.propTypes = {
   info: PropTypes.node,
   open: PropTypes.bool,
   path: PropTypes.string,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 NavItem.defaultProps = {
   active: false,
-  open: false
+  open: false,
 };
 
 export default NavItem;

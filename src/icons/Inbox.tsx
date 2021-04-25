@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Inbox = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Inbox = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Inbox'
+  "Inbox"
 );
 
 export default Inbox;

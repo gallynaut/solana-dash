@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ChevronRight = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const ChevronRight = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ChevronRight'
+  "ChevronRight"
 );
 
 export default ChevronRight;

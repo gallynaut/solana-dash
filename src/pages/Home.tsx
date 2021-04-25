@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import type { FC } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from "react";
+import type { FC } from "react";
+import { Helmet } from "react-helmet-async";
 import {
   Box,
   Button,
@@ -10,29 +10,28 @@ import {
   CardHeader,
   Container,
   Grid,
-  Typography
-} from '@material-ui/core';
+  Typography,
+} from "@material-ui/core";
 import {
   OverviewInbox,
   OverviewLatestTransactions,
   OverviewPrivateWallet,
   OverviewTotalBalance,
   OverviewTotalTransactions,
-  OverviewWeeklyEarnings
-} from '../components/dashboard/overview';
-import useSettings from '../hooks/useSettings';
-import ArrowRightIcon from '../icons/ArrowRight';
-import BriefcaseIcon from '../icons/Briefcase';
-import DownloadIcon from '../icons/Download';
-import ExternalLinkIcon from '../icons/ExternalLink';
-import InformationCircleIcon from '../icons/InformationCircle';
-import PlusIcon from '../icons/Plus';
-import UsersIcon from '../icons/Users';
-import gtm from '../lib/gtm';
+  OverviewWeeklyEarnings,
+} from "../components/dashboard/overview";
+import useSettings from "../hooks/useSettings";
+import ArrowRightIcon from "../icons/ArrowRight";
+import BriefcaseIcon from "../icons/Briefcase";
+import DownloadIcon from "../icons/Download";
+import ExternalLinkIcon from "../icons/ExternalLink";
+import InformationCircleIcon from "../icons/InformationCircle";
+import PlusIcon from "../icons/Plus";
+import UsersIcon from "../icons/Users";
+import gtm from "../lib/gtm";
 
 const Home: FC = () => {
   const { settings } = useSettings();
-
 
   return (
     <>
@@ -41,16 +40,13 @@ const Home: FC = () => {
       </Helmet>
       <Box
         sx={{
-          backgroundColor: 'background.default',
-          minHeight: '100%',
-          py: 8
+          backgroundColor: "background.default",
+          minHeight: "100%",
+          py: 8,
         }}
       >
-        <Container maxWidth={settings.compact ? 'xl' : false}>
-          <Grid
-            container
-            spacing={3}
-          >
+        <Container maxWidth={settings.compact ? "xl" : false}>
+          <Grid container spacing={3}>
             <Grid
               alignItems="center"
               container
@@ -60,22 +56,13 @@ const Home: FC = () => {
               xs={12}
             >
               <Grid item>
-                <Typography
-                  color="textSecondary"
-                  variant="overline"
-                >
+                <Typography color="textSecondary" variant="overline">
                   Home
                 </Typography>
-                <Typography
-                  color="textPrimary"
-                  variant="h5"
-                >
+                <Typography color="textPrimary" variant="h5">
                   Welcome to Solana Dash
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  variant="subtitle2"
-                >
+                <Typography color="textSecondary" variant="subtitle2">
                   Here&apos;s what&apos;s happening with Solana today
                 </Typography>
               </Grid>
@@ -89,70 +76,39 @@ const Home: FC = () => {
                 </Button>
               </Grid>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <OverviewWeeklyEarnings />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <OverviewPrivateWallet />
             </Grid>
-            <Grid
-              item
-              md={8}
-              xs={12}
-            >
+            <Grid item md={8} xs={12}>
               <OverviewTotalTransactions />
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
+            <Grid item md={4} xs={12}>
               <OverviewTotalBalance />
             </Grid>
-            <Grid
-              item
-              md={8}
-              xs={12}
-            >
+            <Grid item md={8} xs={12}>
               <OverviewLatestTransactions />
             </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-            >
+            <Grid item md={4} xs={12}>
               <OverviewInbox />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <Card>
                 <CardHeader
                   disableTypography
-                  subheader={(
-                    <Typography
-                      color="textPrimary"
-                      variant="h6"
-                    >
+                  subheader={
+                    <Typography color="textPrimary" variant="h6">
                       Find your dream job
                     </Typography>
-                  )}
-                  title={(
+                  }
+                  title={
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        pb: 2
+                        alignItems: "center",
+                        display: "flex",
+                        pb: 2,
                       }}
                     >
                       <BriefcaseIcon color="primary" />
@@ -164,24 +120,20 @@ const Home: FC = () => {
                         Jobs
                       </Typography>
                     </Box>
-                  )}
+                  }
                   sx={{ pb: 0 }}
                 />
-                <CardContent sx={{ pt: '8px' }}>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                <CardContent sx={{ pt: "8px" }}>
+                  <Typography color="textSecondary" variant="body2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
                   </Typography>
                 </CardContent>
                 <CardActions
                   sx={{
-                    backgroundColor: 'background.default',
-                    p: 2
+                    backgroundColor: "background.default",
+                    p: 2,
                   }}
                 >
                   <Button
@@ -194,28 +146,21 @@ const Home: FC = () => {
                 </CardActions>
               </Card>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <Card>
                 <CardHeader
                   disableTypography
-                  subheader={(
-                    <Typography
-                      color="textPrimary"
-                      variant="h6"
-                    >
+                  subheader={
+                    <Typography color="textPrimary" variant="h6">
                       Need help figuring things out?
                     </Typography>
-                  )}
-                  title={(
+                  }
+                  title={
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        pb: 2
+                        alignItems: "center",
+                        display: "flex",
+                        pb: 2,
                       }}
                     >
                       <InformationCircleIcon color="primary" />
@@ -227,24 +172,20 @@ const Home: FC = () => {
                         Help Center
                       </Typography>
                     </Box>
-                  )}
+                  }
                   sx={{ pb: 0 }}
                 />
-                <CardContent sx={{ pt: '8px' }}>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                <CardContent sx={{ pt: "8px" }}>
+                  <Typography color="textSecondary" variant="body2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
                   </Typography>
                 </CardContent>
                 <CardActions
                   sx={{
-                    backgroundColor: 'background.default',
-                    p: 2
+                    backgroundColor: "background.default",
+                    p: 2,
                   }}
                 >
                   <Button
@@ -257,29 +198,21 @@ const Home: FC = () => {
                 </CardActions>
               </Card>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <Card>
                 <CardHeader
                   disableTypography
-                  subheader={(
-                    <Typography
-                      color="textPrimary"
-                      variant="h6"
-                    >
-                      Download our Free PDF and learn how to
-                      get more job leads
+                  subheader={
+                    <Typography color="textPrimary" variant="h6">
+                      Download our Free PDF and learn how to get more job leads
                     </Typography>
-                  )}
-                  title={(
+                  }
+                  title={
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        pb: 2
+                        alignItems: "center",
+                        display: "flex",
+                        pb: 2,
                       }}
                     >
                       <DownloadIcon color="primary" />
@@ -291,24 +224,20 @@ const Home: FC = () => {
                         Download
                       </Typography>
                     </Box>
-                  )}
+                  }
                   sx={{ pb: 0 }}
                 />
-                <CardContent sx={{ pt: '8px' }}>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                <CardContent sx={{ pt: "8px" }}>
+                  <Typography color="textSecondary" variant="body2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
                   </Typography>
                 </CardContent>
                 <CardActions
                   sx={{
-                    backgroundColor: 'background.default',
-                    p: 2
+                    backgroundColor: "background.default",
+                    p: 2,
                   }}
                 >
                   <Button
@@ -321,29 +250,21 @@ const Home: FC = () => {
                 </CardActions>
               </Card>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
+            <Grid item md={6} xs={12}>
               <Card>
                 <CardHeader
                   disableTypography
-                  subheader={(
-                    <Typography
-                      color="textPrimary"
-                      variant="h6"
-                    >
-                      Contacts allow you to manage your
-                      company contracts
+                  subheader={
+                    <Typography color="textPrimary" variant="h6">
+                      Contacts allow you to manage your company contracts
                     </Typography>
-                  )}
-                  title={(
+                  }
+                  title={
                     <Box
                       sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        pb: 2
+                        alignItems: "center",
+                        display: "flex",
+                        pb: 2,
                       }}
                     >
                       <UsersIcon color="primary" />
@@ -355,24 +276,20 @@ const Home: FC = () => {
                         Contacts
                       </Typography>
                     </Box>
-                  )}
+                  }
                   sx={{ pb: 0 }}
                 />
-                <CardContent sx={{ pt: '8px' }}>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                <CardContent sx={{ pt: "8px" }}>
+                  <Typography color="textSecondary" variant="body2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
                   </Typography>
                 </CardContent>
                 <CardActions
                   sx={{
-                    backgroundColor: 'background.default',
-                    p: 2
+                    backgroundColor: "background.default",
+                    p: 2,
                   }}
                 >
                   <Button

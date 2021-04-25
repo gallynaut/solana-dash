@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const DeviceTablet = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const DeviceTablet = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'DeviceTablet'
+  "DeviceTablet"
 );
 
 export default DeviceTablet;

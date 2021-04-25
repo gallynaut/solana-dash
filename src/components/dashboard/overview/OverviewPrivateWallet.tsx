@@ -1,6 +1,6 @@
-import type { FC } from 'react';
-import Chart from 'react-apexcharts';
-import numeral from 'numeral';
+import type { FC } from "react";
+import Chart from "react-apexcharts";
+import numeral from "numeral";
 import {
   Avatar,
   Box,
@@ -9,11 +9,11 @@ import {
   CardActions,
   CardContent,
   Divider,
-  Typography
-} from '@material-ui/core';
-import { alpha, useTheme } from '@material-ui/core/styles';
-import ArrowRightIcon from '../../../icons/ArrowRight';
-import ChevronDownIcon from '../../../icons/ChevronDown';
+  Typography,
+} from "@material-ui/core";
+import { alpha, useTheme } from "@material-ui/core/styles";
+import ArrowRightIcon from "../../../icons/ArrowRight";
+import ChevronDownIcon from "../../../icons/ChevronDown";
 
 const OverviewPrivateWallet: FC = (props) => {
   const theme = useTheme();
@@ -21,69 +21,57 @@ const OverviewPrivateWallet: FC = (props) => {
   const chart = {
     options: {
       chart: {
-        background: 'transparent',
+        background: "transparent",
         stacked: false,
         toolbar: {
-          show: false
+          show: false,
         },
-        zoom: false
+        zoom: false,
       },
-      colors: ['#27c6db'],
-      labels: [''],
+      colors: ["#27c6db"],
+      labels: [""],
       plotOptions: {
         radialBar: {
           dataLabels: {
             value: {
-              show: false
-            }
+              show: false,
+            },
           },
           hollow: {
-            size: '60%'
+            size: "60%",
           },
           track: {
-            background: theme.palette.background.default
-          }
-        }
+            background: theme.palette.background.default,
+          },
+        },
       },
       theme: {
-        mode: theme.palette.mode
-      }
+        mode: theme.palette.mode,
+      },
     },
-    series: [83]
+    series: [83],
   };
 
   return (
     <Card {...props}>
       <CardContent
         sx={{
-          display: 'flex',
-          alignItems: 'center'
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        <Chart
-          height="160"
-          type="radialBar"
-          width="160"
-          {...chart}
-        />
+        <Chart height="160" type="radialBar" width="160" {...chart} />
         <Box
           sx={{
-            display: 'flex',
-            flex: 1
+            display: "flex",
+            flex: 1,
           }}
         >
           <div>
-            <Typography
-              color="textPrimary"
-              variant="h4"
-            >
-              {numeral(2150000).format('$0,0.00')}
+            <Typography color="textPrimary" variant="h4">
+              {numeral(2150000).format("$0,0.00")}
             </Typography>
-            <Typography
-              color="textPrimary"
-              sx={{ mt: 1 }}
-              variant="subtitle2"
-            >
+            <Typography color="textPrimary" sx={{ mt: 1 }} variant="subtitle2">
               Your private wallet
             </Typography>
           </div>
@@ -91,7 +79,7 @@ const OverviewPrivateWallet: FC = (props) => {
           <Avatar
             sx={{
               backgroundColor: alpha(theme.palette.error.main, 0.08),
-              color: 'error.main'
+              color: "error.main",
             }}
             variant="rounded"
           >

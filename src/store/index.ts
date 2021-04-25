@@ -1,16 +1,16 @@
 import {
   useDispatch as useReduxDispatch,
-  useSelector as useReduxSelector
-} from 'react-redux';
-import type { TypedUseSelectorHook } from 'react-redux';
-import type { ThunkAction } from 'redux-thunk';
-import { configureStore } from '@reduxjs/toolkit';
-import type { Action } from '@reduxjs/toolkit';
-import rootReducer from './rootReducer';
+  useSelector as useReduxSelector,
+} from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux";
+import type { ThunkAction } from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import type { Action } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducer";
 
 const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.REACT_APP_ENABLE_REDUX_DEV_TOOLS === 'true'
+  devTools: process.env.REACT_APP_ENABLE_REDUX_DEV_TOOLS === "true",
 });
 
 export type RootState = ReturnType<typeof store.getState>;

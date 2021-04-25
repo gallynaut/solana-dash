@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import timelinePlugin from '@fullcalendar/timeline';
+import { useState, useRef, useEffect } from "react";
+import type { FC } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import timelinePlugin from "@fullcalendar/timeline";
 import {
   Box,
   Breadcrumbs,
@@ -17,26 +17,29 @@ import {
   Dialog,
   Grid,
   Link,
-  Typography
-} from '@material-ui/core';
-import type { Theme } from '@material-ui/core';
-import { alpha, experimentalStyled } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { CalendarEventForm, CalendarToolbar } from '../components/dashboard/calendar';
-import ChevronRightIcon from '../icons/ChevronRight';
-import PlusIcon from '../icons/Plus';
-import gtm from '../lib/gtm';
+  Typography,
+} from "@material-ui/core";
+import type { Theme } from "@material-ui/core";
+import { alpha, experimentalStyled } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {
+  CalendarEventForm,
+  CalendarToolbar,
+} from "../components/dashboard/calendar";
+import ChevronRightIcon from "../icons/ChevronRight";
+import PlusIcon from "../icons/Plus";
+import gtm from "../lib/gtm";
 import {
   closeModal,
   getEvents,
   openModal,
   selectEvent,
   selectRange,
-  updateEvent
-} from '../slices/calendar';
-import { useDispatch, useSelector } from '../store';
-import type { RootState } from '../store';
-import type { CalendarEvent, CalendarView } from '../types/calendar';
+  updateEvent,
+} from "../slices/calendar";
+import { useDispatch, useSelector } from "../store";
+import type { RootState } from "../store";
+import type { CalendarEvent, CalendarView } from "../types/calendar";
 
 const selectedEventSelector = (state: RootState): CalendarEvent | null => {
   const { events, selectedEventId } = state.calendar;
@@ -48,55 +51,51 @@ const selectedEventSelector = (state: RootState): CalendarEvent | null => {
   return null;
 };
 
-const FullCalendarWrapper = experimentalStyled('div')(
-  ({ theme }) => (
-    {
-      '& .fc-license-message': {
-        display: 'none'
-      },
-      '& .fc': {
-        '--fc-bg-event-opacity': 1,
-        '--fc-border-color': theme.palette.divider,
-        '--fc-daygrid-event-dot-width': '10px',
-        '--fc-event-text-color': theme.palette.text.primary,
-        '--fc-list-event-hover-bg-color': theme.palette.background.default,
-        '--fc-neutral-bg-color': theme.palette.background.default,
-        '--fc-page-bg-color': theme.palette.background.default,
-        '--fc-today-bg-color': alpha(theme.palette.primary.main, 0.25),
-        color: theme.palette.text.primary,
-        fontFamily: theme.typography.fontFamily
-      },
-      '& .fc .fc-col-header-cell-cushion': {
-        paddingBottom: '10px',
-        paddingTop: '10px'
-      },
-      '& .fc .fc-day-other .fc-daygrid-day-top': {
-        color: theme.palette.text.secondary
-      },
-      '& .fc-daygrid-event': {
-        padding: '10px'
-      }
-    }
-  )
-);
+const FullCalendarWrapper = experimentalStyled("div")(({ theme }) => ({
+  "& .fc-license-message": {
+    display: "none",
+  },
+  "& .fc": {
+    "--fc-bg-event-opacity": 1,
+    "--fc-border-color": theme.palette.divider,
+    "--fc-daygrid-event-dot-width": "10px",
+    "--fc-event-text-color": theme.palette.text.primary,
+    "--fc-list-event-hover-bg-color": theme.palette.background.default,
+    "--fc-neutral-bg-color": theme.palette.background.default,
+    "--fc-page-bg-color": theme.palette.background.default,
+    "--fc-today-bg-color": alpha(theme.palette.primary.main, 0.25),
+    color: theme.palette.text.primary,
+    fontFamily: theme.typography.fontFamily,
+  },
+  "& .fc .fc-col-header-cell-cushion": {
+    paddingBottom: "10px",
+    paddingTop: "10px",
+  },
+  "& .fc .fc-day-other .fc-daygrid-day-top": {
+    color: theme.palette.text.secondary,
+  },
+  "& .fc-daygrid-event": {
+    padding: "10px",
+  },
+}));
 
 const Calendar: FC = () => {
   const dispatch = useDispatch();
   const calendarRef = useRef<FullCalendar | null>(null);
-  const mobileDevice = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
-  const {
-    events,
-    isModalOpen,
-    selectedRange
-  } = useSelector((state) => state.calendar);
+  const mobileDevice = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
+  const { events, isModalOpen, selectedRange } = useSelector(
+    (state) => state.calendar
+  );
   const selectedEvent = useSelector(selectedEventSelector);
   const [date, setDate] = useState<Date>(new Date());
-  const [view, setView] = useState<CalendarView>(mobileDevice
-    ? 'listWeek'
-    : 'dayGridMonth');
+  const [view, setView] = useState<CalendarView>(
+    mobileDevice ? "listWeek" : "dayGridMonth"
+  );
 
   useEffect(() => {
-    gtm.push({ event: 'page_view' });
+    gtm.push({ event: "page_view" });
   }, []);
 
   useEffect(() => {
@@ -108,7 +107,7 @@ const Calendar: FC = () => {
 
     if (calendarEl) {
       const calendarApi = calendarEl.getApi();
-      const newView = mobileDevice ? 'listWeek' : 'dayGridMonth';
+      const newView = mobileDevice ? "listWeek" : "dayGridMonth";
 
       calendarApi.changeView(newView);
       setView(newView);
@@ -181,11 +180,13 @@ const Calendar: FC = () => {
 
   const handleEventResize = async ({ event }: any): Promise<void> => {
     try {
-      await dispatch(updateEvent(event.id, {
-        allDay: event.allDay,
-        start: event.start,
-        end: event.end
-      }));
+      await dispatch(
+        updateEvent(event.id, {
+          allDay: event.allDay,
+          start: event.start,
+          end: event.end,
+        })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -193,11 +194,13 @@ const Calendar: FC = () => {
 
   const handleEventDrop = async ({ event }: any): Promise<void> => {
     try {
-      await dispatch(updateEvent(event.id, {
-        allDay: event.allDay,
-        start: event.start,
-        end: event.end
-      }));
+      await dispatch(
+        updateEvent(event.id, {
+          allDay: event.allDay,
+          start: event.start,
+          end: event.end,
+        })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -214,22 +217,15 @@ const Calendar: FC = () => {
       </Helmet>
       <Box
         sx={{
-          backgroundColor: 'background.default',
-          minHeight: '100%',
-          py: 8
+          backgroundColor: "background.default",
+          minHeight: "100%",
+          py: 8,
         }}
       >
         <Container maxWidth={false}>
-          <Grid
-            container
-            justifyContent="space-between"
-            spacing={3}
-          >
+          <Grid container justifyContent="space-between" spacing={3}>
             <Grid item>
-              <Typography
-                color="textPrimary"
-                variant="h5"
-              >
+              <Typography color="textPrimary" variant="h5">
                 Here&apos;s what you planned
               </Typography>
               <Breadcrumbs
@@ -245,10 +241,7 @@ const Calendar: FC = () => {
                 >
                   Dashboard
                 </Link>
-                <Typography
-                  color="textSecondary"
-                  variant="subtitle2"
-                >
+                <Typography color="textSecondary" variant="subtitle2">
                   Calendar
                 </Typography>
               </Breadcrumbs>
@@ -280,7 +273,7 @@ const Calendar: FC = () => {
           <Card
             sx={{
               mt: 3,
-              p: 2
+              p: 2,
             }}
           >
             <FullCalendarWrapper>
@@ -304,7 +297,7 @@ const Calendar: FC = () => {
                   interactionPlugin,
                   listPlugin,
                   timeGridPlugin,
-                  timelinePlugin
+                  timelinePlugin,
                 ]}
                 ref={calendarRef}
                 rerenderDelay={10}

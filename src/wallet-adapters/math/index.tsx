@@ -1,12 +1,15 @@
 // import EventEmitter from 'eventemitter3';
-import { PublicKey, Transaction } from '@solana/web3.js';
-import { notify } from '../../utils/notifications';
-import { DEFAULT_PUBLIC_KEY, WalletAdapter } from '../types';
+import { PublicKey, Transaction } from "@solana/web3.js";
+import { notify } from "../../utils/notifications";
+import { DEFAULT_PUBLIC_KEY, WalletAdapter } from "../types";
 
 export class MathWalletAdapter implements WalletAdapter {
   _publicKey?: PublicKey;
+
   _onProcess: boolean;
+
   _connected: boolean;
+
   constructor() {
     // super();
     this._onProcess = false;
@@ -14,17 +17,16 @@ export class MathWalletAdapter implements WalletAdapter {
     this.connect = this.connect.bind(this);
   }
 
-  get connected() {
+  get connected(): boolean {
     return this._connected;
   }
 
-
-  get autoApprove() {
+  get autoApprove(): boolean {
     return false;
   }
 
   public async signAllTransactions(
-    transactions: Transaction[],
+    transactions: Transaction[]
   ): Promise<Transaction[]> {
     if (!this._provider) {
       return transactions;
@@ -58,10 +60,10 @@ export class MathWalletAdapter implements WalletAdapter {
     }
 
     if (!this._provider) {
-      window.open('https://mathwallet.org/', '_blank');
+      window.open("https://mathwallet.org/", "_blank");
       notify({
-        message: 'Math Wallet Error',
-        description: 'Please install mathwallet',
+        message: "Math Wallet Error",
+        description: "Please install mathwallet",
       });
       return;
     }

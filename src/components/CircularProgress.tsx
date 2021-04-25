@@ -1,43 +1,34 @@
-import type { FC } from 'react';
-import PropTypes from 'prop-types';
-import { experimentalStyled } from '@material-ui/core/styles';
+import type { FC } from "react";
+import PropTypes from "prop-types";
+import { experimentalStyled } from "@material-ui/core/styles";
 
 interface CircularProgressProps {
   value: number;
 }
 
-const CircularProgressRoot = experimentalStyled('div')({
+const CircularProgressRoot = experimentalStyled("div")({
   height: 56,
-  width: 56
+  width: 56,
 });
 
-const CircularProgressBackground = experimentalStyled('path')(
-  ({ theme }) => (
-    {
-      fill: 'none',
-      stroke: theme.palette.mode === 'dark'
-        ? 'rgba(0,0,0,0.15)'
-        : 'rgba(0,0,0,0.05)',
-      strokeWidth: 4
-    }
-  )
-);
+const CircularProgressBackground = experimentalStyled("path")(({ theme }) => ({
+  fill: "none",
+  stroke:
+    theme.palette.mode === "dark" ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.05)",
+  strokeWidth: 4,
+}));
 
-const CircularProgressValue = experimentalStyled('path')(
-  ({ theme }) => (
-    {
-      animation: '$progress 1s ease-out forwards',
-      fill: 'none',
-      stroke: theme.palette.primary.main,
-      strokeWidth: 4,
-      '@keyframes progress': {
-        '0%': {
-          strokeDasharray: '0 100'
-        }
-      }
-    }
-  )
-);
+const CircularProgressValue = experimentalStyled("path")(({ theme }) => ({
+  animation: "$progress 1s ease-out forwards",
+  fill: "none",
+  stroke: theme.palette.primary.main,
+  strokeWidth: 4,
+  "@keyframes progress": {
+    "0%": {
+      strokeDasharray: "0 100",
+    },
+  },
+}));
 
 const CircularProgress: FC<CircularProgressProps> = (props) => {
   const { value, ...other } = props;
@@ -59,7 +50,7 @@ const CircularProgress: FC<CircularProgressProps> = (props) => {
 };
 
 CircularProgress.propTypes = {
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
 export default CircularProgress;

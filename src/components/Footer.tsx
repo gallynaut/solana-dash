@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC } from "react";
 import {
   Box,
   Container,
@@ -9,95 +9,89 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography
-} from '@material-ui/core';
-import { alpha } from '@material-ui/core/styles';
-import MinusIcon from '../icons/Minus';
-import Logo from './Logo';
+  Typography,
+} from "@material-ui/core";
+import { alpha } from "@material-ui/core/styles";
+import MinusIcon from "../icons/Minus";
+import Logo from "./Logo";
 
 const sections = [
   {
-    title: 'Menu',
+    title: "Menu",
     links: [
       {
-        title: 'Browse Components',
-        href: '/browse'
+        title: "Browse Components",
+        href: "/browse",
       },
       {
-        title: 'Documentation',
-        href: '/docs'
-      }
-    ]
+        title: "Documentation",
+        href: "/docs",
+      },
+    ],
   },
   {
-    title: 'Placeholders',
+    title: "Placeholders",
     links: [
       {
-        title: 'Terms & Conditions',
-        href: '#'
+        title: "Terms & Conditions",
+        href: "#",
       },
       {
-        title: 'License',
-        href: '#'
+        title: "License",
+        href: "#",
       },
       {
-        title: 'Contact',
-        href: '#'
-      }
-    ]
+        title: "Contact",
+        href: "#",
+      },
+    ],
   },
   {
-    title: 'Social',
+    title: "Social",
     links: [
       {
-        title: 'Instagram',
-        href: '#'
+        title: "Instagram",
+        href: "#",
       },
       {
-        title: 'LinkedIn',
-        href: '#'
-      }
-    ]
-  }
+        title: "LinkedIn",
+        href: "#",
+      },
+    ],
+  },
 ];
 
 const Footer: FC = (props) => (
   <Box
     sx={{
-      backgroundColor: 'background.default',
+      backgroundColor: "background.default",
       pb: 6,
       pt: {
         md: 15,
-        xs: 6
-      }
+        xs: 6,
+      },
     }}
     {...props}
   >
     <Container maxWidth="lg">
-      <Grid
-        container
-        spacing={3}
-      >
+      <Grid container spacing={3}>
         <Grid
           item
           md={3}
           sm={4}
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             order: {
               md: 1,
-              xs: 4
-            }
+              xs: 4,
+            },
           }}
           xs={12}
         >
           <Logo />
           <Box sx={{ mt: 1 }}>
-            <Typography
-              color="textSecondary"
-              variant="caption"
-            >
+            <Typography color="textSecondary" variant="caption">
               Devias IO
               <br />
               support@devias.io
@@ -113,15 +107,12 @@ const Footer: FC = (props) => (
             sx={{
               order: {
                 md: index + 2,
-                xs: index + 1
-              }
+                xs: index + 1,
+              },
             }}
             xs={12}
           >
-            <Typography
-              color="textSecondary"
-              variant="overline"
-            >
+            <Typography color="textSecondary" variant="overline">
               {section.title}
             </Typography>
             <List disablePadding>
@@ -131,21 +122,21 @@ const Footer: FC = (props) => (
                   key={link.title}
                   sx={{
                     pb: 0,
-                    pt: 1
+                    pt: 1,
                   }}
                 >
                   <ListItemAvatar
                     sx={{
-                      alignItems: 'center',
-                      display: 'flex',
+                      alignItems: "center",
+                      display: "flex",
                       minWidth: 0,
-                      mr: 0.5
+                      mr: 0.5,
                     }}
                   >
                     <MinusIcon color="primary" />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={(
+                    primary={
                       <Link
                         href={link.href}
                         color="textPrimary"
@@ -153,7 +144,7 @@ const Footer: FC = (props) => (
                       >
                         {link.title}
                       </Link>
-                    )}
+                    }
                   />
                 </ListItem>
               ))}
@@ -163,14 +154,12 @@ const Footer: FC = (props) => (
       </Grid>
       <Divider
         sx={{
-          borderColor: (theme) => alpha(theme.palette.primary.contrastText, 0.12),
-          my: 6
+          borderColor: (theme) =>
+            alpha(theme.palette.primary.contrastText, 0.12),
+          my: 6,
         }}
       />
-      <Typography
-        color="textSecondary"
-        variant="caption"
-      >
+      <Typography color="textSecondary" variant="caption">
         All Rights Reserved.
       </Typography>
     </Container>

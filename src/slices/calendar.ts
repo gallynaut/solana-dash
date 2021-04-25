@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import axios from '../lib/axios';
-import type { AppThunk } from '../store';
-import type { CalendarEvent } from '../types/calendar';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import axios from "../lib/axios";
+import type { AppThunk } from "../store";
+import type { CalendarEvent } from "../types/calendar";
 
 interface CalendarState {
   events: CalendarEvent[];
@@ -18,11 +18,11 @@ const initialState: CalendarState = {
   events: [],
   isModalOpen: false,
   selectedEventId: null,
-  selectedRange: null
+  selectedRange: null,
 };
 
 const slice = createSlice({
-  name: 'calendar',
+  name: "calendar",
   initialState,
   reducers: {
     getEvents(
@@ -81,7 +81,7 @@ const slice = createSlice({
       state.isModalOpen = true;
       state.selectedRange = {
         start,
-        end
+        end,
       };
     },
     openModal(state: CalendarState): void {
@@ -91,62 +91,70 @@ const slice = createSlice({
       state.isModalOpen = false;
       state.selectedEventId = null;
       state.selectedRange = null;
-    }
-  }
+    },
+  },
 });
 
 export const { reducer } = slice;
 
 export const getEvents = (): AppThunk => async (dispatch): Promise<void> => {
-  const response = await axios.get<{ events: CalendarEvent[] }>('/api/calendar/events');
+  const response = await axios.get<{ events: CalendarEvent[] }>(
+    "/api/calendar/events"
+  );
 
   dispatch(slice.actions.getEvents(response.data));
 };
 
-export const createEvent = (data: any): AppThunk => async (dispatch): Promise<void> => {
-  const response = await axios.post<{ event: CalendarEvent }>('/api/calendar/events/new', data);
+export const createEvent = (data: any): AppThunk => async (
+  dispatch
+): Promise<void> => {
+  const response = await axios.post<{ event: CalendarEvent }>(
+    "/api/calendar/events/new",
+    data
+  );
 
   dispatch(slice.actions.createEvent(response.data));
 };
 
-export const selectEvent = (eventId?: string): AppThunk => async (dispatch): Promise<void> => {
+export const selectEvent = (eventId?: string): AppThunk => async (
+  dispatch
+): Promise<void> => {
   dispatch(slice.actions.selectEvent({ eventId }));
 };
 
-export const updateEvent = (
-  eventId: string,
-  update: any
-): AppThunk => async (dispatch): Promise<void> => {
+export const updateEvent = (eventId: string, update: any): AppThunk => async (
+  dispatch
+): Promise<void> => {
   const response = await axios.post<{ event: CalendarEvent }>(
-    '/api/calendar/events/update',
+    "/api/calendar/events/update",
     {
       eventId,
-      update
+      update,
     }
   );
 
   dispatch(slice.actions.updateEvent(response.data));
 };
 
-export const deleteEvent = (eventId: string): AppThunk => async (dispatch): Promise<void> => {
-  await axios.post(
-    '/api/calendar/events/remove',
-    {
-      eventId
-    }
-  );
+export const deleteEvent = (eventId: string): AppThunk => async (
+  dispatch
+): Promise<void> => {
+  await axios.post("/api/calendar/events/remove", {
+    eventId,
+  });
 
   dispatch(slice.actions.deleteEvent({ eventId }));
 };
 
-export const selectRange = (
-  start: Date,
-  end: Date
-): AppThunk => (dispatch): void => {
-  dispatch(slice.actions.selectRange({
-    start: start.getTime(),
-    end: end.getTime()
-  }));
+export const selectRange = (start: Date, end: Date): AppThunk => (
+  dispatch
+): void => {
+  dispatch(
+    slice.actions.selectRange({
+      start: start.getTime(),
+      end: end.getTime(),
+    })
+  );
 };
 
 export const openModal = (): AppThunk => (dispatch): void => {

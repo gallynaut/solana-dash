@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
-import type { FC } from 'react';
-import { formatDistanceToNowStrict } from 'date-fns';
+import { useRef, useState, useEffect } from "react";
+import type { FC } from "react";
+import { formatDistanceToNowStrict } from "date-fns";
 import {
   Avatar,
   Box,
@@ -12,12 +12,12 @@ import {
   ListItemText,
   Popover,
   Tooltip,
-  Typography
-} from '@material-ui/core';
-import UsersIcon from '../../icons/Users';
-import { getContacts } from '../../slices/chat';
-import { useDispatch, useSelector } from '../../store';
-import StatusIndicator from '../StatusIndicator';
+  Typography,
+} from "@material-ui/core";
+import UsersIcon from "../../icons/Users";
+import { getContacts } from "../../slices/chat";
+import { useDispatch, useSelector } from "../../store";
+import StatusIndicator from "../StatusIndicator";
 
 const ContactsPopover: FC = () => {
   const dispatch = useDispatch();
@@ -40,33 +40,26 @@ const ContactsPopover: FC = () => {
   return (
     <>
       <Tooltip title="Contacts">
-        <IconButton
-          color="inherit"
-          onClick={handleOpen}
-          ref={anchorRef}
-        >
+        <IconButton color="inherit" onClick={handleOpen} ref={anchorRef}>
           <UsersIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       <Popover
         anchorEl={anchorRef.current}
         anchorOrigin={{
-          horizontal: 'center',
-          vertical: 'bottom'
+          horizontal: "center",
+          vertical: "bottom",
         }}
         onClose={handleClose}
         open={open}
         PaperProps={{
           sx: {
             p: 2,
-            width: 320
-          }
+            width: 320,
+          },
         }}
       >
-        <Typography
-          color="textPrimary"
-          variant="h6"
-        >
+        <Typography color="textPrimary" variant="h6">
           Contacts
         </Typography>
         <Box sx={{ mt: 2 }}>
@@ -75,16 +68,13 @@ const ContactsPopover: FC = () => {
               const contact = contacts.byId[contactId];
 
               return (
-                <ListItem
-                  disableGutters
-                  key={contact.id}
-                >
+                <ListItem disableGutters key={contact.id}>
                   <ListItemAvatar>
                     <Avatar src={contact.avatar} />
                   </ListItemAvatar>
                   <ListItemText
                     disableTypography
-                    primary={(
+                    primary={
                       <Link
                         color="textPrimary"
                         display="block"
@@ -94,28 +84,15 @@ const ContactsPopover: FC = () => {
                       >
                         {contact.name}
                       </Link>
-                    )}
+                    }
                   />
-                  {
-                    contact.isActive
-                      ? (
-                        <StatusIndicator
-                          size="small"
-                          status="online"
-                        />
-                      )
-                      : (
-                        <Typography
-                          color="textSecondary"
-                          noWrap
-                          variant="caption"
-                        >
-                          {formatDistanceToNowStrict(contact.lastActivity)}
-                          {' '}
-                          ago
-                        </Typography>
-                      )
-                  }
+                  {contact.isActive ? (
+                    <StatusIndicator size="small" status="online" />
+                  ) : (
+                    <Typography color="textSecondary" noWrap variant="caption">
+                      {formatDistanceToNowStrict(contact.lastActivity)} ago
+                    </Typography>
+                  )}
                 </ListItem>
               );
             })}

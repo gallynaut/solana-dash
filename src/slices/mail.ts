@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import axios from '../lib/axios';
-import type { AppThunk } from '../store';
-import type { Email, Label } from '../types/mail';
-import objFromArray from '../utils/objFromArray';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import axios from "../lib/axios";
+import type { AppThunk } from "../store";
+import type { Email, Label } from "../types/mail";
+import objFromArray from "../utils/objFromArray";
 
 interface MailState {
   emails: {
@@ -18,15 +18,15 @@ interface MailState {
 const initialState: MailState = {
   emails: {
     byId: {},
-    allIds: []
+    allIds: [],
   },
   labels: [],
   isSidebarOpen: false,
-  isComposeOpen: false
+  isComposeOpen: false,
 };
 
 const slice = createSlice({
-  name: 'mail',
+  name: "mail",
   initialState,
   reducers: {
     getLabels(
@@ -66,44 +66,43 @@ const slice = createSlice({
     },
     closeCompose(state: MailState): void {
       state.isComposeOpen = false;
-    }
-  }
+    },
+  },
 });
 
 export const { reducer } = slice;
 
 export const getLabels = (): AppThunk => async (dispatch): Promise<void> => {
-  const response = await axios.get<{ labels: Label[] }>('/api/mail/labels');
+  const response = await axios.get<{ labels: Label[] }>("/api/mail/labels");
 
   dispatch(slice.actions.getLabels(response.data));
 };
 
 export const getEmails = ({
   customLabel,
-  systemLabel
-}: { customLabel: string, systemLabel: string }): AppThunk => async (dispatch): Promise<void> => {
-  const response = await axios.get<{ emails: Email[] }>(
-    '/api/mail/emails',
-    {
-      params: {
-        customLabel,
-        systemLabel
-      }
-    }
-  );
+  systemLabel,
+}: {
+  customLabel: string;
+  systemLabel: string;
+}): AppThunk => async (dispatch): Promise<void> => {
+  const response = await axios.get<{ emails: Email[] }>("/api/mail/emails", {
+    params: {
+      customLabel,
+      systemLabel,
+    },
+  });
 
   dispatch(slice.actions.getEmails(response.data));
 };
 
-export const getEmail = (emailId: string): AppThunk => async (dispatch): Promise<void> => {
-  const response = await axios.get<{ email: Email }>(
-    '/api/mail/email',
-    {
-      params: {
-        emailId
-      }
-    }
-  );
+export const getEmail = (emailId: string): AppThunk => async (
+  dispatch
+): Promise<void> => {
+  const response = await axios.get<{ email: Email }>("/api/mail/email", {
+    params: {
+      emailId,
+    },
+  });
 
   dispatch(slice.actions.getEmail(response.data));
 };

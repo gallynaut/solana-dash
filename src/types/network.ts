@@ -1,4 +1,4 @@
-import { Cluster, Connection } from '@solana/web3.js';
+import { Cluster, Connection } from "@solana/web3.js";
 
 export interface Network {
   icon: string;

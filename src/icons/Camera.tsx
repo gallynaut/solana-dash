@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Camera = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Camera = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Camera'
+  "Camera"
 );
 
 export default Camera;

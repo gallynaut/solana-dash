@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import AuthContext from '../contexts/SolanaContext';
+import { useContext } from "react";
+import AuthContext from "../contexts/SolanaContext";
 
 const useAuth = (): any => useContext(AuthContext);
 

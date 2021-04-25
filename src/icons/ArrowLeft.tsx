@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ArrowLeft = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const ArrowLeft = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ArrowLeft'
+  "ArrowLeft"
 );
 
 export default ArrowLeft;

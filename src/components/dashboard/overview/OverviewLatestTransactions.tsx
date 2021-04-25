@@ -1,6 +1,6 @@
-import type { FC } from 'react';
-import { format, subDays } from 'date-fns';
-import numeral from 'numeral';
+import type { FC } from "react";
+import { format, subDays } from "date-fns";
+import numeral from "numeral";
 import {
   Box,
   Card,
@@ -9,8 +9,8 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Typography
-} from '@material-ui/core';
+  Typography,
+} from "@material-ui/core";
 
 interface Transaction {
   id: string;
@@ -23,37 +23,37 @@ interface Transaction {
 
 const transactions: Transaction[] = [
   {
-    id: 'd46800328cd510a668253b45',
+    id: "d46800328cd510a668253b45",
     amount: 25000,
-    currency: 'usd',
+    currency: "usd",
     date: new Date(),
-    sender: 'Devias IO',
-    type: 'receive'
+    sender: "Devias IO",
+    type: "receive",
   },
   {
-    id: 'b4b19b21656e44b487441c50',
+    id: "b4b19b21656e44b487441c50",
     amount: 6843,
-    currency: 'usd',
+    currency: "usd",
     date: subDays(new Date(), 1),
-    sender: 'Zimbru',
-    type: 'send'
+    sender: "Zimbru",
+    type: "send",
   },
   {
-    id: '56c09ad91f6d44cb313397db',
+    id: "56c09ad91f6d44cb313397db",
     amount: 91823,
-    currency: 'usd',
+    currency: "usd",
     date: subDays(new Date(), 1),
-    sender: 'Vertical Jelly',
-    type: 'send'
+    sender: "Vertical Jelly",
+    type: "send",
   },
   {
-    id: 'aaeb96c5a131a55d9623f44d',
+    id: "aaeb96c5a131a55d9623f44d",
     amount: 49550,
-    currency: 'usd',
+    currency: "usd",
     date: subDays(new Date(), 3),
-    sender: 'Devias IO',
-    type: 'receive'
-  }
+    sender: "Devias IO",
+    type: "receive",
+  },
 ];
 
 const OverviewLatestTransactions: FC = (props) => (
@@ -65,9 +65,9 @@ const OverviewLatestTransactions: FC = (props) => (
           <TableRow
             key={transaction.id}
             sx={{
-              '&:last-child td': {
-                border: 0
-              }
+              "&:last-child td": {
+                border: 0,
+              },
             }}
           >
             <TableCell width={100}>
@@ -77,54 +77,36 @@ const OverviewLatestTransactions: FC = (props) => (
                   color="textSecondary"
                   variant="subtitle2"
                 >
-                  {format(transaction.date, 'LLL').toUpperCase()}
+                  {format(transaction.date, "LLL").toUpperCase()}
                 </Typography>
-                <Typography
-                  align="center"
-                  color="textSecondary"
-                  variant="h6"
-                >
-                  {format(transaction.date, 'd')}
+                <Typography align="center" color="textSecondary" variant="h6">
+                  {format(transaction.date, "d")}
                 </Typography>
               </Box>
             </TableCell>
             <TableCell>
               <div>
-                <Typography
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
+                <Typography color="textPrimary" variant="subtitle2">
                   {transaction.sender}
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  variant="body2"
-                >
-                  {
-                    transaction.type === 'receive'
-                      ? 'Payment received'
-                      : 'Payment sent'
-                  }
+                <Typography color="textSecondary" variant="body2">
+                  {transaction.type === "receive"
+                    ? "Payment received"
+                    : "Payment sent"}
                 </Typography>
               </div>
             </TableCell>
             <TableCell align="right">
               <Typography
                 color={
-                  transaction.type === 'receive'
-                    ? 'success.main'
-                    : 'error.main'
+                  transaction.type === "receive" ? "success.main" : "error.main"
                 }
                 variant="subtitle2"
               >
-                {transaction.type === 'receive' ? '+' : '-'}
-                {' '}
-                {numeral(transaction.amount).format('$0,0.00')}
+                {transaction.type === "receive" ? "+" : "-"}{" "}
+                {numeral(transaction.amount).format("$0,0.00")}
               </Typography>
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
+              <Typography color="textSecondary" variant="body2">
                 {transaction.currency.toUpperCase()}
               </Typography>
             </TableCell>

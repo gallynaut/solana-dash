@@ -1,5 +1,5 @@
-import { useRef, useState, useContext } from 'react';
-import type { FC } from 'react';
+import { useRef, useState, useContext } from "react";
+import type { FC } from "react";
 import {
   Button,
   ListItemIcon,
@@ -7,22 +7,19 @@ import {
   MenuItem,
   Popover,
   Typography,
-} from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import { NETWORKS } from '../../constants';
-import AuthContext from '../../contexts/SolanaContext'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-
+} from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { NETWORKS } from "../../constants";
+import AuthContext from "../../contexts/SolanaContext";
 
 const NetworkPopover: FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const theme = useTheme();
   const [open, setOpen] = useState<boolean>(false);
   const { cluster, setCluster } = useContext(AuthContext);
-
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -34,11 +31,10 @@ const NetworkPopover: FC = () => {
 
   const handleChangeNetwork = (selectedCluster: string): void => {
     if (cluster != selectedCluster) {
-      setCluster(selectedCluster)
+      setCluster(selectedCluster);
     }
-    setOpen(false)
+    setOpen(false);
   };
-
 
   return (
     <>
@@ -51,7 +47,7 @@ const NetworkPopover: FC = () => {
           m: 1,
           pl: 3,
           pr: 3,
-          minWidth: '175px'
+          minWidth: "175px",
         }}
         variant="contained"
       >
@@ -61,15 +57,15 @@ const NetworkPopover: FC = () => {
       <Popover
         anchorEl={anchorRef.current}
         anchorOrigin={{
-          horizontal: 'center',
-          vertical: 'bottom'
+          horizontal: "center",
+          vertical: "bottom",
         }}
         getContentAnchorEl={null}
         keepMounted
         onClose={handleClose}
         open={open}
         PaperProps={{
-          sx: { width: 240 }
+          sx: { width: 240 },
         }}
       >
         {Object.keys(NETWORKS).map((key, index) => (
@@ -78,8 +74,8 @@ const NetworkPopover: FC = () => {
             key={key}
             selected={key === cluster}
             sx={{
-              '& .Mui-selected': {
-                bgcolor: 'blue',
+              "& .Mui-selected": {
+                bgcolor: "blue",
               },
             }}
           >
@@ -87,14 +83,11 @@ const NetworkPopover: FC = () => {
               <ChevronRightIcon />
             </ListItemIcon>
             <ListItemText
-              primary={(
-                <Typography
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
+              primary={
+                <Typography color="textPrimary" variant="subtitle2">
                   {NETWORKS[key].label}
                 </Typography>
-              )}
+              }
             />
           </MenuItem>
         ))}

@@ -1,7 +1,3 @@
-import { useEffect, useContext } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import {
   Box,
   Card,
@@ -9,11 +5,15 @@ import {
   Container,
   Divider,
   Link,
-  Typography
-} from '@material-ui/core';
-import LoginSolana from '../../components/solana/LoginSolana';
-import AuthContext from '../../contexts/SolanaContext';
-import LightNetworkSelect from '../../components/solana/LightNetworkSelect';
+  Typography,
+} from "@material-ui/core";
+import type { FC } from "react";
+import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link as RouterLink } from "react-router-dom";
+import LightNetworkSelect from "../../components/solana/LightNetworkSelect";
+import LoginSolana from "../../components/solana/LoginSolana";
+import AuthContext from "../../contexts/SolanaContext";
 
 const Connect: FC = () => {
   const { platform } = useContext(AuthContext);
@@ -25,60 +25,46 @@ const Connect: FC = () => {
       </Helmet>
       <Box
         sx={{
-          backgroundColor: 'background.default',
-          display: 'flex',
-          flexDirection: 'row',
-          minHeight: '100vh'
+          backgroundColor: "background.default",
+          display: "flex",
+          flexDirection: "row",
+          minHeight: "100vh",
         }}
       >
-        <Container
-          maxWidth="sm"
-          sx={{ py: '80px' }}
-        >
-          <Card >
+        <Container maxWidth="sm" sx={{ py: "80px" }}>
+          <Card>
             <CardContent
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                p: 4
+                display: "flex",
+                flexDirection: "column",
+                p: 4,
               }}
             >
               <Box
                 sx={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  justifyContent: 'space-between',
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "space-between",
                   mb: 3,
-                  maxWidth: '50%'
+                  // maxWidth: '50%'
                 }}
               >
-                <div>
-                  <Typography
-                    color="textPrimary"
-                    gutterBottom
-                    variant="h4"
-                  >
+                <Container sx={{ maxWidth: "50%" }}>
+                  <Typography color="textPrimary" gutterBottom variant="h4">
                     Connect
                   </Typography>
-                  <Typography
-                    color="textSecondary"
-                    variant="body2"
-                  >
+                  <Typography color="textSecondary" variant="body2">
                     Connect your wallet to the Solana network
                   </Typography>
-                </div>
-              </Box>
-              <Box
-                sx={{
-                  maxWidth: '50%'
-                }}
-              >
-                <LightNetworkSelect />
+                </Container>
+                <Container sx={{ maxWidth: "50%" }}>
+                  <LightNetworkSelect />
+                </Container>
               </Box>
               <Box
                 sx={{
                   flexGrow: 1,
-                  mt: 3
+                  mt: 3,
                 }}
               >
                 <LoginSolana />

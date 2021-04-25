@@ -60,12 +60,12 @@ async function ledgerSend(
 }
 
 const BIP32_HARDENED_BIT = (1 << 31) >>> 0;
-function harden(n: number = 0) {
+function harden(n = 0) {
   return (n | BIP32_HARDENED_BIT) >>> 0;
 }
 
 export function getSolanaDerivationPath(account?: number, change?: number) {
-  var length;
+  let length;
   if (account !== undefined) {
     if (change !== undefined) {
       length = 4;
@@ -76,7 +76,7 @@ export function getSolanaDerivationPath(account?: number, change?: number) {
     length = 2;
   }
 
-  var derivationPath = Buffer.alloc(1 + length * 4);
+  const derivationPath = Buffer.alloc(1 + length * 4);
   // eslint-disable-next-line
   var offset = 0;
   offset = derivationPath.writeUInt8(length, offset);

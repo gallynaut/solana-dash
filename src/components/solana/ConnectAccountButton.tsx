@@ -1,12 +1,12 @@
-import { useRef, useContext } from 'react';
-import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Divider, Grid, IconButton } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import AuthContext from '../../contexts/SolanaContext';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import NotificationsPopover from '../dashboard/NotificationsPopover';
+import { useRef, useContext } from "react";
+import type { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Divider, Grid, IconButton } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AuthContext from "../../contexts/SolanaContext";
+import NotificationsPopover from "../dashboard/NotificationsPopover";
 
 const ConnectWalletButton: FC = () => {
   const theme = useTheme();
@@ -15,16 +15,20 @@ const ConnectWalletButton: FC = () => {
   const { isAuthenticated, disconnectAccount } = useContext(AuthContext);
 
   const handleClick = (): void => {
-    navigate('/account')
-  }
+    navigate("/account");
+  };
   const handleDisconnect = (): void => {
-    disconnectAccount()
-  }
-
+    disconnectAccount();
+  };
 
   return (
-    <Grid container alignItems="center" component="span" sx={{ minWidth: '175px' }}>
-      {!isAuthenticated ?
+    <Grid
+      container
+      alignItems="center"
+      component="span"
+      sx={{ minWidth: "175px" }}
+    >
+      {!isAuthenticated ? (
         <Grid item>
           <Button
             onClick={handleClick}
@@ -35,20 +39,29 @@ const ConnectWalletButton: FC = () => {
               m: 1,
               pl: 3,
               pr: 3,
-              minWidth: '175px'
+              minWidth: "175px",
             }}
             variant="contained"
           >
             <VpnKeyIcon />
-            <Divider orientation="vertical" flexItem variant="middle" sx={{ color: theme.palette.background.paper }} />
-        Connect wallet
-      </Button>
+            <Divider
+              orientation="vertical"
+              flexItem
+              variant="middle"
+              sx={{ color: theme.palette.background.paper }}
+            />
+            Connect wallet
+          </Button>
         </Grid>
-        : <>
-          <Grid item sx={{
-            pl: 3,
-            pr: 3,
-          }}>
+      ) : (
+        <>
+          <Grid
+            item
+            sx={{
+              pl: 3,
+              pr: 3,
+            }}
+          >
             <NotificationsPopover />
           </Grid>
           <Grid item>
@@ -58,11 +71,15 @@ const ConnectWalletButton: FC = () => {
               onClick={handleDisconnect}
               sx={{ flex: 1 }}
             >
-              <ExitToAppIcon color="primary" fontSize="large" sx={{ alignItems: 'right' }} />
+              <ExitToAppIcon
+                color="primary"
+                fontSize="large"
+                sx={{ alignItems: "right" }}
+              />
             </IconButton>
           </Grid>
         </>
-      }
+      )}
     </Grid>
   );
 };

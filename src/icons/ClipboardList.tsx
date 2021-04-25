@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ClipboardList = createSvgIcon(
   <svg
@@ -13,7 +13,7 @@ const ClipboardList = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ClipboardList'
+  "ClipboardList"
 );
 
 export default ClipboardList;

@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Eye = createSvgIcon(
   <svg
@@ -13,7 +13,7 @@ const Eye = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Eye'
+  "Eye"
 );
 
 export default Eye;

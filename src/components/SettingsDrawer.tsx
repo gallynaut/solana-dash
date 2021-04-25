@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import type { FC } from 'react';
+import { useEffect, useState } from "react";
+import type { FC } from "react";
 import {
   Box,
   Button,
@@ -10,22 +10,20 @@ import {
   Switch,
   TextField,
   Tooltip,
-  Typography
-} from '@material-ui/core';
-import { THEMES, NETWORKS } from '../constants';
-import useSettings from '../hooks/useSettings';
-import AdjustmentsIcon from '../icons/Adjustments';
-import NetworkPopover from './solana/NetworkPopover';
-import LightNetworkSelect from './solana/LightNetworkSelect';
+  Typography,
+} from "@material-ui/core";
+import { THEMES, NETWORKS } from "../constants";
+import useSettings from "../hooks/useSettings";
+import AdjustmentsIcon from "../icons/Adjustments";
+import NetworkPopover from "./solana/NetworkPopover";
+import LightNetworkSelect from "./solana/LightNetworkSelect";
 
-const getValues = (settings) => (
-  {
-    compact: settings.compact,
-    responsiveFontSizes: settings.responsiveFontSizes,
-    roundedCorners: settings.roundedCorners,
-    theme: settings.theme
-  }
-);
+const getValues = (settings) => ({
+  compact: settings.compact,
+  responsiveFontSizes: settings.responsiveFontSizes,
+  roundedCorners: settings.roundedCorners,
+  theme: settings.theme,
+});
 
 const SettingsDrawer: FC = () => {
   const { settings, saveSettings } = useSettings();
@@ -47,7 +45,7 @@ const SettingsDrawer: FC = () => {
   const handleChange = (field, value): void => {
     setValues({
       ...values,
-      [field]: value
+      [field]: value,
     });
   };
 
@@ -66,9 +64,9 @@ const SettingsDrawer: FC = () => {
           sx={{
             bottom: 0,
             margin: (theme) => theme.spacing(4),
-            position: 'fixed',
+            position: "fixed",
             right: 0,
-            zIndex: (theme) => theme.zIndex.speedDial
+            zIndex: (theme) => theme.zIndex.speedDial,
           }}
         >
           <AdjustmentsIcon fontSize="small" />
@@ -81,22 +79,16 @@ const SettingsDrawer: FC = () => {
         PaperProps={{
           sx: {
             p: 2,
-            width: 320
-          }
+            width: 320,
+          },
         }}
       >
-        <Typography
-          color="textPrimary"
-          variant="h6"
-        >
+        <Typography color="textPrimary" variant="h6">
           Network Options
         </Typography>
         <LightNetworkSelect />
         <Divider />
-        <Typography
-          color="textPrimary"
-          variant="h6"
-        >
+        <Typography color="textPrimary" variant="h6">
           Settings
         </Typography>
         <Box sx={{ mt: 3 }}>
@@ -104,26 +96,20 @@ const SettingsDrawer: FC = () => {
             fullWidth
             label="Theme"
             name="theme"
-            onChange={(event): void => handleChange(
-              'theme',
-              event.target.value
-            )}
+            onChange={(event): void =>
+              handleChange("theme", event.target.value)
+            }
             select
             SelectProps={{ native: true }}
             value={values.theme}
             variant="outlined"
           >
             {Object.keys(THEMES).map((theme) => (
-              <option
-                key={theme}
-                value={theme}
-              >
-                {
-                  theme
-                    .split('_')
-                    .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
-                    .join(' ')
-                }
+              <option key={theme} value={theme}>
+                {theme
+                  .split("_")
+                  .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
+                  .join(" ")}
               </option>
             ))}
           </TextField>
@@ -138,23 +124,22 @@ const SettingsDrawer: FC = () => {
         <Box
           sx={{
             mt: 2,
-            px: 1.5
+            px: 1.5,
           }}
         >
           <FormControlLabel
-            control={(
+            control={
               <Switch
                 checked={values.responsiveFontSizes}
                 color="primary"
                 edge="start"
                 name="direction"
-                onChange={(event): void => handleChange(
-                  'responsiveFontSizes',
-                  event.target.checked
-                )}
+                onChange={(event): void =>
+                  handleChange("responsiveFontSizes", event.target.checked)
+                }
               />
-            )}
-            label={(
+            }
+            label={
               <div>
                 Responsive font sizes
                 <Typography
@@ -165,29 +150,28 @@ const SettingsDrawer: FC = () => {
                   Adjust font for small devices
                 </Typography>
               </div>
-            )}
+            }
           />
         </Box>
         <Box
           sx={{
             mt: 2,
-            px: 1.5
+            px: 1.5,
           }}
         >
           <FormControlLabel
-            control={(
+            control={
               <Switch
                 checked={values.compact}
                 color="primary"
                 edge="start"
                 name="compact"
-                onChange={(event): void => handleChange(
-                  'compact',
-                  event.target.checked
-                )}
+                onChange={(event): void =>
+                  handleChange("compact", event.target.checked)
+                }
               />
-            )}
-            label={(
+            }
+            label={
               <div>
                 Compact
                 <Typography
@@ -198,29 +182,28 @@ const SettingsDrawer: FC = () => {
                   Fixed width on some screens
                 </Typography>
               </div>
-            )}
+            }
           />
         </Box>
         <Box
           sx={{
             mt: 2,
-            px: 1.5
+            px: 1.5,
           }}
         >
           <FormControlLabel
-            control={(
+            control={
               <Switch
                 checked={values.roundedCorners}
                 color="primary"
                 edge="start"
                 name="roundedCorners"
-                onChange={(event): void => handleChange(
-                  'roundedCorners',
-                  event.target.checked
-                )}
+                onChange={(event): void =>
+                  handleChange("roundedCorners", event.target.checked)
+                }
               />
-            )}
-            label={(
+            }
+            label={
               <div>
                 Rounded Corners
                 <Typography
@@ -231,7 +214,7 @@ const SettingsDrawer: FC = () => {
                   Increase border radius
                 </Typography>
               </div>
-            )}
+            }
           />
         </Box>
         <Box sx={{ mt: 3 }}>

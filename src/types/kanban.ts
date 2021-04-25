@@ -6,7 +6,7 @@ export interface CheckItem {
   id: string;
   name: string;
   checklistId?: string;
-  state: 'incomplete' | 'complete';
+  state: "incomplete" | "complete";
 }
 
 export interface Checklist {

@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ShoppingBag = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const ShoppingBag = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ShoppingBag'
+  "ShoppingBag"
 );
 
 export default ShoppingBag;

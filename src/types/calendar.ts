@@ -10,7 +10,7 @@ export interface CalendarEvent {
 }
 
 export type CalendarView =
-  | 'dayGridMonth'
-  | 'timeGridWeek'
-  | 'timeGridDay'
-  | 'listWeek';
+  | "dayGridMonth"
+  | "timeGridWeek"
+  | "timeGridDay"
+  | "listWeek";

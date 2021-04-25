@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useEffect } from "react";
+import type { FC } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
@@ -10,33 +10,33 @@ import {
   Drawer,
   Hidden,
   Link,
-  Typography
-} from '@material-ui/core';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import useAuth from '../../hooks/useAuth';
-import BriefcaseIcon from '../../icons/Briefcase';
-import CalendarIcon from '../../icons/Calendar';
-import ChartPieIcon from '../../icons/ChartPie';
-import ChartSquareBarIcon from '../../icons/ChartSquareBar';
-import FolderOpenIcon from '../../icons/FolderOpen';
-import ShareIcon from '../../icons/Share';
-import ShoppingBagIcon from '../../icons/ShoppingBag';
-import ShoppingCartIcon from '../../icons/ShoppingCart';
-import SolanaIcon from '../../icons/Solana';
-import CashIcon from '../../icons/Cash';
-import Logo from '../Logo';
-import NavSection from '../NavSection';
-import Scrollbar from '../Scrollbar';
+  Typography,
+} from "@material-ui/core";
+import ReceiptIcon from "@material-ui/icons/Receipt";
+import useAuth from "../../hooks/useAuth";
+import BriefcaseIcon from "../../icons/Briefcase";
+import CalendarIcon from "../../icons/Calendar";
+import ChartPieIcon from "../../icons/ChartPie";
+import ChartSquareBarIcon from "../../icons/ChartSquareBar";
+import FolderOpenIcon from "../../icons/FolderOpen";
+import ShareIcon from "../../icons/Share";
+import ShoppingBagIcon from "../../icons/ShoppingBag";
+import ShoppingCartIcon from "../../icons/ShoppingCart";
+import SolanaIcon from "../../icons/Solana";
+import CashIcon from "../../icons/Cash";
+import Logo from "../Logo";
+import NavSection from "../NavSection";
+import Scrollbar from "../Scrollbar";
 import {
   setNetwork,
   setAccount,
   setConnectedStatus,
   openModal,
   closeModal,
-} from '../../slices/solana';
-import { useDispatch, useSelector } from '../../store';
-import shortenPublicKey from '../../utils/shortenPublicKey'
-import AccountSummaryCard from '../../components/solana/AccountSummaryCard';
+} from "../../slices/solana";
+import { useDispatch, useSelector } from "../../store";
+import shortenPublicKey from "../../utils/shortenPublicKey";
+import AccountSummaryCard from "../solana/AccountSummaryCard";
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;
@@ -45,128 +45,124 @@ interface DashboardSidebarProps {
 
 const sections = [
   {
-    title: 'Getting Started',
+    title: "Getting Started",
     items: [
       {
-        title: 'Home',
-        path: '/',
-        icon: <ChartSquareBarIcon fontSize="small" />
+        title: "Home",
+        path: "/",
+        icon: <ChartSquareBarIcon fontSize="small" />,
       },
       {
-        title: 'Beginners',
-        path: '/beginners',
+        title: "Beginners",
+        path: "/beginners",
         icon: <ChartPieIcon fontSize="small" />,
         children: [
           {
-            title: 'What is Solana',
-            path: '/beginners/what'
+            title: "What is Solana",
+            path: "/beginners/what",
           },
           {
-            title: 'How does it Work',
-            path: '/beginners/how'
+            title: "How does it Work",
+            path: "/beginners/how",
           },
           {
-            title: 'Creating a Wallet',
-            path: '/beginners/create'
+            title: "Creating a Wallet",
+            path: "/beginners/create",
           },
           {
-            title: 'Connecting a Wallet',
-            path: '/beginners/connect'
+            title: "Connecting a Wallet",
+            path: "/beginners/connect",
           },
           {
-            title: 'Receiving SOL',
-            path: '/beginners/receive'
+            title: "Receiving SOL",
+            path: "/beginners/receive",
           },
           {
-            title: 'Security',
-            path: '/beginners/security'
-          }
-        ]
+            title: "Security",
+            path: "/beginners/security",
+          },
+        ],
       },
       {
-        title: 'Advanced',
-        path: '/advanced',
+        title: "Advanced",
+        path: "/advanced",
         icon: <ShoppingBagIcon fontSize="small" />,
         children: [
           {
-            title: 'Overview',
-            path: '/advanced',
+            title: "Overview",
+            path: "/advanced",
           },
           {
-            title: 'What is Solana',
-            path: '/advanced/what'
+            title: "What is Solana",
+            path: "/advanced/what",
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
-    title: 'Account',
+    title: "Account",
     items: [
       {
-        title: 'Account Overview',
-        path: '/account',
-        icon: <CashIcon fontSize="small" />
+        title: "Account Overview",
+        path: "/account",
+        icon: <CashIcon fontSize="small" />,
       },
       {
-        title: 'Tokens',
-        path: '/tokens',
+        title: "Tokens",
+        path: "/tokens",
         icon: <ShoppingCartIcon fontSize="small" />,
       },
       {
-        title: 'Staking',
-        path: '/staking',
+        title: "Staking",
+        path: "/staking",
         icon: <FolderOpenIcon fontSize="small" />,
       },
       {
-        title: 'Farming',
-        path: '/farming',
-        icon: <ReceiptIcon fontSize="small" />
-      }
-    ]
+        title: "Farming",
+        path: "/farming",
+        icon: <ReceiptIcon fontSize="small" />,
+      },
+    ],
   },
   {
-    title: 'Network',
+    title: "Network",
     items: [
       {
-        title: 'Network Overview',
-        path: '/network',
+        title: "Network Overview",
+        path: "/network",
         icon: <BriefcaseIcon fontSize="small" />,
       },
       {
-        title: 'Projects',
-        path: '/projects',
-        icon: <ShareIcon fontSize="small" />
+        title: "Projects",
+        path: "/projects",
+        icon: <ShareIcon fontSize="small" />,
       },
       {
-        title: 'Calendar',
-        path: '/calendar',
-        icon: <CalendarIcon fontSize="small" />
+        title: "Calendar",
+        path: "/calendar",
+        icon: <CalendarIcon fontSize="small" />,
       },
       {
-        title: 'News',
-        path: '/news',
-        icon: <ShareIcon fontSize="small" />
-      }
-    ]
-  }
+        title: "News",
+        path: "/news",
+        icon: <ShareIcon fontSize="small" />,
+      },
+    ],
+  },
 ];
 
 const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
   const dispatch = useDispatch();
-  const {
-    network,
-    connectedStatus,
-    account,
-    isModalOpen
-  } = useSelector((state) => state.solana);
-
+  const { network, connectedStatus, account, isModalOpen } = useSelector(
+    (state) => state.solana
+  );
 
   const openConnectWalletModal = () => {
-    dispatch(openModal())
-  }
+    dispatch(openModal());
+  };
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -177,18 +173,18 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
   const content = (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%'
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
       }}
     >
       <Scrollbar options={{ suppressScrollX: true }}>
         <Hidden lgUp>
           <Box
             sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              p: 2
+              display: "flex",
+              justifyContent: "center",
+              p: 2,
             }}
           >
             <RouterLink to="/">
@@ -196,7 +192,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
                 color="primary"
                 sx={{
                   height: 40,
-                  width: 40
+                  width: 40,
                 }}
               />
             </RouterLink>
@@ -213,9 +209,9 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
               key={section.title}
               pathname={location.pathname}
               sx={{
-                '& + &': {
-                  mt: 3
-                }
+                "& + &": {
+                  mt: 3,
+                },
               }}
               {...section}
             />
@@ -223,16 +219,10 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          <Typography
-            color="textPrimary"
-            variant="subtitle2"
-          >
+          <Typography color="textPrimary" variant="subtitle2">
             Need Help?
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
+          <Typography color="textSecondary" variant="body2">
             Contact Us
           </Typography>
           <Button
@@ -259,9 +249,9 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
           open={openMobile}
           PaperProps={{
             sx: {
-              backgroundColor: 'background.paper',
-              width: 280
-            }
+              backgroundColor: "background.paper",
+              width: 280,
+            },
           }}
           variant="temporary"
         >
@@ -274,11 +264,11 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
           open
           PaperProps={{
             sx: {
-              backgroundColor: 'background.paper',
-              height: 'calc(100% - 64px) !important',
-              top: '64px !Important',
-              width: 280
-            }
+              backgroundColor: "background.paper",
+              height: "calc(100% - 64px) !important",
+              top: "64px !Important",
+              width: 280,
+            },
           }}
           variant="persistent"
         >
@@ -291,7 +281,7 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
 
 DashboardSidebar.propTypes = {
   onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
+  openMobile: PropTypes.bool,
 };
 
 export default DashboardSidebar;

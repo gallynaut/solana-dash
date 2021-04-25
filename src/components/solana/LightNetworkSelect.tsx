@@ -1,5 +1,5 @@
-import { useRef, useState, useContext, useEffect } from 'react';
-import type { FC } from 'react';
+import { useRef, useState, useContext, useEffect } from "react";
+import type { FC } from "react";
 import {
   Button,
   ListItemIcon,
@@ -8,30 +8,26 @@ import {
   Popover,
   Typography,
   Box,
-  TextField
-} from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
-import { NETWORKS } from '../../constants';
-import AuthContext from '../../contexts/SolanaContext'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-
+  TextField,
+} from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { NETWORKS } from "../../constants";
+import AuthContext from "../../contexts/SolanaContext";
 
 const LightNetworkSelect: FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const theme = useTheme();
   const { cluster, setCluster } = useContext(AuthContext);
 
-
   const handleChangeNetwork = (selectedCluster: string): void => {
     // console.log(selectedCluster)
-    if (cluster != selectedCluster) {
-      setCluster(selectedCluster)
+    if (cluster !== selectedCluster) {
+      setCluster(selectedCluster);
     }
   };
-
 
   return (
     <>
@@ -53,10 +49,7 @@ const LightNetworkSelect: FC = () => {
           }}
         >
           {Object.keys(NETWORKS).map((cluster) => (
-            <option
-              key={cluster}
-              value={cluster}
-            >
+            <option key={cluster} value={cluster}>
               {NETWORKS[cluster].label}
             </option>
           ))}

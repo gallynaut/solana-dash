@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const CurrencyDollar = createSvgIcon(
   <svg
@@ -13,7 +13,7 @@ const CurrencyDollar = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'CurrencyDollar'
+  "CurrencyDollar"
 );
 
 export default CurrencyDollar;

@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/display-name */
-import { Suspense, lazy } from 'react';
-import type { PartialRouteObject } from 'react-router';
-import AuthGuard from './components/AuthGuard';
-import DashboardLayout from './components/dashboard/DashboardLayout';
-import LoadingScreen from './components/LoadingScreen';
-import Connect from './pages/authentication/Connect';
+import { Suspense, lazy } from "react";
+import type { PartialRouteObject } from "react-router";
+import AuthGuard from "./components/AuthGuard";
+import DashboardLayout from "./components/dashboard/DashboardLayout";
+import LoadingScreen from "./components/LoadingScreen";
+import Connect from "./pages/authentication/Connect";
 
 const Loadable = (Component) => (props) => (
   <Suspense fallback={<LoadingScreen />}>
@@ -14,81 +15,81 @@ const Loadable = (Component) => (props) => (
 
 // Dashboard pages
 
-const Home = Loadable(lazy(() => import('./pages/Home')));
-const Calendar = Loadable(lazy(() => import('./pages/Calendar')));
-const Contact = Loadable(lazy(() => import('./pages/Contact')));
-const Network = Loadable(lazy(() => import('./pages/Network')));
-const Overview = Loadable(lazy(() => import('./pages/Overview')));
-const News = Loadable(lazy(() => import('./pages/News')));
+const Home = Loadable(lazy(() => import("./pages/Home")));
+const Calendar = Loadable(lazy(() => import("./pages/Calendar")));
+const Contact = Loadable(lazy(() => import("./pages/Contact")));
+const Network = Loadable(lazy(() => import("./pages/Network")));
+const Overview = Loadable(lazy(() => import("./pages/Overview")));
+const News = Loadable(lazy(() => import("./pages/News")));
 
 // Beginner pages
 
-const BeginnerWhat = Loadable(lazy(() => import('./pages/beginners/BeginnerWhat')));
+const BeginnerWhat = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerWhat"))
+);
 
 // Error pages
 
-const NotFound = Loadable(lazy(() => import('./pages/NotFound')));
-const ServerError = Loadable(lazy(() => import('./pages/ServerError')));
+const NotFound = Loadable(lazy(() => import("./pages/NotFound")));
+const ServerError = Loadable(lazy(() => import("./pages/ServerError")));
 
 const routes: PartialRouteObject[] = [
   {
-    path: '*',
-    element: (
-      <DashboardLayout />
-    ),
+    path: "*",
+    element: <DashboardLayout />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: "/",
+        element: <Home />,
       },
       {
-        path: 'connect',
-        element: <Connect />
+        path: "connect",
+        element: <Connect />,
       },
       {
-        path: 'beginners',
+        path: "beginners",
         children: [
           {
-            path: 'what',
+            path: "what",
             element: <BeginnerWhat />,
           },
           {
-            path: 'how',
+            path: "how",
             element: <Overview />,
           },
           {
-            path: 'create',
+            path: "create",
             element: <Overview />,
           },
           {
-            path: 'connect',
+            path: "connect",
             element: <Overview />,
           },
           {
-            path: 'receive',
+            path: "receive",
             element: <Overview />,
           },
           {
-            path: 'security',
+            path: "security",
             element: <Overview />,
           },
-        ]
+        ],
       },
       {
-        path: 'advanced',
+        path: "advanced",
         children: [
           {
-            path: '/',
+            path: "/",
             element: <Overview />,
           },
           {
-            path: '/what',
+            path: "/what",
             element: <Overview />,
           },
-        ]
+        ],
       },
       {
-        path: 'account',
+        path: "account",
         element: (
           <AuthGuard>
             <Overview />
@@ -96,54 +97,58 @@ const routes: PartialRouteObject[] = [
         ),
       },
       {
-        path: 'network',
-        element: <Network />
+        path: "network",
+        element: <Network />,
       },
       {
-        path: 'tokens',
-        element: <Overview />
+        path: "tokens",
+        element: <Overview />,
       },
       {
-        path: 'staking',
-        element: <Overview />
+        path: "staking",
+        element: <Overview />,
       },
       {
-        path: 'farming',
-        element: <Overview />
+        path: "farming",
+        element: <Overview />,
       },
       {
-        path: '/calendar',
-        element: (<AuthGuard><Calendar /></AuthGuard>),
+        path: "/calendar",
+        element: (
+          <AuthGuard>
+            <Calendar />
+          </AuthGuard>
+        ),
       },
       {
-        path: '/projects',
-        element: <Overview />
+        path: "/projects",
+        element: <Overview />,
       },
       {
-        path: '/news',
-        element: <News />
+        path: "/news",
+        element: <News />,
       },
       {
-        path: '/contact',
-        element: <Contact />
+        path: "/contact",
+        element: <Contact />,
       },
       {
-        path: '401',
-        element: <NotFound />
+        path: "401",
+        element: <NotFound />,
       },
       {
-        path: '404',
-        element: <NotFound />
+        path: "404",
+        element: <NotFound />,
       },
       {
-        path: '500',
-        element: <ServerError />
+        path: "500",
+        element: <ServerError />,
       },
       {
-        path: '*',
-        element: <NotFound />
+        path: "*",
+        element: <NotFound />,
       },
-    ]
+    ],
   },
 ];
 

@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Ban = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Ban = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Ban'
+  "Ban"
 );
 
 export default Ban;

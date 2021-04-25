@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const User = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const User = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'User'
+  "User"
 );
 
 export default User;

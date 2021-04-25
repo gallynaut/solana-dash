@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ExclamationCircle = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const ExclamationCircle = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ExclamationCircle'
+  "ExclamationCircle"
 );
 
 export default ExclamationCircle;

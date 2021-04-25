@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
-import type { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useRef, useState } from "react";
+import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   IconButton,
@@ -8,22 +8,22 @@ import {
   ListItemText,
   MenuItem,
   Popover,
-  Typography
-} from '@material-ui/core';
+  Typography,
+} from "@material-ui/core";
 
 const languageOptions = {
   en: {
-    icon: '/static/icons/uk_flag.svg',
-    label: 'English'
+    icon: "/static/icons/uk_flag.svg",
+    label: "English",
   },
   de: {
-    icon: '/static/icons/de_flag.svg',
-    label: 'German'
+    icon: "/static/icons/de_flag.svg",
+    label: "German",
   },
   es: {
-    icon: '/static/icons/es_flag.svg',
-    label: 'Spanish'
-  }
+    icon: "/static/icons/es_flag.svg",
+    label: "Spanish",
+  },
 };
 
 const LanguagePopover: FC = () => {
@@ -48,38 +48,32 @@ const LanguagePopover: FC = () => {
 
   return (
     <>
-      <IconButton
-        onClick={handleOpen}
-        ref={anchorRef}
-      >
+      <IconButton onClick={handleOpen} ref={anchorRef}>
         <Box
           sx={{
-            display: 'flex',
+            display: "flex",
             height: 20,
             width: 20,
-            '& img': {
-              width: '100%'
-            }
+            "& img": {
+              width: "100%",
+            },
           }}
         >
-          <img
-            alt={selectedOption.label}
-            src={selectedOption.icon}
-          />
+          <img alt={selectedOption.label} src={selectedOption.icon} />
         </Box>
       </IconButton>
       <Popover
         anchorEl={anchorRef.current}
         anchorOrigin={{
-          horizontal: 'center',
-          vertical: 'bottom'
+          horizontal: "center",
+          vertical: "bottom",
         }}
         getContentAnchorEl={null}
         keepMounted
         onClose={handleClose}
         open={open}
         PaperProps={{
-          sx: { width: 240 }
+          sx: { width: 240 },
         }}
       >
         {Object.keys(languageOptions).map((language) => (
@@ -90,12 +84,12 @@ const LanguagePopover: FC = () => {
             <ListItemIcon>
               <Box
                 sx={{
-                  display: 'flex',
+                  display: "flex",
                   height: 20,
                   width: 20,
-                  '& img': {
-                    width: '100%'
-                  }
+                  "& img": {
+                    width: "100%",
+                  },
                 }}
               >
                 <img
@@ -105,14 +99,11 @@ const LanguagePopover: FC = () => {
               </Box>
             </ListItemIcon>
             <ListItemText
-              primary={(
-                <Typography
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
+              primary={
+                <Typography color="textPrimary" variant="subtitle2">
                   {languageOptions[language].label}
                 </Typography>
-              )}
+              }
             />
           </MenuItem>
         ))}

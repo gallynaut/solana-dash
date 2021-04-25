@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ChartSquareBar = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const ChartSquareBar = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ChartSquareBar'
+  "ChartSquareBar"
 );
 
 export default ChartSquareBar;

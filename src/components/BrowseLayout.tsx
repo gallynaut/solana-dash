@@ -1,51 +1,49 @@
-import { useState, useEffect } from 'react';
-import { Link as RouterLink, Outlet, useLocation } from 'react-router-dom';
-import type { FC } from 'react';
+import { useState, useEffect } from "react";
+import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
+import type { FC } from "react";
 import {
   Box,
   Button,
   Container,
   Hidden,
   Skeleton,
-  Typography
-} from '@material-ui/core';
-import ArrowLeftIcon from '../icons/ArrowLeft';
+  Typography,
+} from "@material-ui/core";
+import ArrowLeftIcon from "../icons/ArrowLeft";
 
 const BrowseLayout: FC = () => {
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useState<string>("");
 
   useEffect(() => {
-    (
-      async () => {
-        const response = await fetch('/static/browse/hero.svg');
-        const blob = await response.blob();
+    (async () => {
+      const response = await fetch("/static/browse/hero.svg");
+      const blob = await response.blob();
 
-        setImage(URL.createObjectURL(blob));
-        setIsLoading(false);
-      }
-    )();
+      setImage(URL.createObjectURL(blob));
+      setIsLoading(false);
+    })();
   }, []);
 
-  const urlLastSegment = pathname.slice(pathname.lastIndexOf('/') + 1);
-  const isEntry = urlLastSegment === 'browse' || !urlLastSegment;
+  const urlLastSegment = pathname.slice(pathname.lastIndexOf("/") + 1);
+  const isEntry = urlLastSegment === "browse" || !urlLastSegment;
   const title = isEntry
-    ? 'Browse components'
+    ? "Browse components"
     : urlLastSegment
-      .split('-')
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(' ');
+        .split("-")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
 
   return (
     <>
-      <Box sx={{ backgroundColor: 'background.default' }}>
+      <Box sx={{ backgroundColor: "background.default" }}>
         <Container
           maxWidth="lg"
           sx={{
-            alignItems: 'center',
-            display: 'flex',
-            py: 6
+            alignItems: "center",
+            display: "flex",
+            py: 6,
           }}
         >
           <div>
@@ -61,43 +59,30 @@ const BrowseLayout: FC = () => {
                 Back to components
               </Button>
             )}
-            <Typography
-              color="textPrimary"
-              variant="h1"
-            >
+            <Typography color="textPrimary" variant="h1">
               {title}
             </Typography>
             {isEntry && (
-              <Typography
-                color="textSecondary"
-                sx={{ mt: 1 }}
-                variant="body1"
-              >
-                Browse through over 100 individual components and over 35 screens
+              <Typography color="textSecondary" sx={{ mt: 1 }} variant="body1">
+                Browse through over 100 individual components and over 35
+                screens
               </Typography>
             )}
           </div>
           <Box sx={{ flexGrow: 1 }} />
           <Hidden smDown>
-            {
-              isLoading
-                ? (
-                  <Skeleton
-                    sx={{
-                      borderRadius: 1,
-                      height: 206.24,
-                      width: 195.32
-                    }}
-                    variant="rectangular"
-                  />
-                )
-                : (
-                  <img
-                    alt="Components"
-                    src={image}
-                  />
-                )
-            }
+            {isLoading ? (
+              <Skeleton
+                sx={{
+                  borderRadius: 1,
+                  height: 206.24,
+                  width: 195.32,
+                }}
+                variant="rectangular"
+              />
+            ) : (
+              <img alt="Components" src={image} />
+            )}
           </Hidden>
         </Container>
       </Box>

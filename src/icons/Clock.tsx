@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Clock = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Clock = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Clock'
+  "Clock"
 );
 
 export default Clock;

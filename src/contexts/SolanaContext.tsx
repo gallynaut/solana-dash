@@ -1,14 +1,14 @@
-import { createContext, useReducer, useEffect } from 'react';
-import type { FC, ReactNode } from 'react';
-import { useSnackbar } from 'notistack';
-import PropTypes from 'prop-types';
-import { NETWORKS, WALLETS } from '../constants'
-import { Connection, Cluster, clusterApiUrl } from '@solana/web3.js';
-import type { RpcResponseAndContext } from '@solana/web3.js'
-import SolanaWallet, { PublicKey } from '@project-serum/sol-wallet-adapter';
+import { createContext, useReducer, useEffect } from "react";
+import type { FC, ReactNode } from "react";
+import { useSnackbar } from "notistack";
+import PropTypes from "prop-types";
+import { Connection, Cluster, clusterApiUrl } from "@solana/web3.js";
+import type { RpcResponseAndContext } from "@solana/web3.js";
+import SolanaWallet, { PublicKey } from "@project-serum/sol-wallet-adapter";
+import { NETWORKS, WALLETS } from "../constants";
 // import SolanaWallet from '@project-serum/sol-wallet-adapter'
-import useInterval from '../hooks/useInterval';
-import { notify } from '../utils/notifications'
+import useInterval from "../hooks/useInterval";
+import { notify } from "../utils/notifications";
 
 interface State {
   isInitialized: boolean;
@@ -28,7 +28,7 @@ interface State {
 // }
 
 interface AuthContextValue extends State {
-  platform: 'Solana';
+  platform: "Solana";
   connectAccount: (networkURL: string, providerURL: string) => Promise<void>;
   disconnectAccount: () => Promise<void>;
   setCluster: (cluster: string) => Promise<void>;
@@ -42,50 +42,51 @@ interface AuthProviderProps {
 }
 
 type InitializeAction = {
-  type: 'INITIALIZE';
+  type: "INITIALIZE";
 };
 type ConnectAccountAction = {
-  type: 'CONNECT_ACCOUNT';
+  type: "CONNECT_ACCOUNT";
   payload: {
     account: PublicKey | null;
     publicKey: string;
   };
-}
+};
 type DisconnectAccountAction = {
-  type: 'DISCONNECT_ACCOUNT';
-}
+  type: "DISCONNECT_ACCOUNT";
+};
 type SetClusterAction = {
-  type: 'SET_CLUSTER';
+  type: "SET_CLUSTER";
   payload: {
     cluster: string;
   };
-}
+};
 type SetConnectionAction = {
-  type: 'SET_CONNECTION';
+  type: "SET_CONNECTION";
   payload: {
     connection: Connection | null;
   };
-}
+};
 type SetWalletAction = {
-  type: 'SET_WALLET';
+  type: "SET_WALLET";
   payload: {
     wallet: any; // idk what type it is
-  }
-}
+  };
+};
 type SetWalletProviderAction = {
-  type: 'SET_WALLET_PROVIDER';
+  type: "SET_WALLET_PROVIDER";
   payload: {
     walletProvider: string;
   };
-}
+};
 type SetBalanceAction = {
-  type: 'SET_BALANCE';
+  type: "SET_BALANCE";
   payload: {
     balance: RpcResponseAndContext<number> | null;
   };
-}
+};
 
-type Action = InitializeAction
+type Action =
+  | InitializeAction
   | ConnectAccountAction
   | DisconnectAccountAction
   | SetClusterAction
@@ -97,14 +98,14 @@ type Action = InitializeAction
 const initialState: State = {
   isAuthenticated: false,
   isInitialized: false,
-  cluster: 'mainnetBeta',
-  connection: new Connection('mainnetBeta'),
+  cluster: "mainnetBeta",
+  connection: new Connection("mainnetBeta"),
   account: null, // we could pull from local storage during initialize
-  publicKey: '',
+  publicKey: "",
   wallet: null,
-  walletProvider: '',
+  walletProvider: "",
   balance: null,
-}
+};
 
 const handlers: Record<string, (state: State, action: Action) => State> = {
   INITIALIZE: (state: State, action: InitializeAction): State => {
@@ -114,75 +115,81 @@ const handlers: Record<string, (state: State, action: Action) => State> = {
     };
   },
   CONNECT_ACCOUNT: (state: State, action: ConnectAccountAction): State => {
-    const { account, publicKey } = action.payload
+    const { account, publicKey } = action.payload;
     return {
       ...state,
       isAuthenticated: true,
-      account: account,
-      publicKey: publicKey,
+      account,
+      publicKey,
     };
   },
-  DISCONNECT_ACCOUNT: (state: State, action: DisconnectAccountAction): State => {
+  DISCONNECT_ACCOUNT: (
+    state: State,
+    action: DisconnectAccountAction
+  ): State => {
     return {
       ...state,
       isAuthenticated: false,
       account: null,
-      publicKey: '',
-      walletProvider: '',
+      publicKey: "",
+      walletProvider: "",
     };
   },
   SET_CLUSTER: (state: State, action: SetClusterAction): State => {
-    const { cluster } = action.payload
+    const { cluster } = action.payload;
     return {
       ...state,
-      cluster: cluster,
+      cluster,
     };
   },
   SET_CONNECTION: (state: State, action: SetConnectionAction): State => {
-    const { connection } = action.payload
+    const { connection } = action.payload;
     return {
       ...state,
-      connection: connection,
+      connection,
     };
   },
   SET_WALLET: (state: State, action: SetWalletAction): State => {
-    const { wallet } = action.payload
+    const { wallet } = action.payload;
     return {
       ...state,
-      wallet: wallet,
+      wallet,
     };
   },
-  SET_WALLET_PROVIDER: (state: State, action: SetWalletProviderAction): State => {
-    const { walletProvider } = action.payload
+  SET_WALLET_PROVIDER: (
+    state: State,
+    action: SetWalletProviderAction
+  ): State => {
+    const { walletProvider } = action.payload;
     return {
       ...state,
-      walletProvider: walletProvider,
+      walletProvider,
     };
   },
   SET_BALANCE: (state: State, action: SetBalanceAction): State => {
-    const { balance } = action.payload
-    console.log("setting balance ", balance)
+    const { balance } = action.payload;
+    console.log("setting balance ", balance);
     return {
       ...state,
-      balance: balance,
+      balance,
     };
   },
 };
 
-const reducer = (state: State, action: Action): State => (
-  handlers[action.type] ? handlers[action.type](state, action) : state
-);
+const reducer = (state: State, action: Action): State =>
+  handlers[action.type] ? handlers[action.type](state, action) : state;
 
 const AuthContext = createContext<AuthContextValue>({
   ...initialState,
-  platform: 'Solana',
-  connectAccount: (networkURL: string, providerURL: string) => Promise.resolve(),
+  platform: "Solana",
+  connectAccount: (networkURL: string, providerURL: string) =>
+    Promise.resolve(),
   disconnectAccount: () => Promise.resolve(),
   setCluster: (cluster: string) => Promise.resolve(),
   setConnection: () => Promise.resolve(),
   setWalletProvider: (providerURL: string) => Promise.resolve(),
   getBalance: () => Promise.resolve(),
-})
+});
 
 export const AuthProvider: FC<AuthProviderProps> = (props) => {
   const { children } = props;
@@ -191,150 +198,148 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
 
   useEffect(() => {
     const initialize = async (): Promise<void> => {
-      dispatch({ type: 'INITIALIZE', })
+      dispatch({ type: "INITIALIZE" });
     };
     initialize();
-  }, [])
+  }, []);
 
   // when network changes, update connection
   useEffect(() => {
-    setConnection()
+    setConnection();
     if (state.isInitialized) {
-      enqueueSnackbar('Solana cluster updated', {
+      enqueueSnackbar("Solana cluster updated", {
         anchorOrigin: {
-          horizontal: 'right',
-          vertical: 'top'
+          horizontal: "right",
+          vertical: "top",
         },
-        variant: 'success'
+        variant: "success",
       });
     }
-
-  }, [state.cluster])
+  }, [state.cluster]);
 
   // update wallet when provider changes/disconnects
   useEffect(() => {
-    if (state.walletProvider != '') {
-      console.log("changing wallet")
-      connectAccount(NETWORKS[state.cluster].url, state.walletProvider)
+    if (state.walletProvider !== "") {
+      console.log("changing wallet");
+      connectAccount(NETWORKS[state.cluster].url, state.walletProvider);
     }
-  }, [state.walletProvider])
+  }, [state.walletProvider]);
 
   useEffect(() => {
     if (state.account != null) {
-      getBalance()
+      getBalance();
     }
-  }, [state.account])
+  }, [state.account]);
 
   useInterval(() => {
-    getBalance()
+    getBalance();
   }, 60000);
 
   const getBalance = async (): Promise<void> => {
-    if (state.connection != null && state.publicKey != '') {
-      const conn: Connection = state.connection
+    if (state.connection != null && state.publicKey !== "") {
+      const conn: Connection = state.connection;
       conn.getBalanceAndContext(state.account).then((resp) =>
         dispatch({
-          type: 'SET_BALANCE',
+          type: "SET_BALANCE",
           payload: {
             balance: resp,
-          }
+          },
         })
-      )
+      );
     }
-  }
+  };
 
-
-  const connectAccount = async (networkURL: string, providerURL: string): Promise<void> => {
-    const wallet: any = new SolanaWallet(providerURL, networkURL)
-    wallet.on('connect', () => {
-      const pk: PublicKey = wallet.publicKey
-      console.log('Connected to wallet ' + wallet.publicKey.toBase58());
+  const connectAccount = async (
+    networkURL: string,
+    providerURL: string
+  ): Promise<void> => {
+    const wallet: any = new SolanaWallet(providerURL, networkURL);
+    wallet.on("connect", () => {
+      const pk: PublicKey = wallet.publicKey;
+      console.log(`Connected to wallet ${wallet.publicKey.toBase58()}`);
       dispatch({
-        type: 'CONNECT_ACCOUNT',
+        type: "CONNECT_ACCOUNT",
         payload: {
           account: pk,
           publicKey: wallet.publicKey.toBase58(),
-        }
-
-      })
+        },
+      });
     });
     wallet.connect();
-
-  }
+  };
 
   const disconnectAccount = async (): Promise<void> => {
-    console.log("disconnecting account")
-    dispatch({ type: 'DISCONNECT_ACCOUNT' })
-  }
+    console.log("disconnecting account");
+    dispatch({ type: "DISCONNECT_ACCOUNT" });
+  };
 
   const setCluster = async (cluster: string): Promise<void> => {
     if (!(cluster in NETWORKS)) {
-      console.log("no network exist for ", cluster)
-      return
+      console.log("no network exist for ", cluster);
+      return;
     }
-    const nw: any = state.cluster
+    const nw: any = state.cluster;
 
-    console.log("setting network ", cluster)
+    console.log("setting network ", cluster);
     dispatch({
-      type: 'SET_CLUSTER',
+      type: "SET_CLUSTER",
       payload: {
-        cluster: cluster,
-      }
-    })
-  }
+        cluster,
+      },
+    });
+  };
   const setConnection = async (): Promise<void> => {
-    console.log("setting connection for ", state.cluster)
+    console.log("setting connection for ", state.cluster);
     try {
-      const c: Cluster = NETWORKS[state.cluster].cluster
-      const newConn: Connection = new Connection(clusterApiUrl(c))
+      const c: Cluster = NETWORKS[state.cluster].cluster;
+      const newConn: Connection = new Connection(clusterApiUrl(c));
       dispatch({
-        type: 'SET_CONNECTION',
+        type: "SET_CONNECTION",
         payload: {
           connection: newConn,
-        }
-      })
-
+        },
+      });
     } catch (err) {
-      console.log("error setting connection: ", err)
+      console.log("error setting connection: ", err);
       dispatch({
-        type: 'SET_CONNECTION',
+        type: "SET_CONNECTION",
         payload: {
           connection: null,
-        }
-      })
+        },
+      });
     }
-  }
+  };
 
   const setWalletProvider = async (providerURL: string): Promise<void> => {
-    console.log("setting wallet provider to ", providerURL)
+    console.log("setting wallet provider to ", providerURL);
     dispatch({
-      type: 'SET_WALLET_PROVIDER',
+      type: "SET_WALLET_PROVIDER",
       payload: {
         walletProvider: providerURL,
-      }
-    })
-  }
+      },
+    });
+  };
 
   return (
     <AuthContext.Provider
       value={{
         ...state,
-        platform: 'Solana',
+        platform: "Solana",
         connectAccount,
         disconnectAccount,
         setCluster,
         setConnection,
         setWalletProvider,
-        getBalance
+        getBalance,
       }}
     >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 AuthProvider.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthContext;

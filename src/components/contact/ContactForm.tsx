@@ -1,4 +1,4 @@
-import type { FC, FormEvent } from 'react';
+import type { FC, FormEvent } from "react";
 import {
   Box,
   Button,
@@ -7,8 +7,8 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography
-} from '@material-ui/core';
+  Typography,
+} from "@material-ui/core";
 
 const ContactForm: FC = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -17,58 +17,21 @@ const ContactForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          xs={12}
-          sm={6}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Full Name *
           </Typography>
-          <TextField
-            fullWidth
-            name="name"
-            required
-            variant="outlined"
-          />
+          <TextField fullWidth name="name" required variant="outlined" />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12} sm={6}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Company Name*
           </Typography>
-          <TextField
-            fullWidth
-            name="company"
-            required
-            variant="outlined"
-          />
+          <TextField fullWidth name="company" required variant="outlined" />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12} sm={6}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Work Email *
           </Typography>
           <TextField
@@ -79,16 +42,8 @@ const ContactForm: FC = () => {
             variant="outlined"
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12} sm={6}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Phone Number *
           </Typography>
           <TextField
@@ -99,76 +54,36 @@ const ContactForm: FC = () => {
             variant="outlined"
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12} sm={6}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Company Size
           </Typography>
-          <Select
-            fullWidth
-            variant="outlined"
-          >
+          <Select fullWidth variant="outlined">
             <MenuItem value="10-20">1-10</MenuItem>
             <MenuItem value="11-30">11-30</MenuItem>
             <MenuItem value="31-50">31-50</MenuItem>
           </Select>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12} sm={6}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Team
           </Typography>
-          <Select
-            fullWidth
-            variant="outlined"
-          >
+          <Select fullWidth variant="outlined">
             <MenuItem value="engineering">Engineering</MenuItem>
             <MenuItem value="design">Design</MenuItem>
           </Select>
         </Grid>
-        <Grid
-          item
-          xs={12}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Project Budget *
           </Typography>
-          <Select
-            fullWidth
-            required
-            variant="outlined"
-          >
+          <Select fullWidth required variant="outlined">
             <MenuItem value={20000}>$20,000+</MenuItem>
             <MenuItem value={50000}>$50,000+</MenuItem>
           </Select>
         </Grid>
-        <Grid
-          item
-          xs={12}
-        >
-          <Typography
-            color="textPrimary"
-            sx={{ mb: 1 }}
-            variant="subtitle2"
-          >
+        <Grid item xs={12}>
+          <Typography color="textPrimary" sx={{ mb: 1 }} variant="subtitle2">
             Message
           </Typography>
           <TextField
@@ -183,27 +98,17 @@ const ContactForm: FC = () => {
       </Grid>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          mt: 3
+          display: "flex",
+          justifyContent: "center",
+          mt: 3,
         }}
       >
-        <Button
-          color="primary"
-          fullWidth
-          size="large"
-          variant="contained"
-        >
+        <Button color="primary" fullWidth size="large" variant="contained">
           Let&apos;s Talk
         </Button>
       </Box>
-      <Typography
-        color="textSecondary"
-        sx={{ mt: 3 }}
-        variant="body2"
-      >
-        By submitting this, you agree to the
-        {' '}
+      <Typography color="textSecondary" sx={{ mt: 3 }} variant="body2">
+        By submitting this, you agree to the{" "}
         <Link
           color="textPrimary"
           href="#"
@@ -211,10 +116,8 @@ const ContactForm: FC = () => {
           variant="subtitle2"
         >
           Privacy Policy
-        </Link>
-        {' '}
-        and
-        {' '}
+        </Link>{" "}
+        and{" "}
         <Link
           color="textPrimary"
           href="#"

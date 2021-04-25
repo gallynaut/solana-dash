@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const ChatAlt = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const ChatAlt = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'ChatAlt'
+  "ChatAlt"
 );
 
 export default ChatAlt;

@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const PencilAlt = createSvgIcon(
   <svg
@@ -13,7 +13,7 @@ const PencilAlt = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'PencilAlt'
+  "PencilAlt"
 );
 
 export default PencilAlt;

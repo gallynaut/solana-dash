@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Dot = createSvgIcon(
   <svg
@@ -6,13 +6,9 @@ const Dot = createSvgIcon(
     viewBox="0 0 20 20"
     fill="currentColor"
   >
-    <circle
-      cx="10"
-      cy="10"
-      r="3"
-    />
+    <circle cx="10" cy="10" r="3" />
   </svg>,
-  'Dot'
+  "Dot"
 );
 
 export default Dot;

@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Trash = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Trash = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Trash'
+  "Trash"
 );
 
 export default Trash;

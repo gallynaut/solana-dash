@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const Calendar = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const Calendar = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Calendar'
+  "Calendar"
 );
 
 export default Calendar;

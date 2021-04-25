@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react';
-import type { FC } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
+import { useRef, useState } from "react";
+import type { FC } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import {
   Avatar,
   Box,
@@ -12,11 +12,11 @@ import {
   ListItemText,
   MenuItem,
   Popover,
-  Typography
-} from '@material-ui/core';
-import useAuth from '../../hooks/useAuth';
-import CogIcon from '../../icons/Cog';
-import UserIcon from '../../icons/User';
+  Typography,
+} from "@material-ui/core";
+import useAuth from "../../hooks/useAuth";
+import CogIcon from "../../icons/Cog";
+import UserIcon from "../../icons/User";
 
 const AccountPopover: FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -37,15 +37,15 @@ const AccountPopover: FC = () => {
     try {
       handleClose();
       await logout();
-      navigate('/');
+      navigate("/");
     } catch (err) {
       console.error(err);
-      enqueueSnackbar('Unable to logout', {
+      enqueueSnackbar("Unable to logout", {
         anchorOrigin: {
-          horizontal: 'right',
-          vertical: 'top'
+          horizontal: "right",
+          vertical: "top",
         },
-        variant: 'error'
+        variant: "error",
       });
     }
   };
@@ -57,82 +57,64 @@ const AccountPopover: FC = () => {
         onClick={handleOpen}
         ref={anchorRef}
         sx={{
-          alignItems: 'center',
-          display: 'flex'
+          alignItems: "center",
+          display: "flex",
         }}
       >
         <Avatar
           src={user.avatar}
           sx={{
             height: 32,
-            width: 32
+            width: 32,
           }}
         />
       </Box>
       <Popover
         anchorEl={anchorRef.current}
         anchorOrigin={{
-          horizontal: 'center',
-          vertical: 'bottom'
+          horizontal: "center",
+          vertical: "bottom",
         }}
         getContentAnchorEl={null}
         keepMounted
         onClose={handleClose}
         open={open}
         PaperProps={{
-          sx: { width: 240 }
+          sx: { width: 240 },
         }}
       >
         <Box sx={{ p: 2 }}>
-          <Typography
-            color="textPrimary"
-            variant="subtitle2"
-          >
+          <Typography color="textPrimary" variant="subtitle2">
             {user.name}
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="subtitle2"
-          >
+          <Typography color="textSecondary" variant="subtitle2">
             Devias IO
           </Typography>
         </Box>
         <Divider />
         <Box sx={{ mt: 2 }}>
-          <MenuItem
-            component={RouterLink}
-            to="/dashboard/social/profile"
-          >
+          <MenuItem component={RouterLink} to="/dashboard/social/profile">
             <ListItemIcon>
               <UserIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText
-              primary={(
-                <Typography
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
+              primary={
+                <Typography color="textPrimary" variant="subtitle2">
                   Profile
                 </Typography>
-              )}
+              }
             />
           </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/dashboard/account"
-          >
+          <MenuItem component={RouterLink} to="/dashboard/account">
             <ListItemIcon>
               <CogIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText
-              primary={(
-                <Typography
-                  color="textPrimary"
-                  variant="subtitle2"
-                >
+              primary={
+                <Typography color="textPrimary" variant="subtitle2">
                   Settings
                 </Typography>
-              )}
+              }
             />
           </MenuItem>
         </Box>

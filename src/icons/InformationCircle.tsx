@@ -1,4 +1,4 @@
-import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
+import createSvgIcon from "@material-ui/core/utils/createSvgIcon";
 
 const InformationCircle = createSvgIcon(
   <svg
@@ -12,7 +12,7 @@ const InformationCircle = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'InformationCircle'
+  "InformationCircle"
 );
 
 export default InformationCircle;
