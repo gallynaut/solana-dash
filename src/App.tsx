@@ -8,7 +8,7 @@ import GlobalStyles from "./components/GlobalStyles";
 import SettingsDrawer from "./components/SettingsDrawer";
 import SplashScreen from "./components/SplashScreen";
 import { gtmConfig } from "./config";
-import useAuth from "./hooks/useAuth";
+import useAuth from "./hooks/useSolana";
 import useScrollReset from "./hooks/useScrollReset";
 import useSettings from "./hooks/useSettings";
 import useNotifications from "./hooks/useNotifications";

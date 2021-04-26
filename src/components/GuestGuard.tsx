@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useSolana";
 
 interface GuestGuardProps {
   children: ReactNode;

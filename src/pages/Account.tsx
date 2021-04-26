@@ -14,11 +14,9 @@ import {
 } from "@material-ui/core";
 import {
   OverviewInbox,
-  OverviewLatestTransactions,
   OverviewPrivateWallet,
   OverviewTotalBalance,
-  OverviewTotalTransactions,
-  OverviewWeeklyEarnings,
+  OverviewAccount,
 } from "../components/dashboard/overview";
 import useSettings from "../hooks/useSettings";
 import ArrowRightIcon from "../icons/ArrowRight";
@@ -28,19 +26,14 @@ import ExternalLinkIcon from "../icons/ExternalLink";
 import InformationCircleIcon from "../icons/InformationCircle";
 import PlusIcon from "../icons/Plus";
 import UsersIcon from "../icons/Users";
-import gtm from "../lib/gtm";
 
-const Overview: FC = () => {
+const Account: FC = () => {
   const { settings } = useSettings();
-
-  useEffect(() => {
-    gtm.push({ event: "page_view" });
-  }, []);
 
   return (
     <>
       <Helmet>
-        <title>Dashboard: Overview | Solana Dash</title>
+        <title>Account | Solana Dash</title>
       </Helmet>
       <Box
         sx={{
@@ -61,13 +54,13 @@ const Overview: FC = () => {
             >
               <Grid item>
                 <Typography color="textSecondary" variant="overline">
-                  Overview
+                  Home
                 </Typography>
                 <Typography color="textPrimary" variant="h5">
-                  Good Morning, Jane
+                  Welcome to Solana Dash
                 </Typography>
                 <Typography color="textSecondary" variant="subtitle2">
-                  Here&apos;s what&apos;s happening with your projects today
+                  Here&apos;s what&apos;s happening with Solana today
                 </Typography>
               </Grid>
               <Grid item>
@@ -80,20 +73,16 @@ const Overview: FC = () => {
                 </Button>
               </Grid>
             </Grid>
-            <Grid item md={6} xs={12}>
-              <OverviewWeeklyEarnings />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <OverviewPrivateWallet />
-            </Grid>
             <Grid item md={8} xs={12}>
-              <OverviewTotalTransactions />
+              {/* WALLET / TOKEN OVERVIEW - LINKS TO ACCOUNT PAGE */}
+              <OverviewAccount />
             </Grid>
             <Grid item md={4} xs={12}>
+              {/* SOLANA NETWORK OVERVIEW - LINKS TO NETWORK PAGE */}
               <OverviewTotalBalance />
             </Grid>
             <Grid item md={8} xs={12}>
-              <OverviewLatestTransactions />
+              <OverviewAccount />
             </Grid>
             <Grid item md={4} xs={12}>
               <OverviewInbox />
@@ -313,4 +302,4 @@ const Overview: FC = () => {
   );
 };
 
-export default Overview;
+export default Account;

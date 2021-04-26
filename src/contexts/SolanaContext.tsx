@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createContext, useReducer, useEffect } from "react";
 import type { FC, ReactNode } from "react";
 import { useSnackbar } from "notistack";

@@ -14,7 +14,7 @@ import {
   Popover,
   Typography,
 } from "@material-ui/core";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useSolana";
 import CogIcon from "../../icons/Cog";
 import UserIcon from "../../icons/User";
 

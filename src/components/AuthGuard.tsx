@@ -2,7 +2,7 @@ import type { FC, ReactNode } from "react";
 import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useSolana";
 import Login from "../pages/authentication/Connect";
 
 interface AuthGuardProps {

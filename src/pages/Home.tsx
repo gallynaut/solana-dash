@@ -14,10 +14,9 @@ import {
 } from "@material-ui/core";
 import {
   OverviewInbox,
-  OverviewLatestTransactions,
   OverviewPrivateWallet,
   OverviewTotalBalance,
-  OverviewTotalTransactions,
+  OverviewAccount,
   OverviewWeeklyEarnings,
 } from "../components/dashboard/overview";
 import useSettings from "../hooks/useSettings";
@@ -28,7 +27,6 @@ import ExternalLinkIcon from "../icons/ExternalLink";
 import InformationCircleIcon from "../icons/InformationCircle";
 import PlusIcon from "../icons/Plus";
 import UsersIcon from "../icons/Users";
-import gtm from "../lib/gtm";
 
 const Home: FC = () => {
   const { settings } = useSettings();
@@ -76,20 +74,16 @@ const Home: FC = () => {
                 </Button>
               </Grid>
             </Grid>
-            <Grid item md={6} xs={12}>
-              <OverviewWeeklyEarnings />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <OverviewPrivateWallet />
-            </Grid>
             <Grid item md={8} xs={12}>
-              <OverviewTotalTransactions />
+              {/* WALLET / TOKEN OVERVIEW - LINKS TO ACCOUNT PAGE */}
+              <OverviewAccount />
             </Grid>
             <Grid item md={4} xs={12}>
+              {/* SOLANA NETWORK OVERVIEW - LINKS TO NETWORK PAGE */}
               <OverviewTotalBalance />
             </Grid>
             <Grid item md={8} xs={12}>
-              <OverviewLatestTransactions />
+              <OverviewAccount />
             </Grid>
             <Grid item md={4} xs={12}>
               <OverviewInbox />

@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import useAuth from "../../hooks/useAuth";
+import useSolana from "../../hooks/useSolana";
 import BriefcaseIcon from "../../icons/Briefcase";
 import CalendarIcon from "../../icons/Calendar";
 import ChartPieIcon from "../../icons/ChartPie";
@@ -27,13 +27,6 @@ import CashIcon from "../../icons/Cash";
 import Logo from "../Logo";
 import NavSection from "../NavSection";
 import Scrollbar from "../Scrollbar";
-import {
-  setNetwork,
-  setAccount,
-  setConnectedStatus,
-  openModal,
-  closeModal,
-} from "../../slices/solana";
 import { useDispatch, useSelector } from "../../store";
 import shortenPublicKey from "../../utils/shortenPublicKey";
 import AccountSummaryCard from "../solana/AccountSummaryCard";
@@ -155,14 +148,6 @@ const sections = [
 const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
-  const dispatch = useDispatch();
-  const { network, connectedStatus, account, isModalOpen } = useSelector(
-    (state) => state.solana
-  );
-
-  const openConnectWalletModal = () => {
-    dispatch(openModal());
-  };
 
   useEffect(() => {
     if (openMobile && onMobileClose) {

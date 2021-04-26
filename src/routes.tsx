@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/display-name */
+// import { Account } from "@solana/web3.js";
 import { Suspense, lazy } from "react";
 import type { PartialRouteObject } from "react-router";
 import AuthGuard from "./components/AuthGuard";
@@ -19,7 +20,7 @@ const Home = Loadable(lazy(() => import("./pages/Home")));
 const Calendar = Loadable(lazy(() => import("./pages/Calendar")));
 const Contact = Loadable(lazy(() => import("./pages/Contact")));
 const Network = Loadable(lazy(() => import("./pages/Network")));
-const Overview = Loadable(lazy(() => import("./pages/Overview")));
+const Account = Loadable(lazy(() => import("./pages/Account")));
 const News = Loadable(lazy(() => import("./pages/News")));
 
 // Beginner pages
@@ -55,23 +56,23 @@ const routes: PartialRouteObject[] = [
           },
           {
             path: "how",
-            element: <Overview />,
+            element: <Home />,
           },
           {
             path: "create",
-            element: <Overview />,
+            element: <Home />,
           },
           {
             path: "connect",
-            element: <Overview />,
+            element: <Home />,
           },
           {
             path: "receive",
-            element: <Overview />,
+            element: <Home />,
           },
           {
             path: "security",
-            element: <Overview />,
+            element: <Home />,
           },
         ],
       },
@@ -80,11 +81,11 @@ const routes: PartialRouteObject[] = [
         children: [
           {
             path: "/",
-            element: <Overview />,
+            element: <Home />,
           },
           {
             path: "/what",
-            element: <Overview />,
+            element: <Home />,
           },
         ],
       },
@@ -92,7 +93,7 @@ const routes: PartialRouteObject[] = [
         path: "account",
         element: (
           <AuthGuard>
-            <Overview />
+            <Account />
           </AuthGuard>
         ),
       },
@@ -102,15 +103,15 @@ const routes: PartialRouteObject[] = [
       },
       {
         path: "tokens",
-        element: <Overview />,
+        element: <Home />,
       },
       {
         path: "staking",
-        element: <Overview />,
+        element: <Home />,
       },
       {
         path: "farming",
-        element: <Overview />,
+        element: <Home />,
       },
       {
         path: "/calendar",
@@ -122,7 +123,7 @@ const routes: PartialRouteObject[] = [
       },
       {
         path: "/projects",
-        element: <Overview />,
+        element: <Home />,
       },
       {
         path: "/news",
