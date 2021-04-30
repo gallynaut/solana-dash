@@ -22,6 +22,7 @@ const Contact = Loadable(lazy(() => import("./pages/Contact")));
 const Network = Loadable(lazy(() => import("./pages/Network")));
 const Account = Loadable(lazy(() => import("./pages/Account")));
 const News = Loadable(lazy(() => import("./pages/News")));
+const Test = Loadable(lazy(() => import("./pages/Test")));
 
 // Beginner pages
 
@@ -42,6 +43,10 @@ const routes: PartialRouteObject[] = [
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/test",
+        element: <Test />,
       },
       {
         path: "connect",

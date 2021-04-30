@@ -33,6 +33,7 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "consistent-return": "off",
     "import/prefer-default-export": "off",
     "jsx-a11y/anchor-is-valid": "off",

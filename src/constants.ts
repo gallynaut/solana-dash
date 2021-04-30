@@ -1,6 +1,8 @@
 import { Connection, clusterApiUrl, Cluster } from "@solana/web3.js";
+import { string } from "prop-types";
 import type { Network } from "./types/network";
 import type { Wallet } from "./types/wallet";
+import { Exchange } from "./types/exchange";
 
 export const THEMES = {
   LIGHT: "LIGHT",
@@ -17,9 +19,6 @@ const other: Wallet = {
   label: "other",
 };
 export const WALLETS: Wallet[] = [sollet, other];
-//   sollet: sollet,
-//   other: other,
-// }
 
 const dev: Cluster = "devnet";
 const test: Cluster = "testnet";
@@ -49,3 +48,14 @@ export const NETWORKS = {
   devnet,
   testnet,
 };
+
+export const EXCHANGES: Exchange[] = [
+  {
+    name: "ftx",
+    symbols: ["solusd", "solusdt", "solbtc"],
+  },
+  {
+    name: "binance",
+    symbols: ["solusd", "solusdt", "solbtc"],
+  },
+];

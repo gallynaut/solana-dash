@@ -27,6 +27,7 @@ import ExternalLinkIcon from "../icons/ExternalLink";
 import InformationCircleIcon from "../icons/InformationCircle";
 import PlusIcon from "../icons/Plus";
 import UsersIcon from "../icons/Users";
+import CryptoWatchCard from "../components/trading/CryptoWatchCard";
 
 const Home: FC = () => {
   const { settings } = useSettings();
@@ -76,7 +77,7 @@ const Home: FC = () => {
             </Grid>
             <Grid item md={8} xs={12}>
               {/* WALLET / TOKEN OVERVIEW - LINKS TO ACCOUNT PAGE */}
-              <OverviewAccount />
+              <CryptoWatchCard />
             </Grid>
             <Grid item md={4} xs={12}>
               {/* SOLANA NETWORK OVERVIEW - LINKS TO NETWORK PAGE */}

@@ -30,6 +30,7 @@ import Scrollbar from "../Scrollbar";
 import { useDispatch, useSelector } from "../../store";
 import shortenPublicKey from "../../utils/shortenPublicKey";
 import AccountSummaryCard from "../solana/AccountSummaryCard";
+import NetworkSummaryCard from "../solana/NetworkSummaryCard";
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;
@@ -186,6 +187,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         <Box sx={{ p: 2 }}>
           <AccountSummaryCard />
           {/* END OF ACCOUNT BOX */}
+          <Divider sx={{ my: 1 }} />
+          <NetworkSummaryCard />
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>

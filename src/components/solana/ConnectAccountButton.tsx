@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Divider, Grid, IconButton } from "@material-ui/core";
+import { Button, Divider, Grid, IconButton, Tooltip } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -65,18 +65,20 @@ const ConnectWalletButton: FC = () => {
             <NotificationsPopover />
           </Grid>
           <Grid item>
-            <IconButton
-              aria-label="disconnect account"
-              component="span"
-              onClick={handleDisconnect}
-              sx={{ flex: 1 }}
-            >
-              <ExitToAppIcon
-                color="primary"
-                fontSize="large"
-                sx={{ alignItems: "right" }}
-              />
-            </IconButton>
+            <Tooltip title="logout" aria-label="logout" arrow>
+              <IconButton
+                aria-label="logout"
+                component="span"
+                onClick={handleDisconnect}
+                sx={{ flex: 1 }}
+              >
+                <ExitToAppIcon
+                  color="primary"
+                  fontSize="large"
+                  sx={{ alignItems: "right" }}
+                />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </>
       )}

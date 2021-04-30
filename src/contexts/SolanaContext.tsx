@@ -3,13 +3,20 @@ import { createContext, useReducer, useEffect } from "react";
 import type { FC, ReactNode } from "react";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
-import { Connection, Cluster, clusterApiUrl } from "@solana/web3.js";
+import {
+  Connection,
+  Cluster,
+  clusterApiUrl,
+  Supply,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
 import type { RpcResponseAndContext } from "@solana/web3.js";
 import SolanaWallet, { PublicKey } from "@project-serum/sol-wallet-adapter";
 import { NETWORKS, WALLETS } from "../constants";
 // import SolanaWallet from '@project-serum/sol-wallet-adapter'
 import useInterval from "../hooks/useInterval";
 import { notify } from "../utils/notifications";
+import lamportsToSol from "../utils/lamportsToSol";
 
 interface State {
   isInitialized: boolean;
@@ -21,6 +28,7 @@ interface State {
   wallet: any;
   walletProvider: string;
   balance: RpcResponseAndContext<number>;
+  supply: Supply | null;
 }
 // interface Balances {
 //   devnet: RpcResponseAndContext<number> | null;
@@ -36,6 +44,7 @@ interface AuthContextValue extends State {
   setConnection: () => Promise<void>;
   setWalletProvider: (providerURL: string) => Promise<void>;
   getBalance: () => Promise<void>;
+  getSolanaSupply: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -85,6 +94,12 @@ type SetBalanceAction = {
     balance: RpcResponseAndContext<number> | null;
   };
 };
+type SetSolanaSupplyAction = {
+  type: "SET_SOLANA_SUPPLY";
+  payload: {
+    supply: Supply | null;
+  };
+};
 
 type Action =
   | InitializeAction
@@ -94,7 +109,8 @@ type Action =
   | SetConnectionAction
   | SetWalletAction
   | SetWalletProviderAction
-  | SetBalanceAction;
+  | SetBalanceAction
+  | SetSolanaSupplyAction;
 
 const initialState: State = {
   isAuthenticated: false,
@@ -106,6 +122,7 @@ const initialState: State = {
   wallet: null,
   walletProvider: "",
   balance: null,
+  supply: null,
 };
 
 const handlers: Record<string, (state: State, action: Action) => State> = {
@@ -175,6 +192,14 @@ const handlers: Record<string, (state: State, action: Action) => State> = {
       balance,
     };
   },
+  SET_SOLANA_SUPPLY: (state: State, action: SetSolanaSupplyAction): State => {
+    const { supply } = action.payload;
+    console.log("setting solana supply ", supply);
+    return {
+      ...state,
+      supply,
+    };
+  },
 };
 
 const reducer = (state: State, action: Action): State =>
@@ -190,6 +215,7 @@ const AuthContext = createContext<AuthContextValue>({
   setConnection: () => Promise.resolve(),
   setWalletProvider: (providerURL: string) => Promise.resolve(),
   getBalance: () => Promise.resolve(),
+  getSolanaSupply: () => Promise.resolve(),
 });
 
 export const AuthProvider: FC<AuthProviderProps> = (props) => {
@@ -230,11 +256,23 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     if (state.account != null) {
       getBalance();
     }
-  }, [state.account]);
+  }, [state.account, state.connection]);
+
+  useEffect(() => {
+    if (state.isInitialized && state.connection != null) {
+      getSolanaSupply();
+    }
+  }, [state.connection]);
 
   useInterval(() => {
+    console.log("getting balance");
     getBalance();
   }, 60000);
+
+  useInterval(() => {
+    console.log("getting network supply");
+    getSolanaSupply();
+  }, 30000);
 
   const getBalance = async (): Promise<void> => {
     if (state.connection != null && state.publicKey !== "") {
@@ -247,6 +285,20 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
           },
         })
       );
+    }
+  };
+
+  const getSolanaSupply = async (): Promise<void> => {
+    if (state.connection != null) {
+      const conn: Connection = state.connection;
+      conn.getSupply().then((resp) => {
+        dispatch({
+          type: "SET_SOLANA_SUPPLY",
+          payload: {
+            supply: resp.value,
+          },
+        });
+      });
     }
   };
 
@@ -332,6 +384,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         setConnection,
         setWalletProvider,
         getBalance,
+        getSolanaSupply,
       }}
     >
       {children}
