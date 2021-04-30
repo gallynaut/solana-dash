@@ -187,8 +187,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         <Box sx={{ p: 2 }}>
           <AccountSummaryCard />
           {/* END OF ACCOUNT BOX */}
-          <Divider sx={{ my: 1 }} />
-          <NetworkSummaryCard />
+          {/* <Divider sx={{ my: 1 }} /> */}
+          {/* <NetworkSummaryCard /> */}
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>

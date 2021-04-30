@@ -2,7 +2,7 @@ import { Connection, clusterApiUrl, Cluster } from "@solana/web3.js";
 import { string } from "prop-types";
 import type { Network } from "./types/network";
 import type { Wallet } from "./types/wallet";
-import { Exchange } from "./types/exchange";
+import { Exchange } from "./types/market";
 
 export const THEMES = {
   LIGHT: "LIGHT",

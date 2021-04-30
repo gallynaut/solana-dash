@@ -28,6 +28,8 @@ import InformationCircleIcon from "../icons/InformationCircle";
 import PlusIcon from "../icons/Plus";
 import UsersIcon from "../icons/Users";
 import CryptoWatchCard from "../components/trading/CryptoWatchCard";
+import GeckoPriceCard from "../components/gecko/GeckoPriceCard";
+import SocialCard from "../components/social/SocialCard";
 
 const Home: FC = () => {
   const { settings } = useSettings();
@@ -41,7 +43,7 @@ const Home: FC = () => {
         sx={{
           backgroundColor: "background.default",
           minHeight: "100%",
-          py: 8,
+          py: 6,
         }}
       >
         <Container maxWidth={settings.compact ? "xl" : false}>
@@ -54,7 +56,7 @@ const Home: FC = () => {
               item
               xs={12}
             >
-              <Grid item>
+              <Grid item md={3}>
                 <Typography color="textSecondary" variant="overline">
                   Home
                 </Typography>
@@ -65,14 +67,8 @@ const Home: FC = () => {
                   Here&apos;s what&apos;s happening with Solana today
                 </Typography>
               </Grid>
-              <Grid item>
-                <Button
-                  color="primary"
-                  startIcon={<PlusIcon fontSize="small" />}
-                  variant="contained"
-                >
-                  New Transaction
-                </Button>
+              <Grid item md={9}>
+                <GeckoPriceCard />
               </Grid>
             </Grid>
             <Grid item md={8} xs={12}>
@@ -80,14 +76,7 @@ const Home: FC = () => {
               <CryptoWatchCard />
             </Grid>
             <Grid item md={4} xs={12}>
-              {/* SOLANA NETWORK OVERVIEW - LINKS TO NETWORK PAGE */}
-              <OverviewTotalBalance />
-            </Grid>
-            <Grid item md={8} xs={12}>
-              <OverviewAccount />
-            </Grid>
-            <Grid item md={4} xs={12}>
-              <OverviewInbox />
+              <SocialCard />
             </Grid>
             <Grid item md={6} xs={12}>
               <Card>

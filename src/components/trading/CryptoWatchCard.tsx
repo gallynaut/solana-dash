@@ -17,6 +17,7 @@ import {
   CardContent,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+import useMarket from "../../hooks/useMarket";
 import CryptoWatchChart from "./CryptoWatchChart";
 import { EXCHANGES } from "../../constants";
 
@@ -33,8 +34,7 @@ const CryptoWatchCard: FC = () => {
   const theme = useTheme();
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
-  const [exchange, setExchange] = useState<string>("ftx");
-  const [symbol, setSymbol] = useState<string>("solusd");
+  const { exchange, setExchange, symbol, setSymbol } = useMarket();
 
   const handleOpen = (): void => {
     setOpen(true);
