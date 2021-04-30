@@ -59,3 +59,15 @@ export const EXCHANGES: Exchange[] = [
     symbols: ["solusd", "solusdt", "solbtc"],
   },
 ];
+
+export const CHART_THEMES = {
+  STANDARD: "standard",
+  CANDYCANE: "candycane",
+  ALBUQUERQUE: "albuquerque",
+  EPAPER: "epaper",
+  DELEK: "delek",
+  BLUEPRINT: "blueprint",
+  BALLMER: "ballmer",
+  BUSHIDO: "bushido",
+  ISHIHARA: "ishihara",
+};

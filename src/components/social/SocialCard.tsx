@@ -3,9 +3,12 @@ import numeral from "numeral";
 import Chart from "react-apexcharts";
 import { Box, Grid, Typography, Card, CardHeader } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
+import LightKeywordSelect from "./LightKeywordSelect";
+import useSocial from "../../hooks/useSocial";
 
 const ChartLine: FC = () => {
   const theme = useTheme();
+  const { keyword, setKeyword } = useSocial();
 
   const chart = {
     options: {
@@ -83,14 +86,28 @@ const SocialCard: FC = () => (
     }}
   >
     <Card>
-      <CardHeader
-        title="Social"
-        subheader={
-          <Typography color="textSecondary" variant="body2">
-            Latest social media trends
-          </Typography>
-        }
-      />
+      <Grid
+        container
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Grid item md={6}>
+          <CardHeader
+            title="Social"
+            subheader={
+              <Typography color="textSecondary" variant="body2">
+                Latest social media trends
+              </Typography>
+            }
+          />
+        </Grid>
+        <Grid item md={6}>
+          <LightKeywordSelect />
+        </Grid>
+      </Grid>
       <Grid container>
         <Grid
           item

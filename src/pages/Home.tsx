@@ -30,6 +30,7 @@ import UsersIcon from "../icons/Users";
 import CryptoWatchCard from "../components/trading/CryptoWatchCard";
 import GeckoPriceCard from "../components/gecko/GeckoPriceCard";
 import SocialCard from "../components/social/SocialCard";
+import GoogleTrendsCard from "../components/GoogleTrendsCard";
 
 const Home: FC = () => {
   const { settings } = useSettings();

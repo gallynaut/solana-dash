@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import type { FC, ReactNode } from "react";
 import PropTypes from "prop-types";
 import { THEMES } from "../constants";
+import type { CWColorScheme } from "../types/chart";
 
 interface Settings {
   compact?: boolean;
@@ -9,6 +10,7 @@ interface Settings {
   responsiveFontSizes?: boolean;
   roundedCorners?: boolean;
   theme?: string;
+  chartTheme?: string;
 }
 
 export interface SettingsContextValue {
@@ -26,6 +28,7 @@ const initialSettings: Settings = {
   responsiveFontSizes: true,
   roundedCorners: true,
   theme: THEMES.LIGHT,
+  chartTheme: "standard",
 };
 
 export const restoreSettings = (): Settings | null => {
@@ -68,6 +71,7 @@ const SettingsContext = createContext<SettingsContextValue>({
 export const SettingsProvider: FC<SettingsProviderProps> = (props) => {
   const { children } = props;
   const [settings, setSettings] = useState<Settings>(initialSettings);
+  // const [chartTheme, setChartTheme] = useState<string>("standard");
 
   useEffect(() => {
     const restoredSettings = restoreSettings();
@@ -81,6 +85,15 @@ export const SettingsProvider: FC<SettingsProviderProps> = (props) => {
     setSettings(updatedSettings);
     storeSettings(updatedSettings);
   };
+
+  // const setChartTheme = (updatedChartTheme: string): void => {
+  //   const newSettings: Settings = {
+  //     ...settings,
+  //     chartTheme: updatedChartTheme,
+  //   };
+  //   setSettings(newSettings);
+  //   storeSettings(newSettings);
+  // };
 
   return (
     <SettingsContext.Provider

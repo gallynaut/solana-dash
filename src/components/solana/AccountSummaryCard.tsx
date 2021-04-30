@@ -110,7 +110,7 @@ const AccountSummaryCard: FC = () => {
             item
             xs={12}
           >
-            <Grid item>{solBalance}</Grid>
+            {isAuthenticated ? <Grid item>{solBalance}</Grid> : <></>}
             <Grid item>
               <Typography color="primary" variant="body1">
                 {NETWORKS[cluster].label}

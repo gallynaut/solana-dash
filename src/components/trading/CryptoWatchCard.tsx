@@ -20,6 +20,8 @@ import { useTheme } from "@material-ui/core/styles";
 import useMarket from "../../hooks/useMarket";
 import CryptoWatchChart from "./CryptoWatchChart";
 import { EXCHANGES } from "../../constants";
+import useSettings from "../../hooks/useSettings";
+import LightChartThemeSelect from "./LightChartThemeSelect";
 
 const MARKETS = [
   "ftx-solusd",
@@ -35,6 +37,7 @@ const CryptoWatchCard: FC = () => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const { exchange, setExchange, symbol, setSymbol } = useMarket();
+  const { settings } = useSettings();
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -61,17 +64,31 @@ const CryptoWatchCard: FC = () => {
           minHeight: "500px",
         }}
       >
-        <CardActions onClick={handleOpen}>
-          <CardHeader
-            ref={anchorRef}
-            title="Markets"
-            subheader={
-              <Typography color="textSecondary" variant="body2">
-                {exchange.toUpperCase()} - {symbol.toUpperCase()}
-              </Typography>
-            }
-          />
-        </CardActions>
+        <Grid
+          container
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Grid item md={8}>
+            <CardActions onClick={handleOpen}>
+              <CardHeader
+                ref={anchorRef}
+                title="Markets"
+                subheader={
+                  <Typography color="textSecondary" variant="body2">
+                    {exchange.toUpperCase()} - {symbol.toUpperCase()}
+                  </Typography>
+                }
+              />
+            </CardActions>
+          </Grid>
+          <Grid item md={4}>
+            <LightChartThemeSelect />
+          </Grid>
+        </Grid>
         <CardContent>
           <Popover
             anchorEl={anchorRef.current}
@@ -107,7 +124,11 @@ const CryptoWatchCard: FC = () => {
               );
             })}
           </Popover>
-          <CryptoWatchChart exchange={exchange} symbol={symbol} />
+          <CryptoWatchChart
+            exchange={exchange}
+            symbol={symbol}
+            colorScheme={settings.chartTheme}
+          />
         </CardContent>
       </Card>
     </>
