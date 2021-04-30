@@ -55,9 +55,32 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         }}
       >
         <Hidden lgUp>
-          <IconButton color="inherit" onClick={onSidebarMobileOpen}>
-            <SolanaIcon color="primary" fontSize="small" />
-          </IconButton>
+          <Grid
+            container
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Grid item>
+              <IconButton color="inherit" onClick={onSidebarMobileOpen}>
+                <SolanaIcon color="primary" fontSize="small" />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <Typography
+                variant="h3"
+                color="secondary"
+                sx={{
+                  height: 40,
+                  display: "inline",
+                }}
+              >
+                DASH
+              </Typography>
+            </Grid>
+          </Grid>
         </Hidden>
         <Hidden lgDown>
           <RouterLink to="/">
@@ -96,14 +119,16 @@ const DashboardNavbar: FC<DashboardNavbarProps> = (props) => {
         <Box sx={{ ml: 1 }}>
           <ContentSearch />
         </Box>
-        <Divider orientation="vertical" flexItem variant="middle" />
-        <Box sx={{ ml: 1 }}>
-          <LightNetworkSelect />
-        </Box>
-        <Divider orientation="vertical" flexItem variant="middle" />
-        <Box sx={{ ml: 1 }}>
-          <ConnectAccountButton />
-        </Box>
+        <Hidden lgDown>
+          <Divider orientation="vertical" flexItem variant="middle" />
+          <Box sx={{ ml: 1 }}>
+            <LightNetworkSelect />
+          </Box>
+          <Divider orientation="vertical" flexItem variant="middle" />{" "}
+          <Box sx={{ ml: 1 }}>
+            <ConnectAccountButton />
+          </Box>
+        </Hidden>
       </Toolbar>
     </DashboardNavbarRoot>
   );

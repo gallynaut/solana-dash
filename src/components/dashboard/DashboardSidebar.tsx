@@ -184,13 +184,16 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
             </RouterLink>
           </Box>
         </Hidden>
-        <Box sx={{ p: 2 }}>
-          <AccountSummaryCard />
-          {/* END OF ACCOUNT BOX */}
-          {/* <Divider sx={{ my: 1 }} /> */}
-          {/* <NetworkSummaryCard /> */}
-        </Box>
-        <Divider />
+        <Hidden lgDown>
+          <Box sx={{ p: 2 }}>
+            <AccountSummaryCard />
+            {/* END OF ACCOUNT BOX */}
+            {/* <Divider sx={{ my: 1 }} /> */}
+            {/* <NetworkSummaryCard /> */}
+          </Box>
+          <Divider />
+        </Hidden>
+
         <Box sx={{ p: 2 }}>
           {sections.map((section) => (
             <NavSection
