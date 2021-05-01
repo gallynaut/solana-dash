@@ -5,10 +5,14 @@ import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Button,
+  Card,
+  CardHeader,
+  CardContent,
   CircularProgress,
   Container,
   Drawer,
   IconButton,
+  Grid,
   InputAdornment,
   Link,
   TextField,
@@ -98,10 +102,11 @@ const ContentSearch: FC = () => {
         open={open}
         PaperProps={{
           sx: { width: "100%" },
+          square: false,
         }}
         variant="temporary"
       >
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 1 }}>
           <Box
             sx={{
               display: "flex",
@@ -113,7 +118,7 @@ const ContentSearch: FC = () => {
             </IconButton>
           </Box>
         </Box>
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 1 }}>
           <Container maxWidth="md">
             <Box
               sx={{
@@ -121,31 +126,76 @@ const ContentSearch: FC = () => {
                 display: "flex",
               }}
             >
-              <TextField
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon fontSize="small" />
-                    </InputAdornment>
-                  ),
+              <Grid
+                container
+                direction="column"
+                sx={{
+                  alignItems: "center",
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}
-                onChange={(event): void => setValue(event.target.value)}
-                onKeyUp={handleKeyUp}
-                placeholder="Look up any Solana account, token account, or a specific transaction"
-                value={value}
-              />
-              <Button
-                color="primary"
-                onClick={handleClick}
-                size="large"
-                sx={{ ml: 2 }}
-                variant="contained"
               >
-                Search
-              </Button>
+                <Grid item sx={{ pb: 2, width: "100%" }} md={12}>
+                  <Typography variant="h4">Search</Typography>
+                  <Typography variant="body1">
+                    Look up any Solana account, token account, or a specific
+                    transaction
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  container
+                  direction="row"
+                  sx={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Box clone order={{ xs: 2, sm: 2, md: 1 }}>
+                    <Grid
+                      item
+                      md={2}
+                      sm={4}
+                      sx={{
+                        my: {
+                          md: 0,
+                          sm: 3,
+                          xs: 3,
+                        },
+                      }}
+                    >
+                      <Button
+                        color="primary"
+                        onClick={handleClick}
+                        size="large"
+                        variant="contained"
+                      >
+                        Search
+                      </Button>
+                    </Grid>
+                  </Box>
+                  <Box clone order={{ xs: 1, sm: 1, md: 2 }}>
+                    <Grid item md={9} sm={12}>
+                      <TextField
+                        fullWidth
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <SearchIcon fontSize="small" />
+                            </InputAdornment>
+                          ),
+                        }}
+                        onChange={(event): void => setValue(event.target.value)}
+                        onKeyUp={handleKeyUp}
+                        placeholder="Search..."
+                        value={value}
+                      />
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Grid>
             </Box>
-            <Box sx={{ mt: 3 }}>
+            <Box sx={{ my: 3 }}>
               <Scrollbar options={{ suppressScrollX: true }}>
                 {isLoading ? (
                   <Box
@@ -160,21 +210,26 @@ const ContentSearch: FC = () => {
                   <>
                     {showResults && (
                       <>
-                        {results.map((result, i) => (
-                          <Box key={i} sx={{ mb: 2 }}>
-                            <Link
-                              color="textPrimary"
-                              component={RouterLink}
-                              to="/dashboard"
-                              variant="h5"
-                            >
-                              {result.title}
-                            </Link>
-                            <Typography color="textPrimary" variant="body2">
-                              {result.description}
+                        <Box sx={{ my: 3, width: "100%" }}>
+                          <Typography variant="h4">Results</Typography>
+                          <Typography variant="body1">
+                            This is where the search results will be when I
+                            finish
+                          </Typography>
+                        </Box>
+                        {/* <Card>
+                          <CardHeader
+                            variant="h4"
+                            title="Results"
+                            sx={{ mb: 0 }}
+                          />
+                          <CardContent>
+                            <Typography color="textSecondary" variant="body2">
+                              This is where the search results will be when I
+                              finish
                             </Typography>
-                          </Box>
-                        ))}
+                          </CardContent>
+                        </Card> */}
                       </>
                     )}
                   </>
