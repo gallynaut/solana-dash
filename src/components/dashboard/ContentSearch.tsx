@@ -209,28 +209,12 @@ const ContentSearch: FC = () => {
                 ) : (
                   <>
                     {showResults && (
-                      <>
-                        <Box sx={{ my: 3, width: "100%" }}>
-                          <Typography variant="h4">Results</Typography>
-                          <Typography variant="body1">
-                            This is where the search results will be when I
-                            finish
-                          </Typography>
-                        </Box>
-                        {/* <Card>
-                          <CardHeader
-                            variant="h4"
-                            title="Results"
-                            sx={{ mb: 0 }}
-                          />
-                          <CardContent>
-                            <Typography color="textSecondary" variant="body2">
-                              This is where the search results will be when I
-                              finish
-                            </Typography>
-                          </CardContent>
-                        </Card> */}
-                      </>
+                      <Box sx={{ my: 3, width: "100%" }}>
+                        <Typography variant="h4">Results</Typography>
+                        <Typography variant="body1">
+                          This is where the search results will be when I finish
+                        </Typography>
+                      </Box>
                     )}
                   </>
                 )}

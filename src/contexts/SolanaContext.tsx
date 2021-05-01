@@ -264,6 +264,27 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     }
   }, [state.connection]);
 
+  useEffect(() => {
+    console.log("B1 hit");
+    if (state.isInitialized && state.account == null) {
+      enqueueSnackbar("Wallet disconnected", {
+        anchorOrigin: {
+          horizontal: "right",
+          vertical: "top",
+        },
+        variant: "error",
+      });
+    } else if (state.isInitialized && state.account != null) {
+      enqueueSnackbar("Wallet connected", {
+        anchorOrigin: {
+          horizontal: "right",
+          vertical: "top",
+        },
+        variant: "success",
+      });
+    }
+  }, [state.account]);
+
   useInterval(() => {
     console.log("getting balance");
     getBalance();
