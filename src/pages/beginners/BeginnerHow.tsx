@@ -8,7 +8,7 @@ import ArrowLeftIcon from "../../icons/ArrowLeft";
 import gtm from "../../lib/gtm";
 import BeginnerNavButtons from "./BeginnerNavButtons";
 
-const BeginnerWhat: FC = () => {
+const BeginnerHow: FC = () => {
   const { settings } = useSettings();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const BeginnerWhat: FC = () => {
             Beginner
           </Typography>
           <Typography color="textPrimary" variant="h5">
-            What is Solana
+            How Does it Work
           </Typography>
           <Typography color="textSecondary" variant="subtitle2">
             A brief introduction to Solana
@@ -49,13 +49,13 @@ const BeginnerWhat: FC = () => {
           }}
         >
           <Typography color="textPrimary" variant="h5">
-            What
+            How
           </Typography>
         </Box>
       </Grid>
-      <BeginnerNavButtons prev={null} next="how" />
+      <BeginnerNavButtons prev="what" next="create" />
     </>
   );
 };
 
-export default BeginnerWhat;
+export default BeginnerHow;

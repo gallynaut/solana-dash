@@ -25,11 +25,27 @@ const News = Loadable(lazy(() => import("./pages/News")));
 const Test = Loadable(lazy(() => import("./pages/Test")));
 
 // Beginner pages
-
+const BeginnerFrame = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerFrame"))
+);
 const BeginnerWhat = Loadable(
   lazy(() => import("./pages/beginners/BeginnerWhat"))
 );
-
+const BeginnerHow = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerHow"))
+);
+const BeginnerCreate = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerCreate"))
+);
+const BeginnerConnect = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerConnect"))
+);
+const BeginnerReceive = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerReceive"))
+);
+const BeginnerSecurity = Loadable(
+  lazy(() => import("./pages/beginners/BeginnerSecurity"))
+);
 // Error pages
 
 const NotFound = Loadable(lazy(() => import("./pages/NotFound")));
@@ -54,6 +70,7 @@ const routes: PartialRouteObject[] = [
       },
       {
         path: "beginners",
+        element: <BeginnerFrame />,
         children: [
           {
             path: "what",
@@ -61,23 +78,23 @@ const routes: PartialRouteObject[] = [
           },
           {
             path: "how",
-            element: <Home />,
+            element: <BeginnerHow />,
           },
           {
             path: "create",
-            element: <Home />,
+            element: <BeginnerCreate />,
           },
           {
             path: "connect",
-            element: <Home />,
+            element: <BeginnerConnect />,
           },
           {
             path: "receive",
-            element: <Home />,
+            element: <BeginnerReceive />,
           },
           {
             path: "security",
-            element: <Home />,
+            element: <BeginnerSecurity />,
           },
         ],
       },

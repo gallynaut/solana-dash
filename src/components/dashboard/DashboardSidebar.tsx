@@ -77,21 +77,21 @@ const sections = [
           },
         ],
       },
-      {
-        title: "Advanced",
-        path: "/advanced",
-        icon: <ShoppingBagIcon fontSize="small" />,
-        children: [
-          {
-            title: "Overview",
-            path: "/advanced",
-          },
-          {
-            title: "What is Solana",
-            path: "/advanced/what",
-          },
-        ],
-      },
+      // {
+      //   title: "Advanced",
+      //   path: "/advanced",
+      //   icon: <ShoppingBagIcon fontSize="small" />,
+      //   children: [
+      //     {
+      //       title: "Overview",
+      //       path: "/advanced",
+      //     },
+      //     {
+      //       title: "What is Solana",
+      //       path: "/advanced/what",
+      //     },
+      //   ],
+      // },
     ],
   },
   {
