@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Firebase Site](https://solanadash-654e2.firebaseapp.com/)
 
 ## Available Scripts
 
