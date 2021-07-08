@@ -18,6 +18,11 @@ import useInterval from "../hooks/useInterval";
 import { notify } from "../utils/notifications";
 import lamportsToSol from "../utils/lamportsToSol";
 
+declare global {
+  interface Window {
+    solana: any;
+  }
+}
 interface State {
   isInitialized: boolean;
   isAuthenticated: boolean;
@@ -327,7 +332,20 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     networkURL: string,
     providerURL: string
   ): Promise<void> => {
-    const wallet: any = new SolanaWallet(providerURL, networkURL);
+    const getPhantomProvider = () => {
+      if ("solana" in window) {
+        const provider = window.solana;
+        if (provider.isPhantom) {
+          return provider;
+        }
+      }
+      window.open("https://phantom.app/", "_blank");
+    };
+    let wallet: any = new SolanaWallet(providerURL, networkURL);
+    if (providerURL === "https://www.phantom.app") {
+      wallet = getPhantomProvider();
+      setCluster("mainnetBeta"); // phantom only has mainnet
+    }
     wallet.on("connect", () => {
       const pk: PublicKey = wallet.publicKey;
       console.log(`Connected to wallet ${wallet.publicKey.toBase58()}`);
@@ -335,7 +353,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         type: "CONNECT_ACCOUNT",
         payload: {
           account: pk,
-          publicKey: wallet.publicKey.toBase58(),
+          publicKey: pk.toBase58(),
         },
       });
     });

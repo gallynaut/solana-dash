@@ -14,11 +14,15 @@ const sollet: Wallet = {
   url: "https://www.sollet.io",
   label: "sollet",
 };
+const phantom: Wallet = {
+  url: "https://www.phantom.app",
+  label: "phantom",
+};
 const other: Wallet = {
   url: "https://www.solanadash.io",
   label: "other",
 };
-export const WALLETS: Wallet[] = [sollet, other];
+export const WALLETS: Wallet[] = [sollet, phantom, other];
 
 const dev: Cluster = "devnet";
 const test: Cluster = "testnet";

@@ -44,7 +44,7 @@ const AccountSummaryCard: FC = () => {
   const solBalance: ReactJSXElement =
     balance != null ? (
       <Button color="primary" variant="text" onClick={gotoAccount}>
-        {balance.value.toFixed(4)} SOL
+        {(balance.value * 10 ** -9).toFixed(5)} SOL
       </Button>
     ) : (
       <Typography color="primary" variant="body1">
@@ -112,7 +112,7 @@ const AccountSummaryCard: FC = () => {
           >
             {isAuthenticated ? <Grid item>{solBalance}</Grid> : <></>}
             <Grid item>
-              <Typography color="primary" variant="body1">
+              <Typography color="primary" variant="body2">
                 {NETWORKS[cluster].label}
               </Typography>
             </Grid>

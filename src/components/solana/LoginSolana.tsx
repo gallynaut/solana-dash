@@ -6,6 +6,7 @@ import useIsMountedRef from "../../hooks/useIsMountedRef";
 import { NETWORKS, WALLETS } from "../../constants";
 import { Wallet } from "../../types/wallet";
 import AuthContext from "../../contexts/SolanaContext";
+// import { PhantomWalletAdapter } from "../../wallet-adapters/phantom";
 
 const LoginSolana: FC = (props) => {
   const isMountedRef = useIsMountedRef();
