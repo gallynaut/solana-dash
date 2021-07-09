@@ -241,8 +241,8 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     if (state.isInitialized) {
       enqueueSnackbar("Solana cluster updated", {
         anchorOrigin: {
-          horizontal: "right",
-          vertical: "top",
+          horizontal: "center",
+          vertical: "bottom",
         },
         variant: "success",
       });
@@ -270,20 +270,19 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   }, [state.connection]);
 
   useEffect(() => {
-    console.log("B1 hit");
     if (state.isInitialized && state.account == null) {
       enqueueSnackbar("Wallet disconnected", {
         anchorOrigin: {
-          horizontal: "right",
-          vertical: "top",
+          horizontal: "center",
+          vertical: "bottom",
         },
         variant: "error",
       });
     } else if (state.isInitialized && state.account != null) {
       enqueueSnackbar("Wallet connected", {
         anchorOrigin: {
-          horizontal: "right",
-          vertical: "top",
+          horizontal: "center",
+          vertical: "bottom",
         },
         variant: "success",
       });

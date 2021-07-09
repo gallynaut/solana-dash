@@ -5,6 +5,7 @@ import { Button, Divider, Grid, IconButton, Tooltip } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ClearIcon from "@material-ui/icons/Clear";
 import AuthContext from "../../contexts/SolanaContext";
 import NotificationsPopover from "../dashboard/NotificationsPopover";
 
@@ -55,18 +56,35 @@ const ConnectWalletButton: FC = () => {
         </Grid>
       ) : (
         <>
-          <Grid
-            item
-            sx={{
-              pl: 3,
-              pr: 3,
-            }}
-          >
-            <NotificationsPopover />
-          </Grid>
           <Grid item>
-            <Tooltip title="logout" aria-label="logout" arrow>
-              <IconButton
+            <Tooltip
+              title="disconnect wallet"
+              aria-label="disconnect wallet"
+              arrow
+            >
+              <Button
+                onClick={handleDisconnect}
+                ref={anchorRef}
+                color="primary"
+                size="medium"
+                sx={{
+                  m: 1,
+                  pl: 3,
+                  pr: 3,
+                  minWidth: "150px",
+                }}
+                variant="contained"
+              >
+                <ClearIcon fontSize="small" />
+                <Divider
+                  orientation="vertical"
+                  flexItem
+                  variant="middle"
+                  sx={{ color: theme.palette.background.paper }}
+                />
+                Disconnect
+              </Button>
+              {/* <IconButton
                 aria-label="logout"
                 component="span"
                 onClick={handleDisconnect}
@@ -77,7 +95,7 @@ const ConnectWalletButton: FC = () => {
                   fontSize="large"
                   sx={{ alignItems: "right" }}
                 />
-              </IconButton>
+              </IconButton> */}
             </Tooltip>
           </Grid>
         </>

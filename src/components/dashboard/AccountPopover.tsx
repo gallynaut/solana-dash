@@ -42,8 +42,8 @@ const AccountPopover: FC = () => {
       console.error(err);
       enqueueSnackbar("Unable to logout", {
         anchorOrigin: {
-          horizontal: "right",
-          vertical: "top",
+          horizontal: "center",
+          vertical: "bottom",
         },
         variant: "error",
       });

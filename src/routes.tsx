@@ -17,7 +17,6 @@ const Loadable = (Component) => (props) => (
 // Dashboard pages
 
 const Home = Loadable(lazy(() => import("./pages/Home")));
-const Calendar = Loadable(lazy(() => import("./pages/Calendar")));
 const Contact = Loadable(lazy(() => import("./pages/Contact")));
 const Network = Loadable(lazy(() => import("./pages/Network")));
 const Account = Loadable(lazy(() => import("./pages/Account")));
@@ -135,14 +134,14 @@ const routes: PartialRouteObject[] = [
         path: "farming",
         element: <Home />,
       },
-      {
-        path: "/calendar",
-        element: (
-          <AuthGuard>
-            <Calendar />
-          </AuthGuard>
-        ),
-      },
+      // {
+      //   path: "/calendar",
+      //   element: (
+      //     <AuthGuard>
+      //       <Calendar />
+      //     </AuthGuard>
+      //   ),
+      // },
       {
         path: "/projects",
         element: <Home />,

@@ -53,14 +53,11 @@ const Account: FC = () => {
               xs={12}
             >
               <Grid item>
-                <Typography color="textSecondary" variant="overline">
-                  Home
-                </Typography>
                 <Typography color="textPrimary" variant="h5">
-                  Welcome to Solana Dash
+                  Account
                 </Typography>
                 <Typography color="textSecondary" variant="subtitle2">
-                  Here&apos;s what&apos;s happening with Solana today
+                  Account Summary and Transactions
                 </Typography>
               </Grid>
               <Grid item>
