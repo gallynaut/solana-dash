@@ -1,8 +1,13 @@
-import { Connection, clusterApiUrl, Cluster } from "@solana/web3.js";
+import { Connection, clusterApiUrl, Cluster, PublicKey } from "@solana/web3.js";
 import { string } from "prop-types";
+// import { PublicKey } from "@project-serum/sol-wallet-adapter";
 import type { Network } from "./types/network";
 import type { Wallet } from "./types/wallet";
 import { Exchange } from "./types/market";
+
+export const TOKEN_PROGRAM_ID = new PublicKey(
+  "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+);
 
 export const THEMES = {
   LIGHT: "LIGHT",

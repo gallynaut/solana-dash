@@ -44,6 +44,7 @@ module.exports = {
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-shadow": "off",
+    "@typescript-eslint/no-redeclare": "off",
     "react/react-in-jsx-scope": "off",
     "react/display-name": "off",
     "react/jsx-props-no-spreading": "off",

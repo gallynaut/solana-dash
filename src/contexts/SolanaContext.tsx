@@ -9,14 +9,59 @@ import {
   clusterApiUrl,
   Supply,
   LAMPORTS_PER_SOL,
+  PublicKey,
 } from "@solana/web3.js";
 import type { RpcResponseAndContext } from "@solana/web3.js";
-import SolanaWallet, { PublicKey } from "@project-serum/sol-wallet-adapter";
-import { NETWORKS, WALLETS } from "../constants";
+import SolanaWallet from "@project-serum/sol-wallet-adapter";
+import {
+  Infer,
+  number,
+  optional,
+  enums,
+  any,
+  boolean,
+  string,
+  array,
+  type,
+  nullable,
+  coerce,
+  create,
+  instance,
+} from "superstruct";
+import { NETWORKS, WALLETS, TOKEN_PROGRAM_ID } from "../constants";
 // import SolanaWallet from '@project-serum/sol-wallet-adapter'
 import useInterval from "../hooks/useInterval";
 import { notify } from "../utils/notifications";
 import lamportsToSol from "../utils/lamportsToSol";
+// import { fetchAccountTokens } from "../utils/tokens";
+export const PublicKeyFromString = coerce(
+  instance(PublicKey),
+  string(),
+  (value) => new PublicKey(value)
+);
+
+export const TokenAccountType = enums(["mint", "account", "multisig"]);
+
+export type TokenAccountState = Infer<typeof AccountState>;
+const AccountState = enums(["initialized", "uninitialized", "frozen"]);
+
+const TokenAmount = type({
+  decimals: number(),
+  uiAmountString: string(),
+  amount: string(),
+});
+export type TokenAccountInfo = Infer<typeof TokenAccountInfo>;
+export const TokenAccountInfo = type({
+  mint: PublicKeyFromString,
+  owner: PublicKeyFromString,
+  tokenAmount: TokenAmount,
+  delegate: optional(PublicKeyFromString),
+  state: AccountState,
+  isNative: boolean(),
+  rentExemptReserve: optional(TokenAmount),
+  delegatedAmount: optional(TokenAmount),
+  closeAuthority: optional(PublicKeyFromString),
+});
 
 declare global {
   interface Window {
@@ -49,6 +94,7 @@ interface AuthContextValue extends State {
   setConnection: () => Promise<void>;
   setWalletProvider: (providerURL: string) => Promise<void>;
   getBalance: () => Promise<void>;
+  getTokenBalances: () => Promise<void>;
   getSolanaSupply: () => Promise<void>;
 }
 
@@ -220,6 +266,7 @@ const AuthContext = createContext<AuthContextValue>({
   setConnection: () => Promise.resolve(),
   setWalletProvider: (providerURL: string) => Promise.resolve(),
   getBalance: () => Promise.resolve(),
+  getTokenBalances: () => Promise.resolve(),
   getSolanaSupply: () => Promise.resolve(),
 });
 
@@ -260,6 +307,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   useEffect(() => {
     if (state.account != null) {
       getBalance();
+      getTokenBalances();
     }
   }, [state.account, state.connection]);
 
@@ -295,6 +343,11 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   }, 60000);
 
   useInterval(() => {
+    console.log("getting token balances");
+    getTokenBalances();
+  }, 20000);
+
+  useInterval(() => {
     console.log("getting network supply");
     getSolanaSupply();
   }, 30000);
@@ -310,6 +363,32 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
           },
         })
       );
+    }
+  };
+
+  const getTokenBalances = async (): Promise<void> => {
+    if (state.connection != null && state.account != null) {
+      const conn: Connection = state.connection;
+      conn
+        .getParsedTokenAccountsByOwner(state.account, {
+          programId: TOKEN_PROGRAM_ID,
+        })
+        .then((resp) => {
+          const data: any = {
+            tokens: resp.value.map((accountInfo) => {
+              const parsedInfo = accountInfo.account.data.parsed.info;
+              const info = create(parsedInfo, TokenAccountInfo);
+              return info;
+            }),
+          };
+          const t: TokenAccountInfo[] = data.tokens;
+          t.sort((a, b) =>
+            b.tokenAmount.uiAmountString.localeCompare(
+              a.tokenAmount.uiAmountString
+            )
+          );
+          console.log("TOKENS: ", t);
+        });
     }
   };
 
@@ -422,6 +501,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         setConnection,
         setWalletProvider,
         getBalance,
+        getTokenBalances,
         getSolanaSupply,
       }}
     >
