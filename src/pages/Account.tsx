@@ -12,12 +12,7 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-import {
-  OverviewInbox,
-  OverviewPrivateWallet,
-  OverviewTotalBalance,
-  OverviewAccount,
-} from "../components/dashboard";
+import OverviewAccount from "../components/account/OverviewAccount";
 import useSettings from "../hooks/useSettings";
 import ArrowRightIcon from "../icons/ArrowRight";
 import BriefcaseIcon from "../icons/Briefcase";

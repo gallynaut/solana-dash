@@ -39,7 +39,6 @@ const AccountPopover: FC = () => {
       await logout();
       navigate("/");
     } catch (err) {
-      console.error(err);
       enqueueSnackbar("Unable to logout", {
         anchorOrigin: {
           horizontal: "center",

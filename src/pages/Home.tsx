@@ -1,32 +1,8 @@
 import { useEffect } from "react";
 import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Container,
-  Grid,
-  Typography,
-} from "@material-ui/core";
-import {
-  OverviewInbox,
-  OverviewPrivateWallet,
-  OverviewTotalBalance,
-  OverviewAccount,
-  OverviewWeeklyEarnings,
-} from "../components/dashboard";
+import { Box, Container, Grid, Typography } from "@material-ui/core";
 import useSettings from "../hooks/useSettings";
-import ArrowRightIcon from "../icons/ArrowRight";
-import BriefcaseIcon from "../icons/Briefcase";
-import DownloadIcon from "../icons/Download";
-import ExternalLinkIcon from "../icons/ExternalLink";
-import InformationCircleIcon from "../icons/InformationCircle";
-import PlusIcon from "../icons/Plus";
-import UsersIcon from "../icons/Users";
 import CryptoWatchCard from "../components/trading/CryptoWatchCard";
 import GeckoPriceCard from "../components/trading/GeckoPriceCard";
 import SocialCard from "../components/social/SocialCard";
