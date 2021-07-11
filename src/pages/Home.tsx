@@ -18,7 +18,7 @@ import {
   OverviewTotalBalance,
   OverviewAccount,
   OverviewWeeklyEarnings,
-} from "../components/dashboard/overview";
+} from "../components/dashboard";
 import useSettings from "../hooks/useSettings";
 import ArrowRightIcon from "../icons/ArrowRight";
 import BriefcaseIcon from "../icons/Briefcase";
@@ -28,9 +28,9 @@ import InformationCircleIcon from "../icons/InformationCircle";
 import PlusIcon from "../icons/Plus";
 import UsersIcon from "../icons/Users";
 import CryptoWatchCard from "../components/trading/CryptoWatchCard";
-import GeckoPriceCard from "../components/gecko/GeckoPriceCard";
+import GeckoPriceCard from "../components/trading/GeckoPriceCard";
 import SocialCard from "../components/social/SocialCard";
-import GoogleTrendsCard from "../components/GoogleTrendsCard";
+import GoogleTrendsCard from "../components/social/GoogleTrendsCard";
 
 const Home: FC = () => {
   const { settings } = useSettings();

@@ -7,7 +7,7 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ClearIcon from "@material-ui/icons/Clear";
 import AuthContext from "../../contexts/SolanaContext";
-import NotificationsPopover from "../dashboard/NotificationsPopover";
+import NotificationsPopover from "../general/NotificationsPopover";
 
 const ConnectWalletButton: FC = () => {
   const theme = useTheme();

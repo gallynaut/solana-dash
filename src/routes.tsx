@@ -3,10 +3,10 @@
 // import { Account } from "@solana/web3.js";
 import { Suspense, lazy } from "react";
 import type { PartialRouteObject } from "react-router";
-import AuthGuard from "./components/AuthGuard";
-import DashboardLayout from "./components/dashboard/DashboardLayout";
-import LoadingScreen from "./components/LoadingScreen";
-import Connect from "./pages/authentication/Connect";
+import AuthGuard from "./components/general/AuthGuard";
+import DashboardLayout from "./components/general/DashboardLayout";
+import LoadingScreen from "./components/general/LoadingScreen";
+import Connect from "./pages/Connect";
 
 const Loadable = (Component) => (props) => (
   <Suspense fallback={<LoadingScreen />}>
@@ -26,25 +26,25 @@ const Test = Loadable(lazy(() => import("./pages/Test")));
 
 // Beginner pages
 const BeginnerFrame = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerFrame"))
+  lazy(() => import("./pages/informational/beginners/BeginnerFrame"))
 );
 const BeginnerWhat = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerWhat"))
+  lazy(() => import("./pages/informational/beginners/BeginnerWhat"))
 );
 const BeginnerHow = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerHow"))
+  lazy(() => import("./pages/informational/beginners/BeginnerHow"))
 );
 const BeginnerCreate = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerCreate"))
+  lazy(() => import("./pages/informational/beginners/BeginnerCreate"))
 );
 const BeginnerConnect = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerConnect"))
+  lazy(() => import("./pages/informational/beginners/BeginnerConnect"))
 );
 const BeginnerReceive = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerReceive"))
+  lazy(() => import("./pages/informational/beginners/BeginnerReceive"))
 );
 const BeginnerSecurity = Loadable(
-  lazy(() => import("./pages/beginners/BeginnerSecurity"))
+  lazy(() => import("./pages/informational/beginners/BeginnerSecurity"))
 );
 // Error pages
 

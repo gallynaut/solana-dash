@@ -51,5 +51,7 @@ module.exports = {
     "react/require-default-props": "off",
     "react-hooks/exhaustive-deps": "off",
     "react/forbid-prop-types": "off",
+    "no-underscore-dangle": "off",
+    "import/extensions": "off",
   },
 };

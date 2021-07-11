@@ -18,7 +18,7 @@ import {
   OverviewPrivateWallet,
   OverviewTotalBalance,
   OverviewAccount,
-} from "../components/dashboard/overview";
+} from "../components/dashboard";
 import useSettings from "../hooks/useSettings";
 import ArrowRightIcon from "../icons/ArrowRight";
 import BriefcaseIcon from "../icons/Briefcase";

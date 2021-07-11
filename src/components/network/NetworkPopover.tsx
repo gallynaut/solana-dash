@@ -30,7 +30,7 @@ const NetworkPopover: FC = () => {
   };
 
   const handleChangeNetwork = (selectedCluster: string): void => {
-    if (cluster != selectedCluster) {
+    if (cluster !== selectedCluster) {
       setCluster(selectedCluster);
     }
     setOpen(false);

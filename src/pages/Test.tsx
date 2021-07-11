@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Box, Typography, Grid } from "@material-ui/core";
 import CryptoWatchChart from "../components/trading/CryptoWatchChart";
 import SolanaTradingCard from "../components/trading/CryptoWatchCard";
-import GoogleTrendsCard from "../components/social/GoogleTrendsCard";
+import GoogleTrendsCard from "../components/social/DynamicGoogleTrendsCard";
 
 const Test: FC = () => (
   <>
