@@ -135,14 +135,10 @@ const routes: PartialRouteObject[] = [
         path: "farming",
         element: <Home />,
       },
-      // {
-      //   path: "/calendar",
-      //   element: (
-      //     <AuthGuard>
-      //       <Calendar />
-      //     </AuthGuard>
-      //   ),
-      // },
+      {
+        path: "/calendar",
+        element: <Home />,
+      },
       {
         path: "/projects",
         element: <Home />,
