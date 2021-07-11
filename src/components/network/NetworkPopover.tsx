@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { NETWORKS } from "../../constants";
 import AuthContext from "../../contexts/SolanaContext";
@@ -68,7 +67,7 @@ const NetworkPopover: FC = () => {
           sx: { width: 240 },
         }}
       >
-        {Object.keys(NETWORKS).map((key, index) => (
+        {Object.keys(NETWORKS).map((key, _index) => (
           <MenuItem
             onClick={() => handleChangeNetwork(key)}
             key={key}

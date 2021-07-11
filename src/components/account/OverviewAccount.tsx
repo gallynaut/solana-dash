@@ -1,20 +1,7 @@
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import type { FC } from "react";
-import Chart from "react-apexcharts";
-import { format } from "date-fns";
-import {
-  Box,
-  Card,
-  CardHeader,
-  Typography,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Tooltip,
-} from "@material-ui/core";
+import { Box, Card, CardHeader, Divider } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Scrollbar from "../general/Scrollbar";
 import SolanaGradientIcon from "../../icons/SolanaGradient";
 import AuthContext from "../../contexts/SolanaContext";

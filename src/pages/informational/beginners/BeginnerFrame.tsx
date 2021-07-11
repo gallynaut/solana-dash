@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import type { FC } from "react";
-import { Helmet } from "react-helmet-async";
-import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 import { Outlet } from "react-router-dom";
 import useSettings from "../../../hooks/useSettings";
-import ArrowRightIcon from "../../../icons/ArrowRight";
-import ArrowLeftIcon from "../../../icons/ArrowLeft";
 import gtm from "../../../lib/gtm";
 
 const BeginnerFrame: FC = () => {

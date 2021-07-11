@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { Box, Container, Grid, Typography } from "@material-ui/core";
@@ -6,7 +5,6 @@ import useSettings from "../hooks/useSettings";
 import CryptoWatchCard from "../components/trading/CryptoWatchCard";
 import GeckoPriceCard from "../components/trading/GeckoPriceCard";
 import SocialCard from "../components/social/SocialCard";
-import GoogleTrendsCard from "../components/social/GoogleTrendsCard";
 
 const Home: FC = () => {
   const { settings } = useSettings();

@@ -1,5 +1,4 @@
-import { Connection, clusterApiUrl, Cluster, PublicKey } from "@solana/web3.js";
-import { string } from "prop-types";
+import { clusterApiUrl, Cluster, PublicKey } from "@solana/web3.js";
 // import { PublicKey } from "@project-serum/sol-wallet-adapter";
 import type { Network } from "./types/network";
 import type { Wallet } from "./types/wallet";

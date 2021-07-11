@@ -1,6 +1,5 @@
 import React from "react";
 import type { FC } from "react";
-import ReactDOM from "react-dom";
 import Script from "react-load-script";
 
 interface GoogleTrendsProps {

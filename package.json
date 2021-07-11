@@ -12,7 +12,8 @@
     "eject": "react-scripts eject",
     "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write './src/**/*.js'",
     "deploy": "firebase deploy",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "fix-unused-imports": "tslint --config tslint-imports.json --fix --project ."
   },
   "eslintConfig": {
     "extends": [

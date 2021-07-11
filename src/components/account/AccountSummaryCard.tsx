@@ -1,29 +1,21 @@
 import { useRef, useContext } from "react";
 import type { FC } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardActions,
   CardHeader,
   Box,
-  Divider,
   Grid,
   Typography,
   Button,
-  IconButton,
   CardContent,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { formatTimeStr } from "antd/lib/statistic/utils";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import AuthContext from "../../contexts/SolanaContext";
 import { NETWORKS } from "../../constants";
 import shortenPublicKey from "../../utils/shortenPublicKey";
-import SolanaGradientIcon from "../../icons/SolanaGradient";
-import ArrowRightIcon from "../../icons/ArrowRight";
-import BriefcaseIcon from "../../icons/Briefcase";
 import SolanaIcon from "../../icons/Solana";
 
 const AccountSummaryCard: FC = () => {

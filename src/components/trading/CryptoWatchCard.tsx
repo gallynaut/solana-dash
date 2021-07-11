@@ -1,39 +1,22 @@
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { useRef, useState } from "react";
 import {
   Card,
   CardActions,
   CardHeader,
-  Box,
-  Divider,
   Grid,
-  ListItemIcon,
-  ListItemText,
   MenuItem,
   Popover,
   Typography,
-  Button,
-  IconButton,
   CardContent,
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
 import useMarket from "../../hooks/useMarket";
 import CryptoWatchChart from "./CryptoWatchChart";
 import { EXCHANGES } from "../../constants";
 import useSettings from "../../hooks/useSettings";
 import LightChartThemeSelect from "./LightChartThemeSelect";
 
-const MARKETS = [
-  "ftx-solusd",
-  "ftx-solusdt",
-  "ftx-solbtc",
-  "binance-solusd",
-  "binance-solusdt",
-  "binance-solbtc",
-];
-
 const CryptoWatchCard: FC = () => {
-  const theme = useTheme();
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const { exchange, setExchange, symbol, setSymbol } = useMarket();

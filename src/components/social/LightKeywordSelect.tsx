@@ -1,21 +1,7 @@
-import { useRef, useState, useContext, useEffect } from "react";
+import { useRef } from "react";
 import type { FC } from "react";
-import {
-  Button,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  Popover,
-  Typography,
-  Box,
-  TextField,
-} from "@material-ui/core";
+import { Box, TextField } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { NETWORKS } from "../../constants";
-import AuthContext from "../../contexts/SolanaContext";
 import useSocial from "../../hooks/useSocial";
 
 const KEYWORDS = ["Solana", "Serum", "Rust", "Ftx"];

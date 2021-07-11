@@ -13,13 +13,8 @@ import {
 } from "@material-ui/core";
 import { experimentalStyled } from "@material-ui/core/styles";
 import type { AppBarProps } from "@material-ui/core";
-import MenuIcon from "../../icons/Menu";
 import SolanaIcon from "../../icons/Solana";
-import AccountPopover from "./AccountPopover";
 import ContentSearch from "./ContentSearch";
-import NetworkPopover from "../network/NetworkPopover";
-import NotificationsPopover from "./NotificationsPopover";
-import NetworkNavbar from "../network/NetworkNavbar";
 import ConnectAccountButton from "../account/ConnectAccountButton";
 import LightNetworkSelect from "../network/LightNetworkSelect";
 

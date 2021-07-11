@@ -1,5 +1,3 @@
-import { PublicKey } from "@project-serum/sol-wallet-adapter";
-
 const shortenPublicKey = (
   pk: string,
   firstN: number,

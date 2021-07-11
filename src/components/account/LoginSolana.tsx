@@ -1,18 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import type { FC } from "react";
 import { Button, Divider, Grid, Typography } from "@material-ui/core";
 import useIsMountedRef from "../../hooks/useIsMountedRef";
-
-import { NETWORKS, WALLETS } from "../../constants";
+import { WALLETS } from "../../constants";
 import { Wallet } from "../../types/wallet";
 import AuthContext from "../../contexts/SolanaContext";
-// import { PhantomWalletAdapter } from "../../wallet-adapters/phantom";
 
 const LoginSolana: FC = (props) => {
   const isMountedRef = useIsMountedRef();
-  const { cluster, connectAccount, setWalletProvider } = useContext(
-    AuthContext
-  );
+  const { setWalletProvider } = useContext(AuthContext);
 
   const handleClick = (wallet: Wallet) => {
     // console.log(wallet.url)

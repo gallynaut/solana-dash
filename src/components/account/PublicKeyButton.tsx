@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import type { FC } from "react";
 import { Typography, Button, Tooltip } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
@@ -7,9 +7,7 @@ import AuthContext from "../../contexts/SolanaContext";
 
 const PublicKeyButton: FC = (props) => {
   const theme = useTheme();
-  const { isAuthenticated, publicKey, cluster, balance } = useContext(
-    AuthContext
-  );
+  const { publicKey } = useContext(AuthContext);
   const copyToClipboard = () => {
     const el = document.createElement("textarea");
     el.value = publicKey;

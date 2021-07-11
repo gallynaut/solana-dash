@@ -1,10 +1,7 @@
-import { useEffect } from "react";
 import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { Box, Container, Grid, Typography } from "@material-ui/core";
-import { TokenListProvider, TokenInfo } from "@solana/spl-token-registry";
 import useSettings from "../hooks/useSettings";
-import TokenSummaryCard from "../components/tokens/TokenSummaryCard";
 
 const Tokens: FC = () => {
   const { settings } = useSettings();

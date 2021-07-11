@@ -1,13 +1,11 @@
 import { useRef, useContext } from "react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Divider, Grid, IconButton, Tooltip } from "@material-ui/core";
+import { Button, Divider, Grid, Tooltip } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ClearIcon from "@material-ui/icons/Clear";
 import AuthContext from "../../contexts/SolanaContext";
-import NotificationsPopover from "../general/NotificationsPopover";
 
 const ConnectWalletButton: FC = () => {
   const theme = useTheme();

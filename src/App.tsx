@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import type { FC } from "react";
 import { useRoutes } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "@material-ui/core";
 import "./i18n";
 import GlobalStyles from "./components/general/GlobalStyles";
@@ -11,7 +10,6 @@ import { gtmConfig } from "./config";
 import useAuth from "./hooks/useSolana";
 import useScrollReset from "./hooks/useScrollReset";
 import useSettings from "./hooks/useSettings";
-import useNotifications from "./hooks/useNotifications";
 import gtm from "./lib/gtm";
 import routes from "./routes";
 import { createTheme } from "./theme";

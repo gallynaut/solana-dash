@@ -1,12 +1,8 @@
 import type { FC } from "react";
-import { useEffect, useRef, useMemo, Children } from "react";
-import Chart from "react-apexcharts";
-import { Box, Card, CardContent, CardHeader } from "@material-ui/core";
+import { useEffect, useRef, useMemo } from "react";
 import { useTheme } from "@material-ui/core/styles";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import CryptowatchEmbed from "cryptowatch-embed";
 import uuid from "react-uuid";
-import useSettings from "../../hooks/useSettings";
 import { CHART_THEMES } from "../../constants";
 
 interface CryptoWatchProps {

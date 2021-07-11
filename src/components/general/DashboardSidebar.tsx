@@ -3,33 +3,26 @@ import type { FC } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
-  Avatar,
   Box,
   Button,
   Divider,
   Drawer,
   Hidden,
-  Link,
   Typography,
 } from "@material-ui/core";
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import useSolana from "../../hooks/useSolana";
 import BriefcaseIcon from "../../icons/Briefcase";
 import CalendarIcon from "../../icons/Calendar";
 import ChartPieIcon from "../../icons/ChartPie";
 import ChartSquareBarIcon from "../../icons/ChartSquareBar";
 import FolderOpenIcon from "../../icons/FolderOpen";
 import ShareIcon from "../../icons/Share";
-import ShoppingBagIcon from "../../icons/ShoppingBag";
 import ShoppingCartIcon from "../../icons/ShoppingCart";
 import SolanaIcon from "../../icons/Solana";
 import CashIcon from "../../icons/Cash";
-import Logo from "./Logo";
 import NavSection from "./NavSection";
 import Scrollbar from "./Scrollbar";
-import shortenPublicKey from "../../utils/shortenPublicKey";
 import AccountSummaryCard from "../account/AccountSummaryCard";
-import NetworkSummaryCard from "../network/NetworkSummaryCard";
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;

@@ -8,7 +8,6 @@ import {
   Cluster,
   clusterApiUrl,
   Supply,
-  LAMPORTS_PER_SOL,
   PublicKey,
 } from "@solana/web3.js";
 import type { RpcResponseAndContext } from "@solana/web3.js";
@@ -18,21 +17,16 @@ import {
   number,
   optional,
   enums,
-  any,
   boolean,
   string,
-  array,
   type,
-  nullable,
   coerce,
   create,
   instance,
 } from "superstruct";
-import { NETWORKS, WALLETS, TOKEN_PROGRAM_ID } from "../constants";
+import { NETWORKS, TOKEN_PROGRAM_ID } from "../constants";
 // import SolanaWallet from '@project-serum/sol-wallet-adapter'
 import useInterval from "../hooks/useInterval";
-import { notify } from "../utils/notifications";
-import lamportsToSol from "../utils/lamportsToSol";
 // import { fetchAccountTokens } from "../utils/tokens";
 export const PublicKeyFromString = coerce(
   instance(PublicKey),

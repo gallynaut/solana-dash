@@ -12,10 +12,9 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import { THEMES, NETWORKS } from "../../constants";
+import { THEMES } from "../../constants";
 import useSettings from "../../hooks/useSettings";
 import AdjustmentsIcon from "../../icons/Adjustments";
-import NetworkPopover from "../network/NetworkPopover";
 import LightNetworkSelect from "../network/LightNetworkSelect";
 
 const getValues = (settings) => ({

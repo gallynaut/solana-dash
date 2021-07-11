@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import numeral from "numeral";
 import Chart from "react-apexcharts";
 import {
@@ -12,11 +12,8 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import googleTrends from "google-trends-api";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import LightKeywordSelect from "./LightKeywordSelect";
 import useSocial from "../../hooks/useSocial";
-import XIcon from "../../icons/X";
 
 const ChartLine: FC = () => {
   const theme = useTheme();

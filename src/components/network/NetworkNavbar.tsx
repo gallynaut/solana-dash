@@ -5,14 +5,13 @@ import { useTheme } from "@material-ui/core/styles";
 import WifiIcon from "@material-ui/icons/Wifi";
 import WifiOffIcon from "@material-ui/icons/WifiOff";
 import ReplayIcon from "@material-ui/icons/Replay";
-import NetworkPopover from "./NetworkPopover";
 import AuthContext from "../../contexts/SolanaContext";
 import LightNetworkSelect from "./LightNetworkSelect";
 
 const NetworkNavbar: FC = () => {
   const theme = useTheme();
   const anchorRef = useRef<HTMLButtonElement | null>(null);
-  const { cluster, connection, setConnection } = useContext(AuthContext);
+  const { connection, setConnection } = useContext(AuthContext);
 
   const handleNetworkRefresh = (): void => {
     if (connection == null) {

@@ -1,21 +1,6 @@
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { useRef, useState } from "react";
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  Box,
-  Divider,
-  Grid,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  Popover,
-  Typography,
-  Button,
-  IconButton,
-  CardContent,
-} from "@material-ui/core";
+import { Card, CardHeader, Typography, CardContent } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import GoogleTrends from "./GoogleTrends";
 

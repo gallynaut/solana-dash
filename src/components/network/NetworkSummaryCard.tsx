@@ -1,43 +1,23 @@
-import { useRef, useContext } from "react";
+import { useContext } from "react";
 import type { FC } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardActions,
   CardHeader,
-  Box,
   Divider,
   Grid,
   Typography,
   Button,
-  IconButton,
   CardContent,
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { formatTimeStr } from "antd/lib/statistic/utils";
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import AuthContext from "../../contexts/SolanaContext";
 import { NETWORKS } from "../../constants";
-import shortenPublicKey from "../../utils/shortenPublicKey";
-import SolanaGradientIcon from "../../icons/SolanaGradient";
-import ArrowRightIcon from "../../icons/ArrowRight";
-import BriefcaseIcon from "../../icons/Briefcase";
-import SolanaIcon from "../../icons/Solana";
 import lamportsToSol from "../../utils/lamportsToSol";
 
 const NetworkSummaryCard: FC = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
-  const anchorRef = useRef<HTMLButtonElement | null>(null);
-  const { isAuthenticated, publicKey, cluster, supply } = useContext(
-    AuthContext
-  );
-  const gotoNetwork = (): void => {
-    navigate("/network");
-  };
+  const { cluster, supply } = useContext(AuthContext);
 
   const circ: string =
     supply !== null ? lamportsToSol(supply.circulating, "M") : "N/A";
