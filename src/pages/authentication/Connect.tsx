@@ -11,8 +11,8 @@ import type { FC } from "react";
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link as RouterLink } from "react-router-dom";
-import LightNetworkSelect from "../../components/solana/LightNetworkSelect";
-import LoginSolana from "../../components/solana/LoginSolana";
+import LightNetworkSelect from "../../components/network/LightNetworkSelect";
+import LoginSolana from "../../components/account/LoginSolana";
 import AuthContext from "../../contexts/SolanaContext";
 
 const Connect: FC = () => {

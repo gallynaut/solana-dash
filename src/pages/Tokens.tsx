@@ -12,6 +12,7 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import { TokenListProvider, TokenInfo } from "@solana/spl-token-registry";
 import {
   OverviewInbox,
   OverviewPrivateWallet,
@@ -28,13 +29,13 @@ import PlusIcon from "../icons/Plus";
 import UsersIcon from "../icons/Users";
 import TokenSummaryCard from "../components/tokens/TokenSummaryCard";
 
-const Account: FC = () => {
+const Tokens: FC = () => {
   const { settings } = useSettings();
 
   return (
     <>
       <Helmet>
-        <title>Account | Solana Dash</title>
+        <title>Tokens | Solana Dash</title>
       </Helmet>
       <Box
         sx={{
@@ -55,29 +56,12 @@ const Account: FC = () => {
             >
               <Grid item>
                 <Typography color="textPrimary" variant="h5">
-                  Account
+                  Tokens
                 </Typography>
                 <Typography color="textSecondary" variant="subtitle2">
-                  Account Summary and Transactions
+                  List of Tokens on Solana
                 </Typography>
               </Grid>
-              <Grid item>
-                <Button
-                  color="primary"
-                  startIcon={<PlusIcon fontSize="small" />}
-                  variant="contained"
-                >
-                  New Transaction
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid item md={8} xs={12}>
-              {/* WALLET / TOKEN OVERVIEW - LINKS TO ACCOUNT PAGE */}
-              <OverviewAccount />
-            </Grid>
-            <Grid item md={4} xs={12}>
-              {/* SOLANA NETWORK OVERVIEW - LINKS TO NETWORK PAGE */}
-              <TokenSummaryCard />
             </Grid>
           </Grid>
         </Container>
@@ -86,4 +70,4 @@ const Account: FC = () => {
   );
 };
 
-export default Account;
+export default Tokens;

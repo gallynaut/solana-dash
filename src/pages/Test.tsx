@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { Box, Typography, Grid } from "@material-ui/core";
-import CandleChart from "../components/solana/CandleChart";
 import CryptoWatchChart from "../components/trading/CryptoWatchChart";
 import SolanaTradingCard from "../components/trading/CryptoWatchCard";
 import GoogleTrendsCard from "../components/social/GoogleTrendsCard";

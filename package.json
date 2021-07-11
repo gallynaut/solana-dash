@@ -53,6 +53,7 @@
     "@project-serum/sol-wallet-adapter": "^0.1.8",
     "@react-pdf/renderer": "^1.6.13",
     "@reduxjs/toolkit": "^1.5.0",
+    "@solana/spl-token-registry": "^0.2.173",
     "@solana/web3.js": "^1.2.7",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/user-event": "^13.0.1",

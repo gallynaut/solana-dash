@@ -20,6 +20,7 @@ const Home = Loadable(lazy(() => import("./pages/Home")));
 const Contact = Loadable(lazy(() => import("./pages/Contact")));
 const Network = Loadable(lazy(() => import("./pages/Network")));
 const Account = Loadable(lazy(() => import("./pages/Account")));
+const Tokens = Loadable(lazy(() => import("./pages/Tokens")));
 const News = Loadable(lazy(() => import("./pages/News")));
 const Test = Loadable(lazy(() => import("./pages/Test")));
 
@@ -124,7 +125,7 @@ const routes: PartialRouteObject[] = [
       },
       {
         path: "tokens",
-        element: <Home />,
+        element: <Tokens />,
       },
       {
         path: "staking",

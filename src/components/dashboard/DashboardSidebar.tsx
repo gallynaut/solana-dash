@@ -27,10 +27,9 @@ import CashIcon from "../../icons/Cash";
 import Logo from "../Logo";
 import NavSection from "../NavSection";
 import Scrollbar from "../Scrollbar";
-import { useDispatch, useSelector } from "../../store";
 import shortenPublicKey from "../../utils/shortenPublicKey";
-import AccountSummaryCard from "../solana/AccountSummaryCard";
-import NetworkSummaryCard from "../solana/NetworkSummaryCard";
+import AccountSummaryCard from "../account/AccountSummaryCard";
+import NetworkSummaryCard from "../network/NetworkSummaryCard";
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;

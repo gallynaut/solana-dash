@@ -17,12 +17,11 @@ import MenuIcon from "../../icons/Menu";
 import SolanaIcon from "../../icons/Solana";
 import AccountPopover from "./AccountPopover";
 import ContentSearch from "./ContentSearch";
-import NetworkPopover from "../solana/NetworkPopover";
+import NetworkPopover from "../network/NetworkPopover";
 import NotificationsPopover from "./NotificationsPopover";
-// import ConnectWallet from '../connect/ConnectWallet.js.old';
-import NetworkNavbar from "../solana/NetworkNavbar";
-import ConnectAccountButton from "../solana/ConnectAccountButton";
-import LightNetworkSelect from "../solana/LightNetworkSelect";
+import NetworkNavbar from "../network/NetworkNavbar";
+import ConnectAccountButton from "../account/ConnectAccountButton";
+import LightNetworkSelect from "../network/LightNetworkSelect";
 
 interface DashboardNavbarProps extends AppBarProps {
   onSidebarMobileOpen?: () => void;

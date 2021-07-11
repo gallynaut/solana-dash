@@ -6,20 +6,17 @@ import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
-import { Provider as ReduxProvider } from "react-redux";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
 import StyledEngineProvider from "@material-ui/core/StyledEngineProvider";
 import { SnackbarProvider } from "notistack";
-import { Button, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import CancelIcon from "@material-ui/icons/Cancel";
 import App from "./App";
-// import { AuthProvider } from './contexts/JWTContext';
 import { AuthProvider } from "./contexts/SolanaContext";
 import { SettingsProvider } from "./contexts/SettingsContext";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
-import store from "./store";
 
 // add action to all snackbars
 const notistackRef: React.Ref<SnackbarProvider> = React.createRef();
@@ -30,32 +27,30 @@ const onClickDismiss = (key) => () => {
 ReactDOM.render(
   <StrictMode>
     <HelmetProvider>
-      <ReduxProvider store={store}>
-        <StyledEngineProvider injectFirst>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <SnackbarProvider
-              dense
-              preventDuplicate
-              maxSnack={3}
-              autoHideDuration={3000}
-              ref={notistackRef}
-              action={(key) => (
-                <IconButton onClick={onClickDismiss(key)}>
-                  <CancelIcon />
-                </IconButton>
-              )}
-            >
-              <SettingsProvider>
-                <BrowserRouter>
-                  <AuthProvider>
-                    <App />
-                  </AuthProvider>
-                </BrowserRouter>
-              </SettingsProvider>
-            </SnackbarProvider>
-          </LocalizationProvider>
-        </StyledEngineProvider>
-      </ReduxProvider>
+      <StyledEngineProvider injectFirst>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <SnackbarProvider
+            dense
+            preventDuplicate
+            maxSnack={3}
+            autoHideDuration={3000}
+            ref={notistackRef}
+            action={(key) => (
+              <IconButton onClick={onClickDismiss(key)}>
+                <CancelIcon />
+              </IconButton>
+            )}
+          >
+            <SettingsProvider>
+              <BrowserRouter>
+                <AuthProvider>
+                  <App />
+                </AuthProvider>
+              </BrowserRouter>
+            </SettingsProvider>
+          </SnackbarProvider>
+        </LocalizationProvider>
+      </StyledEngineProvider>
     </HelmetProvider>
   </StrictMode>,
   document.getElementById("root")
