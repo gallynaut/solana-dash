@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
+import Link from "@material-ui/core/Link";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -112,7 +113,11 @@ const TokenTable: FC<TokenTableProps> = (props) => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              <TableCell>Name</TableCell>
+              <TableCell>Symbol</TableCell>
+              <TableCell style={{ minWidth: 170 }}>Public Key</TableCell>
+              <TableCell>Website</TableCell>
+              {/* {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -120,7 +125,7 @@ const TokenTable: FC<TokenTableProps> = (props) => {
                 >
                   {column.label}
                 </TableCell>
-              ))}
+              ))} */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -129,7 +134,26 @@ const TokenTable: FC<TokenTableProps> = (props) => {
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
-                    {columns.map((column) => {
+                    <TableCell key={columns[0].id} align={columns[0].align}>
+                      {row[columns[0].id]}
+                    </TableCell>
+                    <TableCell key={columns[0].id} align={columns[0].align}>
+                      {row[columns[1].id]}
+                    </TableCell>
+                    <TableCell key={columns[0].id} align={columns[0].align}>
+                      {row[columns[2].id]}
+                    </TableCell>
+                    <Link
+                      href={row[columns[3].id]}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      <TableCell key={columns[0].id} align={columns[0].align}>
+                        {row[columns[3].id]}
+                      </TableCell>
+                    </Link>
+
+                    {/* {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
@@ -138,7 +162,7 @@ const TokenTable: FC<TokenTableProps> = (props) => {
                             : value}
                         </TableCell>
                       );
-                    })}
+                    })} */}
                   </TableRow>
                 );
               })}

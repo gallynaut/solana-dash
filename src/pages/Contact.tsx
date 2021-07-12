@@ -1,8 +1,18 @@
 import { useEffect } from "react";
 import type { FC } from "react";
-import { Link as BrowserLink } from "react-router-dom";
+
 import { Helmet } from "react-helmet-async";
-import { Avatar, Box, Container, Link, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Container,
+  Link,
+  Typography,
+  Grid,
+} from "@material-ui/core";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import EmailIcon from "@material-ui/icons/Email";
 import { ContactForm } from "../components/contact";
 import Logo from "../components/general/Logo";
 import MailIcon from "../icons/Mail";
@@ -42,14 +52,6 @@ const Contact: FC = () => {
               },
             }}
           >
-            <Link component={BrowserLink} to="/">
-              <Logo
-                sx={{
-                  height: 33,
-                  width: 42,
-                }}
-              />
-            </Link>
             <Box
               sx={{
                 alignItems: "center",
@@ -68,7 +70,7 @@ const Contact: FC = () => {
                 <MailIcon />
               </Avatar>
               <Typography color="textPrimary" variant="overline">
-                Contact sales
+                Contact us
               </Typography>
             </Box>
             <Typography
@@ -76,22 +78,53 @@ const Contact: FC = () => {
               sx={{ fontWeight: "fontWeightBold" }}
               variant="h1"
             >
-              Talk to our account expert
+              Talk to our devs
             </Typography>
             <Typography color="textPrimary" sx={{ py: 3 }} variant="body1">
-              Have questions about integrating our APIs? Fill out the form and a
-              senior web expert will be in touch shortly.
+              Have questions about our site or want to integrate with us? Our
+              development team will be in contact with you soon.
             </Typography>
-            <Typography sx={{ color: "primary.main" }} variant="h6">
-              Join 3,000+ forward-thinking companies:
+            <Typography sx={{ color: "primary.main", py: 2 }} variant="h6">
+              Find us on Social Media
             </Typography>
-            <Box sx={{ pt: 2 }}>
-              <img
-                alt="logoipsum1"
-                src="/static/contact/contact_logos.svg"
-                style={{ maxWidth: "100%" }}
-              />
-            </Box>
+            <Box sx={{ pt: 2 }} />
+            <Grid
+              container
+              sx={{ maxWidth: "50%", py: 4 }}
+              alignContent="space-between"
+              alignItems="center"
+            >
+              <Grid item sx={{ px: 4 }}>
+                <Link
+                  href="https://www.twitter.com/solanadash"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <IconButton
+                    color="primary"
+                    aria-label="twitter"
+                    component="span"
+                  >
+                    <TwitterIcon sx={{ fontSize: 60 }} />
+                  </IconButton>
+                </Link>
+              </Grid>
+              <Grid item sx={{ px: 4 }}>
+                <Link
+                  href="mailto:SolanaDash@gmail.com"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <IconButton
+                    color="primary"
+                    aria-label="email"
+                    component="span"
+                  >
+                    <EmailIcon sx={{ fontSize: 60 }} />
+                  </IconButton>
+                </Link>
+              </Grid>
+            </Grid>
           </Container>
         </Box>
         <Box

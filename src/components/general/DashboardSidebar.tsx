@@ -23,6 +23,8 @@ import CashIcon from "../../icons/Cash";
 import NavSection from "./NavSection";
 import Scrollbar from "./Scrollbar";
 import AccountSummaryCard from "../account/AccountSummaryCard";
+import WelcomeCard from "./WelcomeCard";
+import useSolana from "../../hooks/useSolana";
 
 interface DashboardSidebarProps {
   onMobileClose: () => void;
@@ -141,6 +143,7 @@ const sections = [
 const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
+  const { isAuthenticated } = useSolana();
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -178,7 +181,8 @@ const DashboardSidebar: FC<DashboardSidebarProps> = (props) => {
         </Hidden>
         <Hidden lgDown>
           <Box sx={{ p: 2 }}>
-            <AccountSummaryCard />
+            {isAuthenticated ? <AccountSummaryCard /> : <WelcomeCard />}
+            {/* <AccountSummaryCard /> */}
             {/* END OF ACCOUNT BOX */}
             {/* <Divider sx={{ my: 1 }} /> */}
             {/* <NetworkSummaryCard /> */}

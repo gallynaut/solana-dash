@@ -63,7 +63,7 @@ const Tokens: FC = () => {
               </IconButton>
             </Grid>
           </Grid>
-          <Divider sx={{ pb: "1em" }} />
+          <Divider sx={{ py: "1em" }} />
           <TokenTable tokens={tokens.mainnetBeta} />
         </Container>
       </Box>

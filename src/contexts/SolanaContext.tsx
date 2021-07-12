@@ -3,13 +3,7 @@ import { createContext, useReducer, useEffect } from "react";
 import type { FC, ReactNode } from "react";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
-import {
-  Connection,
-  Cluster,
-  clusterApiUrl,
-  Supply,
-  PublicKey,
-} from "@solana/web3.js";
+import { Connection, Cluster, clusterApiUrl, PublicKey } from "@solana/web3.js";
 import type { RpcResponseAndContext } from "@solana/web3.js";
 import SolanaWallet from "@project-serum/sol-wallet-adapter";
 import {
@@ -71,7 +65,6 @@ interface State {
   wallet: any;
   walletProvider: string;
   balance: RpcResponseAndContext<number>;
-  supply: Supply | null;
 }
 // interface Balances {
 //   devnet: RpcResponseAndContext<number> | null;
@@ -88,7 +81,6 @@ interface AuthContextValue extends State {
   setWalletProvider: (providerURL: string) => Promise<void>;
   getBalance: () => Promise<void>;
   getTokenBalances: () => Promise<void>;
-  getSolanaSupply: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -138,12 +130,6 @@ type SetBalanceAction = {
     balance: RpcResponseAndContext<number> | null;
   };
 };
-type SetSolanaSupplyAction = {
-  type: "SET_SOLANA_SUPPLY";
-  payload: {
-    supply: Supply | null;
-  };
-};
 
 type Action =
   | InitializeAction
@@ -153,8 +139,7 @@ type Action =
   | SetConnectionAction
   | SetWalletAction
   | SetWalletProviderAction
-  | SetBalanceAction
-  | SetSolanaSupplyAction;
+  | SetBalanceAction;
 
 const initialState: State = {
   isAuthenticated: false,
@@ -166,7 +151,6 @@ const initialState: State = {
   wallet: null,
   walletProvider: "",
   balance: null,
-  supply: null,
 };
 
 const handlers: Record<string, (state: State, action: Action) => State> = {
@@ -236,14 +220,6 @@ const handlers: Record<string, (state: State, action: Action) => State> = {
       balance,
     };
   },
-  SET_SOLANA_SUPPLY: (state: State, action: SetSolanaSupplyAction): State => {
-    const { supply } = action.payload;
-    console.log("setting solana supply ", supply);
-    return {
-      ...state,
-      supply,
-    };
-  },
 };
 
 const reducer = (state: State, action: Action): State =>
@@ -260,7 +236,6 @@ const AuthContext = createContext<AuthContextValue>({
   setWalletProvider: (providerURL: string) => Promise.resolve(),
   getBalance: () => Promise.resolve(),
   getTokenBalances: () => Promise.resolve(),
-  getSolanaSupply: () => Promise.resolve(),
 });
 
 export const AuthProvider: FC<AuthProviderProps> = (props) => {
@@ -305,12 +280,6 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
   }, [state.account, state.connection]);
 
   useEffect(() => {
-    if (state.isInitialized && state.connection != null) {
-      getSolanaSupply();
-    }
-  }, [state.connection]);
-
-  useEffect(() => {
     if (state.isInitialized && state.account == null) {
       enqueueSnackbar("Wallet disconnected", {
         anchorOrigin: {
@@ -330,20 +299,13 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     }
   }, [state.account]);
 
+  // every 5 minutes
   useInterval(() => {
     console.log("getting balance");
     getBalance();
-  }, 60000);
-
-  useInterval(() => {
     console.log("getting token balances");
     getTokenBalances();
-  }, 20000);
-
-  useInterval(() => {
-    console.log("getting network supply");
-    getSolanaSupply();
-  }, 30000);
+  }, 300000);
 
   const getBalance = async (): Promise<void> => {
     if (state.connection != null && state.publicKey !== "") {
@@ -382,20 +344,6 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
           );
           console.log("TOKENS: ", t);
         });
-    }
-  };
-
-  const getSolanaSupply = async (): Promise<void> => {
-    if (state.connection != null) {
-      const conn: Connection = state.connection;
-      conn.getSupply().then((resp) => {
-        dispatch({
-          type: "SET_SOLANA_SUPPLY",
-          payload: {
-            supply: resp.value,
-          },
-        });
-      });
     }
   };
 
@@ -495,7 +443,6 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         setWalletProvider,
         getBalance,
         getTokenBalances,
-        getSolanaSupply,
       }}
     >
       {children}

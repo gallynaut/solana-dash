@@ -17,12 +17,7 @@ import lamportsToSol from "../../utils/lamportsToSol";
 
 const NetworkSummaryCard: FC = () => {
   const navigate = useNavigate();
-  const { cluster, supply } = useContext(AuthContext);
-
-  const circ: string =
-    supply !== null ? lamportsToSol(supply.circulating, "M") : "N/A";
-  const total: string =
-    supply !== null ? lamportsToSol(supply.total, "M") : "N/A";
+  const { cluster } = useContext(AuthContext);
 
   return (
     <>
@@ -59,7 +54,7 @@ const NetworkSummaryCard: FC = () => {
 
             <Grid item md={5}>
               <Typography color="textPrimary" variant="body1">
-                {circ}
+                {0}
               </Typography>
             </Grid>
             <Grid item>
@@ -69,7 +64,7 @@ const NetworkSummaryCard: FC = () => {
             </Grid>
             <Grid item md={5}>
               <Typography color="textPrimary" variant="body1">
-                {total}
+                {0}
               </Typography>
             </Grid>
             <Grid item md={5}>
@@ -101,7 +96,7 @@ const NetworkSummaryCard: FC = () => {
             </Grid>
             <Grid item md={5}>
               <Typography color="textPrimary" variant="body1">
-                {circ}
+                {0}
               </Typography>
             </Grid>
             <Grid item>
@@ -111,7 +106,7 @@ const NetworkSummaryCard: FC = () => {
             </Grid>
             <Grid item md={5}>
               <Typography color="textPrimary" variant="body1">
-                {total}
+                {0}
               </Typography>
             </Grid>
           </Grid>
