@@ -1,10 +1,27 @@
 import type { FC } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Box, Container, Grid, Typography } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import useSettings from "../hooks/useSettings";
+import useTokens from "../hooks/useTokens";
+import TokenTable from "../components/tokens/TokenTable";
 
 const Tokens: FC = () => {
   const { settings } = useSettings();
+  const { tokens, fetchTokens } = useTokens();
+
+  const handleRefresh = () => {
+    console.log("fetccchiiing");
+    fetchTokens();
+  };
 
   return (
     <>
@@ -36,8 +53,18 @@ const Tokens: FC = () => {
                   List of Tokens on Solana
                 </Typography>
               </Grid>
+              <IconButton
+                color="primary"
+                aria-label="refresh tokens"
+                component="span"
+                onClick={handleRefresh}
+              >
+                <RefreshIcon />
+              </IconButton>
             </Grid>
           </Grid>
+          <Divider sx={{ pb: "1em" }} />
+          <TokenTable tokens={tokens.mainnetBeta} />
         </Container>
       </Box>
     </>

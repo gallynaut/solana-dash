@@ -25,9 +25,8 @@ import {
   instance,
 } from "superstruct";
 import { NETWORKS, TOKEN_PROGRAM_ID } from "../constants";
-// import SolanaWallet from '@project-serum/sol-wallet-adapter'
 import useInterval from "../hooks/useInterval";
-// import { fetchAccountTokens } from "../utils/tokens";
+
 export const PublicKeyFromString = coerce(
   instance(PublicKey),
   string(),

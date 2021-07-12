@@ -14,6 +14,7 @@ import { IconButton } from "@material-ui/core";
 import CancelIcon from "@material-ui/icons/Cancel";
 import App from "./App";
 import { AuthProvider } from "./contexts/SolanaContext";
+import { TokensProvider } from "./contexts/TokensContext";
 import { SettingsProvider } from "./contexts/SettingsContext";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
@@ -43,9 +44,11 @@ ReactDOM.render(
           >
             <SettingsProvider>
               <BrowserRouter>
-                <AuthProvider>
-                  <App />
-                </AuthProvider>
+                <TokensProvider>
+                  <AuthProvider>
+                    <App />
+                  </AuthProvider>
+                </TokensProvider>
               </BrowserRouter>
             </SettingsProvider>
           </SnackbarProvider>

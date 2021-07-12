@@ -20,7 +20,7 @@ const OverviewAccount: FC = (props) => {
         avatar={<SolanaGradientIcon sx={{ fontSize: "4em" }} />}
         title="Account Overview"
         sx={{ px: 3 }}
-        subheader={<PublicKeyButton />}
+        subheader={<PublicKeyButton publicKey={publicKey} />}
       />
       <Divider variant="middle" />
       <Scrollbar>

@@ -85,15 +85,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = (props) => {
     storeSettings(updatedSettings);
   };
 
-  // const setChartTheme = (updatedChartTheme: string): void => {
-  //   const newSettings: Settings = {
-  //     ...settings,
-  //     chartTheme: updatedChartTheme,
-  //   };
-  //   setSettings(newSettings);
-  //   storeSettings(newSettings);
-  // };
-
   return (
     <SettingsContext.Provider
       value={{

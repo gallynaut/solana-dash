@@ -4,7 +4,7 @@ import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import OverviewAccount from "../components/account/OverviewAccount";
 import useSettings from "../hooks/useSettings";
 import PlusIcon from "../icons/Plus";
-import TokenSummaryCard from "../components/tokens/TokenSummaryCard";
+import AccountTokenSummaryCard from "../components/account/AccountTokenSummaryCard";
 
 const Account: FC = () => {
   const { settings } = useSettings();
@@ -55,7 +55,7 @@ const Account: FC = () => {
             </Grid>
             <Grid item md={4} xs={12}>
               {/* SOLANA NETWORK OVERVIEW - LINKS TO NETWORK PAGE */}
-              <TokenSummaryCard />
+              <AccountTokenSummaryCard />
             </Grid>
           </Grid>
         </Container>
