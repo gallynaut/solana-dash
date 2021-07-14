@@ -1,22 +1,13 @@
-import { useRef, useContext } from "react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardActions,
-  CardHeader,
-  Box,
-  Grid,
   Typography,
   Button,
   CardContent,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import AuthContext from "../../contexts/SolanaContext";
-import { NETWORKS } from "../../constants";
-import shortenPublicKey from "../../utils/shortenPublicKey";
-import SolanaIcon from "../../icons/Solana";
 
 const WelcomeCard: FC = () => {
   const theme = useTheme();

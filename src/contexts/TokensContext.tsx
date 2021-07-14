@@ -6,6 +6,7 @@ import {
   TokenInfo,
   ENV as SolanaENV,
 } from "@solana/spl-token-registry";
+import { getSite } from "../types/TokenData";
 import useInterval from "../hooks/useInterval";
 
 interface Tokens {
@@ -111,16 +112,12 @@ export const TokensProvider: FC<TokensProviderProps> = (props) => {
     }
   }, []);
 
-  // useInterval(() => {
-  //   console.log("interval expired, fetching tokens");
-  //   fetchTokens();
-  // }, 1000);
-
   const fetchTokens = async (): Promise<void> => {
     new TokenListProvider().resolve().then((tokens) => {
       const maintokenList = tokens
         .filterByChainId(SolanaENV.MainnetBeta)
         .getList();
+
       const mainTokenMap = mapTokenList(maintokenList);
       const devnetList = tokens.filterByChainId(SolanaENV.Devnet).getList();
       const devnetTokenMap = mapTokenList(devnetList);

@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import type { FC } from "react";
 import { Typography, Button, Tooltip } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
-import AuthContext from "../../contexts/SolanaContext";
 
 interface PublicKeyButtonProps {
   publicKey: string;

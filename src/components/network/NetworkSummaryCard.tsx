@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import AuthContext from "../../contexts/SolanaContext";
 import { NETWORKS } from "../../constants";
-import lamportsToSol from "../../utils/lamportsToSol";
 
 const NetworkSummaryCard: FC = () => {
   const navigate = useNavigate();

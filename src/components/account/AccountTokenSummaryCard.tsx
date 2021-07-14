@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useContext } from "react";
 import numeral from "numeral";
 import {
   Badge,
@@ -15,7 +14,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import ArrowRightIcon from "../../icons/ArrowRight";
-import AuthContext from "../../contexts/SolanaContext";
 
 interface Currency {
   amount: number;

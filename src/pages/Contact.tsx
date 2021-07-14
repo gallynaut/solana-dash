@@ -14,7 +14,6 @@ import {
 import TwitterIcon from "@material-ui/icons/Twitter";
 import EmailIcon from "@material-ui/icons/Email";
 import { ContactForm } from "../components/contact";
-import Logo from "../components/general/Logo";
 import MailIcon from "../icons/Mail";
 import gtm from "../lib/gtm";
 
