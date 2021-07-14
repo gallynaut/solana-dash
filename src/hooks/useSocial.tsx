@@ -1,5 +1,11 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import googleTrends from "google-trends-api";
+import SocialContext from "../contexts/SocialContext";
+import type { SocialContextValue } from "../contexts/SocialContext";
+
+// const useSocial = (): SocialContextValue => useContext(SocialContext);
+
+// export default useSocial;
 
 export const restoreTrends = (): Object | null => {
   let trends: Object = null;

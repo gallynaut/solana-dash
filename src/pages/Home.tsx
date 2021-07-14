@@ -4,7 +4,6 @@ import { Box, Container, Grid, Typography } from "@material-ui/core";
 import useSettings from "../hooks/useSettings";
 import CryptoWatchCard from "../components/trading/CryptoWatchCard";
 import GeckoPriceCard from "../components/trading/GeckoPriceCard";
-import SocialCard from "../components/social/SocialCard";
 
 const Home: FC = () => {
   const { settings } = useSettings();
@@ -50,9 +49,8 @@ const Home: FC = () => {
               {/* WALLET / TOKEN OVERVIEW - LINKS TO ACCOUNT PAGE */}
               <CryptoWatchCard />
             </Grid>
-            <Grid item md={4} xs={12}>
-              <SocialCard />
-            </Grid>
+            {/* <Grid item md={4} xs={12}>
+            </Grid> */}
           </Grid>
         </Container>
       </Box>

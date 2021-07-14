@@ -4,11 +4,11 @@ import Chart from "react-apexcharts";
 import { Box, Grid, Typography, Card, CardHeader } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import LightKeywordSelect from "./LightKeywordSelect";
-import useSocial from "../../hooks/useSocial";
+// import useSocial from "../../hooks/useSocial";
 
 const ChartLine: FC = () => {
   const theme = useTheme();
-  const { keyword, setKeyword } = useSocial();
+  // const { keyword, setKeyword } = useSocial();
 
   const chart = {
     options: {
