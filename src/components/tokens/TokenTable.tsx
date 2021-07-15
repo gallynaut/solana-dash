@@ -3,6 +3,7 @@ import type { FC } from "react";
 import {
   Paper,
   Table,
+  Hidden,
   Link,
   TableBody,
   TableCell,
@@ -40,10 +41,12 @@ const TokenTable: FC<TokenTableProps> = (props) => {
       <TableContainer sx={{ maxHeight: "65vh" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow key="table-header">
               <TableCell sx={{ width: 150 }}>Name</TableCell>
               <TableCell sx={{ width: 120 }}>Symbol</TableCell>
-              <TableCell sx={{ minWidth: 170 }}>Public Key</TableCell>
+              <Hidden mdDown>
+                <TableCell sx={{ minWidth: 170 }}>Public Key</TableCell>
+              </Hidden>
               <TableCell sx={{ minWidth: 100 }}>Website</TableCell>
             </TableRow>
           </TableHead>
@@ -53,36 +56,22 @@ const TokenTable: FC<TokenTableProps> = (props) => {
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
-                    <TableCell
-                      key={TokenColumns[0].id}
-                      align={TokenColumns[0].align}
-                    >
-                      {row[TokenColumns[0].id]}
-                    </TableCell>
-                    <TableCell
-                      key={TokenColumns[0].id}
-                      align={TokenColumns[0].align}
-                    >
-                      {row[TokenColumns[1].id]}
-                    </TableCell>
-                    <TableCell
-                      key={TokenColumns[0].id}
-                      align={TokenColumns[0].align}
-                    >
-                      {row[TokenColumns[2].id]}
-                    </TableCell>
-                    <Link
-                      href={row[TokenColumns[3].id]}
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      <TableCell
-                        key={TokenColumns[0].id}
-                        align={TokenColumns[0].align}
-                      >
+                    <TableCell>{row[TokenColumns[0].id]}</TableCell>
+                    <TableCell>{row[TokenColumns[1].id]}</TableCell>
+                    <Hidden mdDown>
+                      <TableCell>{row[TokenColumns[2].id]}</TableCell>
+                    </Hidden>
+                    {row[TokenColumns[3].id] === "" ? (
+                      <TableCell>{row[TokenColumns[3].id]}</TableCell>
+                    ) : (
+                      <TableCell>
+                        <Link
+                          href={row[TokenColumns[3].id]}
+                          style={{ textDecoration: "none", color: "black" }}
+                        />
                         {row[TokenColumns[3].id]}
                       </TableCell>
-                    </Link>
+                    )}
                   </TableRow>
                 );
               })}

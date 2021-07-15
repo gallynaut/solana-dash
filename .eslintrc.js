@@ -53,5 +53,6 @@ module.exports = {
     "react/forbid-prop-types": "off",
     "no-underscore-dangle": "off",
     "import/extensions": "off",
+    "no-console": "off",
   },
 };
