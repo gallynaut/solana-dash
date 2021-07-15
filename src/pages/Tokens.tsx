@@ -201,8 +201,8 @@ const Tokens: FC = () => {
               spacing={2}
             >
               {ALL_TAGS.map((tag) => (
-                <Grid item sm={12} md={4} lg={3}>
-                  <MenuItem key={tag} value={tag}>
+                <Grid item sm={12} md={4} lg={3} key={tag}>
+                  <MenuItem value={tag}>
                     <FormControlLabel
                       control={
                         <Checkbox
