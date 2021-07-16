@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import {
+  Box,
   Paper,
   Table,
   Hidden,
+  IconButton,
   Link,
   TableBody,
   TableCell,
@@ -13,7 +15,13 @@ import {
   TableRow,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LanguageIcon from "@material-ui/icons/Language";
+import TelegramIcon from "@material-ui/icons/Telegram";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import GeckoIcon from "../../icons/Gecko";
 import { TokenData, TokenColumns } from "../../types/TokenData";
+import SolanaIcon from "../../icons/SolanaGradient";
 
 interface TokenTableProps {
   tokens: TokenData[];
@@ -35,6 +43,9 @@ const TokenTable: FC<TokenTableProps> = (props) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const handleRowSelect = (event: any) => {
+    console.log(event.target.value);
+  };
 
   return (
     <Paper sx={{ width: "100%" }}>
@@ -42,12 +53,12 @@ const TokenTable: FC<TokenTableProps> = (props) => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow key="table-header">
-              <TableCell sx={{ width: 150 }}>Name</TableCell>
-              <TableCell sx={{ width: 120 }}>Symbol</TableCell>
-              <Hidden mdDown>
-                <TableCell sx={{ minWidth: 170 }}>Public Key</TableCell>
-              </Hidden>
-              <TableCell sx={{ minWidth: 100 }}>Website</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Symbol</TableCell>
+              {/* <Hidden mdDown>
+                <TableCell sx={{ pr: 10 }}>Public Key</TableCell>
+              </Hidden> */}
+              <TableCell>Resources</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -55,23 +66,94 @@ const TokenTable: FC<TokenTableProps> = (props) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                  <TableRow
+                    onClick={handleRowSelect}
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.name}
+                  >
                     <TableCell>{row[TokenColumns[0].id]}</TableCell>
                     <TableCell>{row[TokenColumns[1].id]}</TableCell>
-                    <Hidden mdDown>
+                    {/* <Hidden mdDown>
                       <TableCell>{row[TokenColumns[2].id]}</TableCell>
-                    </Hidden>
-                    {row[TokenColumns[3].id] === "" ? (
-                      <TableCell>{row[TokenColumns[3].id]}</TableCell>
-                    ) : (
-                      <TableCell>
-                        <Link
-                          href={row[TokenColumns[3].id]}
-                          style={{ textDecoration: "none", color: "black" }}
-                        />
-                        {row[TokenColumns[3].id]}
-                      </TableCell>
-                    )}
+                    </Hidden> */}
+                    <TableCell>
+                      <Box>
+                        {row.key ? (
+                          <IconButton
+                            color="primary"
+                            component="a"
+                            href={`https://www.solanabeach.io/address/${row.key}`}
+                            target="_blank"
+                          >
+                            <SolanaIcon />
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                        {row.gecko ? (
+                          <IconButton
+                            color="primary"
+                            component="a"
+                            href={`https://www.coingecko.com/en/coins/${row.gecko}`}
+                            target="_blank"
+                          >
+                            <GeckoIcon />
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                        {row.twitter ? (
+                          <IconButton
+                            color="primary"
+                            component="a"
+                            href={row.twitter}
+                            target="_blank"
+                          >
+                            <TwitterIcon />
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                        {row.website ? (
+                          <IconButton
+                            color="primary"
+                            component="a"
+                            href={row.website}
+                            target="_blank"
+                          >
+                            <LanguageIcon />
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                        {row.github ? (
+                          <IconButton
+                            color="primary"
+                            component="a"
+                            href={row.github}
+                            target="_blank"
+                          >
+                            <GitHubIcon />
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                        {row.telegram ? (
+                          <IconButton
+                            color="primary"
+                            component="a"
+                            href={row.telegram}
+                            target="_blank"
+                          >
+                            <TelegramIcon />
+                          </IconButton>
+                        ) : (
+                          <></>
+                        )}
+                      </Box>
+                    </TableCell>
                   </TableRow>
                 );
               })}

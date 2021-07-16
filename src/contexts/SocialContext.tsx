@@ -7,8 +7,6 @@ import {
   ENV as SolanaENV,
 } from "@solana/spl-token-registry";
 import axios from "axios";
-import { getSite } from "../types/TokenData";
-import useInterval from "../hooks/useInterval";
 
 const domain = "http://localhost:8000";
 

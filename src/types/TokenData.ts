@@ -4,18 +4,53 @@ export interface TokenData {
   name: string;
   symbol: string;
   key: string;
-  website: string;
+  website?: string;
+  gecko?: string;
+  telegram?: string;
+  github?: string;
+  twitter?: string;
+  medium?: string;
 }
 
 export function createData(
   name: string,
   symbol: string,
   key: string,
-  website: string
+  extensions: string[]
 ): TokenData {
   // const keyButton = <PublicKeyButton publicKey={key} />;
-  return { name, symbol, key, website };
+  return { name, symbol, key, ...extensions };
 }
+export const getExtensions = (t: TokenInfo): any => {
+  let website = "";
+  let gecko = "";
+  let telegram = "";
+  let github = "";
+  let twitter = "";
+  let medium = "";
+  if (typeof t.extensions !== "undefined") {
+    if (typeof t.extensions.website !== "undefined") {
+      website = t.extensions.website;
+    }
+    if (typeof t.extensions.coingeckoId !== "undefined") {
+      gecko = t.extensions.coingeckoId;
+    }
+    if (typeof t.extensions.tgann !== "undefined") {
+      telegram = t.extensions.tgann;
+    }
+    if (typeof t.extensions.github !== "undefined") {
+      github = t.extensions.github;
+    }
+    if (typeof t.extensions.twitter !== "undefined") {
+      twitter = t.extensions.twitter;
+    }
+    if (typeof t.extensions.medium !== "undefined") {
+      medium = t.extensions.medium;
+    }
+  }
+  return { website, gecko, telegram, github, twitter, medium };
+};
+
 const getAllTags = (tokenList: TokenInfo[]) => {
   const allTags: string[] = [];
 
@@ -103,13 +138,3 @@ export const TokenColumns: TokenColumn[] = [
     minWidth: 170,
   },
 ];
-
-export const getSite = (t: TokenInfo): string => {
-  if (
-    typeof t.extensions !== "undefined" &&
-    typeof t.extensions.website !== "undefined"
-  ) {
-    return t.extensions.website;
-  }
-  return "";
-};

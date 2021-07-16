@@ -21,6 +21,7 @@ import {
 } from "@material-ui/core";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import { TokenInfo } from "@solana/spl-token-registry";
 import useSettings from "../hooks/useSettings";
 import useTokens from "../hooks/useTokens";
 import TokenTable from "../components/tokens/TokenTable";
@@ -29,11 +30,13 @@ import {
   ALL_TAGS,
   containsTag,
   createData,
-  getSite,
+  getExtensions,
   containsSearchTerm,
   containsGecko,
 } from "../types/TokenData";
 import useDebounce from "../hooks/useDebounce";
+
+const getIconDrawer = (t: TokenInfo[]) => {};
 
 const Tokens: FC = () => {
   const { settings } = useSettings();
@@ -55,7 +58,7 @@ const Tokens: FC = () => {
                 token.name,
                 token.symbol,
                 token.address,
-                getSite(token)
+                getExtensions(token)
               )
             );
           }

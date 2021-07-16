@@ -39,11 +39,6 @@ export const restoreTokens = (): Tokens | null => {
 
     if (storedData) {
       const storedObj: Tokens = JSON.parse(storedData);
-      // console.log(storedObj);
-      // const mainnetTokenMap = arrayToTokenMap(storedObj.mainnetBeta);
-      // const devnetTokenMap = arrayToTokenMap(storedObj.devnet);
-      // const testnetTokenMap = arrayToTokenMap(storedObj.testnet);
-      // const lastUpd = storedObj.lastUpdated;
       tokens = storedObj;
     } else {
       tokens = initialTokens;
@@ -58,7 +53,6 @@ export const restoreTokens = (): Tokens | null => {
 };
 
 export const storeTokens = (tokens: Tokens): void => {
-  console.log("Saving tokens");
   window.localStorage.setItem("tokens", JSON.stringify(tokens));
 };
 
@@ -73,7 +67,6 @@ export const TokensProvider: FC<TokensProviderProps> = (props) => {
 
   useEffect(() => {
     const restoredTokens = restoreTokens();
-    console.log(Object.keys(restoredTokens.mainnetBeta).length);
     if (restoredTokens === null) {
       fetchTokens();
     } else if (
@@ -88,7 +81,7 @@ export const TokensProvider: FC<TokensProviderProps> = (props) => {
   }, []);
 
   const fetchTokens = async (): Promise<void> => {
-    console.log("fetching");
+    console.log("fetching tokens");
     new TokenListProvider().resolve().then((tokens) => {
       const t: Tokens = {
         lastUpdated: Date.now(),
@@ -138,7 +131,6 @@ const arrayToTokenMap = (tokenArray: Array<any>): Map<string, TokenInfo> => {
     const [key, token] = t;
     tokenMap[key] = token;
   });
-  console.log(tokenMap);
   return tokenMap;
 };
 
