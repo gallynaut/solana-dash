@@ -26,7 +26,6 @@ const CryptoWatchChart: FC<CryptoWatchProps> = (props: CryptoWatchProps) => {
   } else {
     c = CHART_THEMES.STANDARD;
   }
-  console.log(c);
 
   const chart = useMemo(
     () =>

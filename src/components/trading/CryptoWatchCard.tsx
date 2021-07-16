@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useRef, useState } from "react";
 import {
+  Box,
   Card,
   CardActions,
   CardHeader,
@@ -87,10 +88,10 @@ const CryptoWatchCard: FC = () => {
               sx: { width: 240 },
             }}
           >
-            {EXCHANGES.map(function (e) {
+            {EXCHANGES.map((e) => {
               return (
-                <>
-                  {e.symbols.map(function (s) {
+                <Box key={e.name}>
+                  {e.symbols.map((s) => {
                     return (
                       <MenuItem
                         onClick={() => handleChangeMarket(e.name, s)}
@@ -103,7 +104,7 @@ const CryptoWatchCard: FC = () => {
                       </MenuItem>
                     );
                   })}
-                </>
+                </Box>
               );
             })}
           </Popover>

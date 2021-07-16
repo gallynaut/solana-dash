@@ -2,14 +2,9 @@ import { useEffect } from "react";
 import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { Box, Grid, Typography } from "@material-ui/core";
-import gtm from "../../../lib/gtm";
 import BeginnerNavButtons from "./BeginnerNavButtons";
 
 const BeginnerCreate: FC = () => {
-  useEffect(() => {
-    gtm.push({ event: "page_view" });
-  }, []);
-
   return (
     <>
       <Helmet>

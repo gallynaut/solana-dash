@@ -62,10 +62,10 @@ export const EXCHANGES: Exchange[] = [
     name: "ftx",
     symbols: ["solusd", "solusdt", "solbtc"],
   },
-  {
-    name: "binance",
-    symbols: ["solusd", "solusdt", "solbtc"],
-  },
+  // {
+  //   name: "binance",
+  //   symbols: ["solusd", "solusdt", "solbtc"],
+  // },
 ];
 
 export const CHART_THEMES = {

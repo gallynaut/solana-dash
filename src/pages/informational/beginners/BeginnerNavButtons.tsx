@@ -5,7 +5,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 import useSettings from "../../../hooks/useSettings";
 import ArrowRightIcon from "../../../icons/ArrowRight";
 import ArrowLeftIcon from "../../../icons/ArrowLeft";
-import gtm from "../../../lib/gtm";
 
 type BeginnerNavButtonProps = {
   next?: string | null;
@@ -18,10 +17,6 @@ const BeginnerNavButtons: FC<BeginnerNavButtonProps> = (
   const { settings } = useSettings();
   const navigate = useNavigate();
   const { next, prev } = props;
-
-  useEffect(() => {
-    gtm.push({ event: "page_view" });
-  }, []);
 
   const handlePrevClick = (): void => {
     if (prev !== null) {

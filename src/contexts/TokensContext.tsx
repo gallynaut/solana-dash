@@ -6,15 +6,13 @@ import {
   TokenInfo,
   ENV as SolanaENV,
 } from "@solana/spl-token-registry";
-import { getSite } from "../types/TokenData";
-import useInterval from "../hooks/useInterval";
 
 interface Tokens {
   lastUpdated: Number;
   // tokens: Map<string, TokenInfo>;
-  mainnetBeta: Map<string, TokenInfo>;
-  devnet: Map<string, TokenInfo>;
-  testnet: Map<string, TokenInfo>;
+  mainnetBeta: TokenInfo[];
+  devnet: TokenInfo[];
+  testnet: TokenInfo[];
 }
 
 export interface TokensContextValue {
@@ -28,9 +26,9 @@ interface TokensProviderProps {
 
 const initialTokens: Tokens = {
   lastUpdated: 0,
-  mainnetBeta: new Map<string, TokenInfo>(),
-  devnet: new Map<string, TokenInfo>(),
-  testnet: new Map<string, TokenInfo>(),
+  mainnetBeta: [],
+  devnet: [],
+  testnet: [],
 };
 
 export const restoreTokens = (): Tokens | null => {
@@ -40,29 +38,13 @@ export const restoreTokens = (): Tokens | null => {
     const storedData: string | null = window.localStorage.getItem("tokens");
 
     if (storedData) {
-      const storedObj = JSON.parse(storedData);
-      const mainnetTokenMap =
-        storedObj.mainnetBeta === undefined
-          ? initialTokens.mainnetBeta
-          : new Map<string, TokenInfo>(JSON.parse(storedObj.mainnetBeta));
-      const devnetTokenMap =
-        storedObj.devnet === undefined
-          ? initialTokens.devnet
-          : new Map<string, TokenInfo>(JSON.parse(storedObj.devnet));
-      const testnetTokenMap =
-        storedObj.testnet === undefined
-          ? initialTokens.testnet
-          : new Map<string, TokenInfo>(JSON.parse(storedObj.testnet));
-      const lastUpd =
-        storedObj.lastUpdated === undefined
-          ? initialTokens.lastUpdated
-          : storedObj.lastUpdated;
-      tokens = {
-        lastUpdated: lastUpd,
-        mainnetBeta: mainnetTokenMap,
-        devnet: devnetTokenMap,
-        testnet: testnetTokenMap,
-      };
+      const storedObj: Tokens = JSON.parse(storedData);
+      // console.log(storedObj);
+      // const mainnetTokenMap = arrayToTokenMap(storedObj.mainnetBeta);
+      // const devnetTokenMap = arrayToTokenMap(storedObj.devnet);
+      // const testnetTokenMap = arrayToTokenMap(storedObj.testnet);
+      // const lastUpd = storedObj.lastUpdated;
+      tokens = storedObj;
     } else {
       tokens = initialTokens;
     }
@@ -76,16 +58,8 @@ export const restoreTokens = (): Tokens | null => {
 };
 
 export const storeTokens = (tokens: Tokens): void => {
-  console.log("writing to storage");
-  window.localStorage.setItem(
-    "tokens",
-    JSON.stringify({
-      lastUpdated: tokens.lastUpdated,
-      mainnetBeta: tokenMapToArray(tokens.mainnetBeta),
-      devnet: tokenMapToArray(tokens.devnet),
-      testnet: tokenMapToArray(tokens.testnet),
-    })
-  );
+  console.log("Saving tokens");
+  window.localStorage.setItem("tokens", JSON.stringify(tokens));
 };
 
 const TokensContext = createContext<TokensContextValue>({
@@ -99,12 +73,13 @@ export const TokensProvider: FC<TokensProviderProps> = (props) => {
 
   useEffect(() => {
     const restoredTokens = restoreTokens();
-    if (restoreTokens === null) {
+    console.log(Object.keys(restoredTokens.mainnetBeta).length);
+    if (restoredTokens === null) {
       fetchTokens();
     } else if (
-      tokens.mainnetBeta.size === 0 ||
-      tokens.devnet.size === 0 ||
-      tokens.testnet.size === 0
+      Object.keys(restoredTokens.mainnetBeta).length === 0 ||
+      Object.keys(restoredTokens.devnet).length === 0 ||
+      Object.keys(restoredTokens.testnet).length === 0
     ) {
       fetchTokens();
     } else {
@@ -113,24 +88,15 @@ export const TokensProvider: FC<TokensProviderProps> = (props) => {
   }, []);
 
   const fetchTokens = async (): Promise<void> => {
+    console.log("fetching");
     new TokenListProvider().resolve().then((tokens) => {
-      const maintokenList = tokens
-        .filterByChainId(SolanaENV.MainnetBeta)
-        .getList();
-
-      const mainTokenMap = mapTokenList(maintokenList);
-      const devnetList = tokens.filterByChainId(SolanaENV.Devnet).getList();
-      const devnetTokenMap = mapTokenList(devnetList);
-      const testnetList = tokens.filterByChainId(SolanaENV.Testnet).getList();
-      const testnetTokenMap = mapTokenList(testnetList);
       const t: Tokens = {
         lastUpdated: Date.now(),
-        mainnetBeta: mainTokenMap,
-        devnet: devnetTokenMap,
-        testnet: testnetTokenMap,
+        mainnetBeta: tokens.filterByChainId(SolanaENV.MainnetBeta).getList(),
+        devnet: tokens.filterByChainId(SolanaENV.Devnet).getList(),
+        testnet: tokens.filterByChainId(SolanaENV.Testnet).getList(),
       };
-      setTokens(t);
-      storeTokens(t);
+      saveTokens(t);
     });
   };
 
@@ -162,8 +128,18 @@ const mapTokenList = (tokenList: TokenInfo[]): Map<string, TokenInfo> => {
   }, new Map());
   return tokenMap;
 };
+
 const tokenMapToArray = (tokenMap: Map<string, TokenInfo>): Array<any> => {
   return Array.from(tokenMap.entries());
+};
+const arrayToTokenMap = (tokenArray: Array<any>): Map<string, TokenInfo> => {
+  const tokenMap = new Map<string, TokenInfo>();
+  tokenArray.forEach((t) => {
+    const [key, token] = t;
+    tokenMap[key] = token;
+  });
+  console.log(tokenMap);
+  return tokenMap;
 };
 
 export const TokensConsumer = TokensContext.Consumer;

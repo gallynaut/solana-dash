@@ -54,14 +54,14 @@ const useSocial = () => {
     console.log("fetching trend for ", keyword);
     googleTrends
       .interestOverTime({ keyword })
-      .then(function (results) {
+      .then((results) => {
         setTrends({
           ...trends,
           keyword: results,
         });
         console.log(results);
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.error(err);
       });
   };

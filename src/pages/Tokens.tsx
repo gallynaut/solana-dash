@@ -21,11 +21,9 @@ import {
 } from "@material-ui/core";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import DeleteIcon from "@material-ui/icons/Delete";
 import useSettings from "../hooks/useSettings";
 import useTokens from "../hooks/useTokens";
 import TokenTable from "../components/tokens/TokenTable";
-import BellIcon from "../icons/Bell";
 import {
   TokenData,
   ALL_TAGS,
@@ -48,7 +46,6 @@ const Tokens: FC = () => {
 
   useEffect(() => {
     const set: TokenData[] = [];
-    console.log("tags ", tags);
     tokens.mainnetBeta.forEach((token) => {
       if (containsGecko(token) !== "") {
         if (tags.length === 0 || containsTag(token, tags)) {
@@ -96,7 +93,6 @@ const Tokens: FC = () => {
       newTags.push(newTag);
     }
     setTags(newTags);
-    console.log("TAGS: ", newTags);
   };
 
   const open = Boolean(anchorEl);

@@ -3,15 +3,10 @@ import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { Box, Grid, Typography } from "@material-ui/core";
 import useSettings from "../../../hooks/useSettings";
-import gtm from "../../../lib/gtm";
 import BeginnerNavButtons from "./BeginnerNavButtons";
 
 const BeginnerHow: FC = () => {
   const { settings } = useSettings();
-
-  useEffect(() => {
-    gtm.push({ event: "page_view" });
-  }, []);
 
   return (
     <>

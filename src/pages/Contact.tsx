@@ -15,13 +15,8 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import EmailIcon from "@material-ui/icons/Email";
 import { ContactForm } from "../components/contact";
 import MailIcon from "../icons/Mail";
-import gtm from "../lib/gtm";
 
 const Contact: FC = () => {
-  useEffect(() => {
-    gtm.push({ event: "page_view" });
-  }, []);
-
   return (
     <>
       <Helmet>
